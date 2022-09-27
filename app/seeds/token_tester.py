@@ -1,3 +1,4 @@
+
 import requests
 import json
 
@@ -8,4 +9,13 @@ def tester():
 
     test = json.loads(response.text)
 
-    print(test)
+    for key, value in test.items():
+        name = key
+        price = value['usd']
+        # print(key)
+        # print(value['usd'])
+        print(value['usd_market_cap'])
+        print(value['usd_24h_vol'])
+        print(value['usd_24h_change'])
+
+tester()

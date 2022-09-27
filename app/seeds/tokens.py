@@ -1,18 +1,22 @@
 from app.models.tokens import db, Token
-from .tokens_list import tokens_list_all
 import requests
 import json
 
 def seed_tokens():
 
-    # response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Csolana&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
+    response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Csolana&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
 
-    # test = json.loads(response.text)
+    test = json.loads(response.text)
 
-    for token in tokens_list_all:
+    for key, value in test.items():
+        name=key
+        price=value['usd']
+        dailyVolume=value['usd_24h_vol']
+        dailyChange=value['usd_24h_change']
+        marketCap=value['usd_market_cap']
+
         db.session.add(Token(
-            name=token,
-            price=0
+            name=name, price=price, dailyVolume=dailyVolume, dailyChange=dailyChange, marketCap=marketCap
         ))
 
     db.session.commit()
