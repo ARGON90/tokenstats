@@ -16,6 +16,14 @@ all_tokens = Blueprint('tokens', __name__)
 @all_tokens.route('/')
 def get_all_tokens():
 
+    response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Csolana&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
+
+    test = json.loads(response.text)
+
+    return test
+
+
+# CMC:
     # def price_get(token):
     #     url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
     #     parameters = {
@@ -58,30 +66,3 @@ def get_all_tokens():
 
     # new_dict = {item['id']:item for item in token_list_new}
     # print(new_dict)
-
-    response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Csolana&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
-
-    test = json.loads(response.text)
-
-    return test
-
-
-# @all_tokens.route('/update', methods=['PUT'])
-# def edit_user_book(id):
-#     form = UpdateToken()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     data = form.data
-
-#     if form.validate_on_submit():
-#         book = Book.query.get(id)
-#         book.title = data['title']
-#         book.year = data['year']
-#         book.author = data['author']
-#         book.description = data['description']
-#         book.banned = data['banned']
-#         book.image_url = data['image_url']
-
-#         db.session.commit()
-#         return book.to_dict()
-
-#     return {'errors': validation_errors_to_error_messages(form.errors)}, 400

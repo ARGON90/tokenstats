@@ -9,6 +9,8 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 
+import AllTokens from './components/AllTokens'
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -28,6 +30,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path='/tokens' exact={true}>
+          <AllTokens />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
