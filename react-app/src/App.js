@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 
 import AllTokens from './components/AllTokens'
+import UpdateTokens from './components/UpdateTokens';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,6 +33,9 @@ function App() {
       <Switch>
         <Route path='/tokens' exact={true}>
           <AllTokens />
+        </Route>
+        <Route path='/tokens/refresh' exact={true}>
+          <UpdateTokens />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
