@@ -6,10 +6,10 @@ class Token(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(255), nullable=False)
-    price = db.Column(db.BigInteger, nullable=False)
-    dailyVolume = db.Column(db.BigInteger, nullable=False)
-    dailyChange = db.Column(db.BigInteger, nullable=False)
-    marketCap = db.Column(db.BigInteger, nullable=False)
+    price = db.Column(db.Float(precision=4), nullable=False)
+    dailyVolume = db.Column(db.Float(precision=4), nullable=False)
+    dailyChange = db.Column(db.Float(precision=4), nullable=False)
+    marketCap = db.Column(db.Float(precision=4), nullable=False)
 
 
     def to_dict(self):
