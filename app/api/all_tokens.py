@@ -5,6 +5,7 @@ from flask import Blueprint, request
 from requests import Session
 from app.models.tokens import Token
 from app.forms.tokens_form import UpdateToken
+from decimal import Decimal
 import requests
 import json
 
@@ -26,7 +27,7 @@ def update_tokens():
     this_token = Token.query.filter(Token.name.like('c%')).first()
 
     for key, value in fetch.items():
-        print('FOR LOOP', key)
+      
         this_token = Token.query.filter(Token.name.like(key)).first()
         this_token.price=value['usd']
         this_token.dailyVolume=value['usd_24h_vol']
