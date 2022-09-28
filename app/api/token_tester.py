@@ -4,8 +4,6 @@ from flask import Blueprint, request
 from requests import Session
 from app.models.tokens import Token
 from app.forms.tokens_form import UpdateToken
-import requests
-import json
 
 def tester():
     all_tokens = Token.query.all()

@@ -1,23 +1,27 @@
 from .db import db
 
 
-class Token(db.Model):
-    __tablename__ = "tokens"
+class Trade(db.Model):
+    __tablename__ = "trades"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    name = db.Column(db.String(255), nullable=False)
-    price = db.Column(db.Float(precision=4), nullable=False)
-    dailyVolume = db.Column(db.Float(precision=4), nullable=False)
-    dailyChange = db.Column(db.Float(precision=4), nullable=False)
-    marketCap = db.Column(db.Float(precision=4), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    portfolio_id = db.Column(db.Integer, db.ForeignKey("portfolios.id"), nullable=False)
+    token_id = db.Column(db.Integer, db.ForeignKey("tokens.id"), nullable=False)
+    token_name = db.Column(db.String(255), nullable=False)
+    trade_price = db.Column(db.Integer, nullable=False)
+    amount_traded= db.Column(db.Integer, nullable=False)
+    buy = db.Column(db.Boolean, nullable=False)
 
 
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.name,
-            'price': self.price,
-            'dailyVolume': self.dailyVolume,
-            'dailyChange': self.dailyChange,
-            'marketCap': self.marketCap,
+            'user_id': self.user_id,
+            'portfolio_id': self.portfolio_id,
+            'token_id': self.token_id,
+            'token_name': self.token_name,
+            'trade_price': self.trade_price,
+            'amount_traded': self.amount_traded,
+            'buy': self.buy,
         }
