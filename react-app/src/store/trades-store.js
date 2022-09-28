@@ -1,6 +1,6 @@
 
 const GET_USER_TRADES = '/portfolios/GET_USER_TRADES';
-// const CREATE_PORTFOLIO = '/portfolios/ADD_PORTFOLIO'
+const CREATE_TRADE = '/portfolios/ADD_TRADE'
 // const EDIT_PORTFOLIO = '/portfolios/EDIT_PORTFOLIO'
 // const DELETE_PORTFOLIO = '/portfolios/DELETE_PORTFOLIO'
 
@@ -9,10 +9,10 @@ const getUserTrades = (trades) => ({
     trades
 });
 
-// const createPortfolio = (portfolio) => ({
-//     type: CREATE_PORTFOLIO,
-//     portfolio
-// })
+const createTrade = (trade) => ({
+    type: CREATE_TRADE,
+    trade
+})
 
 // const editPortfolio = (portfolio) => ({
 //     type: EDIT_PORTFOLIO,
@@ -34,18 +34,18 @@ export const getUserTradesThunk = () => async (dispatch) => {
     }
 }
 
-// export const createPortfolioThunk = (data) => async dispatch => {
-//     const response = await fetch('/api/portfolios/', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-//     if (response.ok) {
-//         const portfolio = await response.json();
-//         await dispatch(createPortfolio(portfolio));
-//         return portfolio;
-//     }
-// }
+export const createPortfolioThunk = (data) => async dispatch => {
+    const response = await fetch('/api/portfolios/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (response.ok) {
+        const portfolio = await response.json();
+        await dispatch(createPortfolio(portfolio));
+        return portfolio;
+    }
+}
 
 // export const updatePortfolioThunk = (data) => async dispatch => {
 //     const response = await fetch(`/api/portfolios/${data.id}`, {
