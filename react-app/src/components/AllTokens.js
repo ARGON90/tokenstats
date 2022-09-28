@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
+import Portfolios from './Portfolios';
 
 import "./index.css"
 
@@ -32,6 +33,10 @@ function AllTokens() {
 
   return (
     <>
+        <div>
+          <Portfolios />
+        </div>
+        <br></br>
        {allTokens.map((token) =>
         <div key={token.id} className='flex-row col-gap-5'>
           <div>{token.name}</div>

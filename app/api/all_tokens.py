@@ -32,6 +32,7 @@ def update_tokens():
         this_token.dailyVolume=value['usd_24h_vol']
         this_token.dailyChange=value['usd_24h_change']
         this_token.marketCap=value['usd_market_cap']
+        db.session.commit()
 
     tokens = Token.query.all()
     tokens_dict = {token.id: token.to_dict() for token in tokens}

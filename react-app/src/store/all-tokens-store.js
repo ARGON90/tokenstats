@@ -40,7 +40,6 @@ const initialState = {}
 const tokensReducer = (state = initialState, action) => {
     let newState = { ...state }
     switch (action.type) {
-
         case GET_ALL_TOKENS: {
             // console.log('ALL TOKENS REDUCER')
             const tokens = action.tokens
@@ -49,7 +48,6 @@ const tokensReducer = (state = initialState, action) => {
                 ...tokens
             }
         }
-
         case UPDATE_ALL_TOKENS: {
             // console.log('UPDATE TOKENS REDUCER')
             const tokens = action.tokens
