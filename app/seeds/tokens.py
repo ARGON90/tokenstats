@@ -13,10 +13,10 @@ def seed_tokens():
 
 
         name=key
-        price=round(value['usd'], 4)
-        dailyVolume=round(value['usd_24h_vol'], 4)
-        dailyChange=round(value['usd_24h_change'], 4)
-        marketCap=round(value['usd_market_cap'], 4)
+        price=value['usd']
+        dailyVolume=value['usd_24h_vol']
+        dailyChange=value['usd_24h_change']
+        marketCap=value['usd_market_cap']
 
         db.session.add(Token(
             name=name, price=price, dailyVolume=dailyVolume, dailyChange=dailyChange, marketCap=marketCap
