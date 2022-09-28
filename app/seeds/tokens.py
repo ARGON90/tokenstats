@@ -9,6 +9,9 @@ def seed_tokens():
     test = json.loads(response.text)
 
     for key, value in test.items():
+
+     
+
         name=key
         price=value['usd']
         dailyVolume=value['usd_24h_vol']
