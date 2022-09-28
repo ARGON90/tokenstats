@@ -6,10 +6,10 @@ from app.models.holdings import Holdings
 from app.forms.portfolio_form import PortfolioForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
-portfolios_routes = Blueprint('portfolios', __name__)
+holdings_routes = Blueprint('holdings', __name__)
 
 
-@portfolios_routes.route('/')
+@holdings_routes.route('/')
 @login_required
 def get_user_holdings():
     holdings = Holdings.query.all()

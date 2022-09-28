@@ -25,8 +25,8 @@ function Portfolios() {
             <CreatePortfolioModal />
             <div>
                 {userPortfolios.map((portfolio) =>
-                    <div className='flex-row'>
-                        <div key={portfolio.id} >{portfolio.name}</div>
+                    <div key={portfolio.id} className='flex-row'>
+                        <div >{portfolio.name}</div>
                         <EditPortfolioModal portfolio={portfolio}/>
                         <DeletePortfolioModal portfolio={portfolio}/>
                     </div>
