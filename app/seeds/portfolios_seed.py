@@ -1,7 +1,5 @@
 from app.models import db
 from app.models.portfolio import Portfolio
-import requests
-import json
 
 def seed_portfolios():
 
