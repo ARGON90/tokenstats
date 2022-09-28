@@ -7,8 +7,8 @@ function CreatePortfolioModal() {
 
   return (
     <>
-      <div>
-        <button onClick={() => setShowModal(true)}>
+      <div className="create-book-container">
+        <button className="create-book-button" onClick={() => setShowModal(true)}>
           Create a Portfolio
         </button>
         {showModal && (

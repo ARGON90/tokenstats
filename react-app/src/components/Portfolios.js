@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getUserPortfoliosThunk } from '../store/portfolio-store';
 import CreatePortfolioModal from './CreatePortfolioModal';
-
+import DeletePortfolioModal from './DeletePortfolioModal';
+import EditPortfolioModal from './EditPortfolioModal';
 
 function Portfolios() {
     const dispatch = useDispatch()
@@ -24,7 +25,11 @@ function Portfolios() {
             <CreatePortfolioModal />
             <div>
                 {userPortfolios.map((portfolio) =>
-                    <div>{portfolio.name}</div>
+                    <div className='flex-row'>
+                        <div key={portfolio.id} >{portfolio.name}</div>
+                        <EditPortfolioModal portfolio={portfolio}/>
+                        <DeletePortfolioModal portfolio={portfolio}/>
+                    </div>
                 )}
             </div>
 

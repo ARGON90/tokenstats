@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createPortfolioThunk } from "../../store/portfolio-store";
+import { updatePortfolioThunk } from "../../store/portfolio-store";
 
-import "./CreatePortfolioModal.css"
+import "./EditPortfolioModal.css"
 
 
-const CreatePortfolioForm = ({ setShowModal }) => {
+const EditPortfolioForm = ({ setShowModal, portfolio }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState({
         name: "",
     });
-    const [name, setName] = useState("");
+    const [name, setName] = useState(portfolio.name);
 
     const updateName = (e) => setName(e.target.value);
 
@@ -33,12 +33,13 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         e.preventDefault();
 
         const data = {
+            id: portfolio.id,
             name,
         };
 
-        const createdPortfolio = await dispatch(createPortfolioThunk(data));
+        const updatedPortfolio = await dispatch(updatePortfolioThunk(data));
 
-        if (createdPortfolio) {
+        if (updatedPortfolio) {
             setErrors([]);
             setShowModal(false);
             history.push("/tokens");
@@ -47,13 +48,13 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
     return (
         <>
-            <form className="create-book-form" onSubmit={handleSubmit}>
-                <div className="create-book-form-title">Create a Portfolio</div>
-                <div className="create-book-form-body-separator-top"></div>
-                <div className="create-book-modal-body">
-                    <label className="create-book-form-label">Portfolio Name</label>
+            <form className="edit-book-form" onSubmit={handleSubmit}>
+                <div className="edit-book-form-title">Edit a Portfolio</div>
+                <div className="edit-book-form-body-separator-top"></div>
+                <div className="edit-book-modal-body">
+                    <label className="edit-book-form-label">Portfolio Name</label>
                     <input
-                        className="create-book-form-input"
+                        className="edit-book-form-input"
                         type="string"
                         placeholder="Name"
                         required
@@ -62,9 +63,9 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     />
                     <div className="edit-book-form-error-message">{errors?.name}</div>
                 </div>
-                <div className="create-book-form-body-separator-bottom"></div>
+                <div className="edit-book-form-body-separator-bottom"></div>
 
-                <div className="create-book-form-button-container">
+                <div className="edit-book-form-button-container">
                     <button
                         className="create-book-form-submit"
                         type="submit"
@@ -75,7 +76,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         Submit
                     </button>
                     <button
-                        className="create-book-form-cancel"
+                        className="edit-book-form-cancel"
                         onClick={() => setShowModal(false)}
                     >
                         Cancel
@@ -86,4 +87,4 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     );
 };
 
-export default CreatePortfolioForm;
+export default EditPortfolioForm;
