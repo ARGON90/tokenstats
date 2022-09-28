@@ -4,12 +4,14 @@ import session from './session'
 import tokensReducer from './all-tokens-store';
 import portfoliosReducer from './portfolio-store';
 import holdingsReducer from './holdings-store';
+import tradesReducer from './trades-store';
 
 const rootReducer = combineReducers({
   session,
   tokens: tokensReducer,
   portfolios: portfoliosReducer,
-  holdings: holdingsReducer
+  holdings: holdingsReducer,
+  trades: tradesReducer
 });
 
 

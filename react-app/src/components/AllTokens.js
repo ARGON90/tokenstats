@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
 import Portfolios from './Portfolios';
 import Holdings from './Holdings';
+import Trades from './Trades';
 
 import "./index.css"
 // comment for heroku push
@@ -23,12 +24,10 @@ function AllTokens() {
   }
 
   function refreshPrice() {
-    console.log('ALL TOKENS USE EFFECT')
     dispatch(updateAllTokensThunk())
   }
 
   useEffect(() => {
-    console.log('ALL TOKENS USE EFFECT')
     dispatch(getAllTokensThunk())
   }, [dispatch])
 
@@ -36,6 +35,12 @@ function AllTokens() {
     <>
       <div>
         <Holdings />
+      </div>
+
+      <br></br>
+
+      <div>
+        <Trades />
       </div>
 
       <br></br>
