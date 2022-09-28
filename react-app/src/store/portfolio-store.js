@@ -1,11 +1,17 @@
 // constants
-const GET_USER_PORTFOLIO = 'tokens/GET_USER_PORTFOLIO';
+const GET_USER_PORTFOLIO = '/portfolios/GET_USER_PORTFOLIO';
+const CREATE_PORTFOLIO = '/portfolios/ADD_PORTFOLIO'
 // const UPDATE_ALL_TOKENS = 'tokens/UPDATE_ALL_TOKENS';
 
 const getUserPortfolios = (portfolios) => ({
     type: GET_USER_PORTFOLIO,
     portfolios
 });
+
+const createPortfolio = (portfolio) => ({
+    type: CREATE_PORTFOLIO,
+    portfolio
+})
 
 // const updateAllTokens = (tokens) => ({
 //     type: GET_ALL_TOKENS,
@@ -14,13 +20,28 @@ const getUserPortfolios = (portfolios) => ({
 
 
 export const getUserPortfoliosThunk = () => async (dispatch) => {
-    console.log('ALL TOKENS THUNK')
+
     const response = await fetch('/api/portfolios/');
     if (response.ok) {
         console.log("ALL TOKENS OK", response)
         const data = await response.json();
         dispatch(getUserPortfolios(data));
         return JSON.stringify(data);
+    }
+}
+
+export const createPortfolioThunk = (data) => async dispatch => {
+
+    const response = await fetch('/api/portfolios/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (response.ok) {
+        const portfolio = await response.json();
+        // console.log('RESPONSE OK, BOOK', book)
+        await dispatch(createPortfolio(portfolio));
+        return portfolio;
     }
 }
 
@@ -48,6 +69,17 @@ const portfoliosReducer = (state = initialState, action) => {
                 ...portfolios
             }
         }
+
+        case CREATE_PORTFOLIO: {
+            // console.log('ADD BOOK REDUCER')
+            newState = {
+                ...state,
+                [action.portfolio.id]: action.portfolio
+            };
+            return newState;
+        }
+
+
         // case UPDATE_ALL_TOKENS: {
         //     // console.log('UPDATE TOKENS REDUCER')
         //     const tokens = action.tokens

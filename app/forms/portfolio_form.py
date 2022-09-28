@@ -7,5 +7,6 @@ from wtforms.validators import DataRequired
 from datetime import datetime
 
 
-class UpdateToken(FlaskForm):
+class PortfolioForm(FlaskForm):
+    user_id = IntegerField("User Id")
     name = StringField("Name", validators=[DataRequired()])
