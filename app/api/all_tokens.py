@@ -27,10 +27,13 @@ def update_tokens():
     this_token = Token.query.filter(Token.name.like('c%')).first()
 
     for key, value in fetch.items():
-      
+
         this_token = Token.query.filter(Token.name.like(key)).first()
         this_token.price=value['usd']
+        print('ROUNDED NUM', round(value['usd'], 4))
+
         this_token.dailyVolume=value['usd_24h_vol']
+
         this_token.dailyChange=value['usd_24h_change']
         this_token.marketCap=value['usd_market_cap']
         db.session.commit()
