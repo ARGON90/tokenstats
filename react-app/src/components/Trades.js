@@ -11,7 +11,10 @@ function Trades() {
     const currentUser = useSelector((state) => (state?.session?.user))
     const userId = Number(currentUser.id)
     const allTrades = useSelector((state) => Object.values(state?.trades))
-    const userTrades = allTrades.filter(trades => trades.user_id === userId)
+    const userTrades = allTrades.filter(trades => trades?.user_id === userId)
+    const allToken = useSelector((state) => (state?.tokens))
+
+    console.log(allToken[1].name)
 
     useEffect(() => {
         dispatch(getUserTradesThunk())
@@ -27,13 +30,17 @@ function Trades() {
         }
     }
 
+    function getTokenName(id) {
+        return allToken[id].name
+    }
+
     // if (!userPortfolios) return (<div>No portfolfios</div>)
     return (
         <>
             <div>My Trades</div>
             {userTrades.map((trade) =>
                 <div key={trade.id} className='flex-row'>
-                    <div>You {boughtSold(trade.buy)} {trade.amount_traded} {trade.token_name} at a price of {trade.trade_price} each</div>
+                    <div>You {boughtSold(trade.buy)} {trade.amount_traded} {getTokenName(trade.token_id)} at a price of ${trade.trade_price} each</div>
                     <EditTradeModal trade={trade}/>
                     <DeleteTradeModal trade={trade}/>
                 </div>

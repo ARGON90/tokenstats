@@ -41,8 +41,6 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(tokenSelect)
-
         const data = {
             amount_traded: tradeAmount,
             buy: buySell,
@@ -64,8 +62,9 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
     const tokenList = [
         {name: 'Bitcoin', tokenId: 1},
-        {name: 'Ethereum', tokenId: 2},
-        {name: 'Cardano', tokenId: 3},
+        {name: 'Cardano', tokenId: 2},
+        {name: 'Ethereum', tokenId: 3},
+        {name: 'Solana', tokenId: 4},
 ]
 
     return (

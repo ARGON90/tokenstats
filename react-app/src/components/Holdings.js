@@ -19,12 +19,12 @@ function Holdings() {
     return (
         <>
         <div>My Holdings</div>
-        {userHoldings.map((holding) =>
+        {userHoldings ? userHoldings.map((holding) =>
             <div key={holding.id}>
                 <div>{holding.token_amount} {holding.token_name}</div>
 
             </div>
-        )}
+        ) : <div>No holdings</div>}
 
 
         </>
