@@ -31,12 +31,6 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/tokens' exact={true}>
-          <AllTokens />
-        </Route>
-        <Route path='/tokens/refresh' exact={true}>
-          <UpdateTokens />
-        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -48,6 +42,12 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/tokens' exact={true}>
+          <AllTokens />
+        </ProtectedRoute>
+        <ProtectedRoute path='/tokens/refresh' exact={true}>
+          <UpdateTokens />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>

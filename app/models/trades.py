@@ -9,8 +9,8 @@ class Trade(db.Model):
     portfolio_id = db.Column(db.Integer, db.ForeignKey("portfolios.id"), nullable=False)
     token_id = db.Column(db.Integer, db.ForeignKey("tokens.id"), nullable=False)
     token_name = db.Column(db.String(255), nullable=False)
-    trade_price = db.Column(db.Integer, nullable=False)
-    amount_traded= db.Column(db.Integer, nullable=False)
+    trade_price = db.Column(db.Float(precision=4), nullable=False)
+    amount_traded= db.Column(db.Float(precision=4), nullable=False)
     buy = db.Column(db.String, nullable=False)
 
     user = db.relationship("User",back_populates="trades")
