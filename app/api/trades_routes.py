@@ -20,8 +20,6 @@ def create_trade():
     form = TradeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
-    print('JSON REQ', request.json)
-    print(data)
     if form.validate_on_submit():
         trade = Trade(
             user_id=current_user.id,
@@ -30,14 +28,14 @@ def create_trade():
             portfolio_id=data['portfolio_id'],
             token_name=data['token_name'],
             trade_price=data['trade_price'],
-            amount_traded=data['amount_traded']
+            amount_traded=data['amount_traded'],
+            total_cost=data['total_cost']
         )
-
         db.session.add(trade)
         db.session.commit()
         return trade.to_dict()
 
-    print(form.errors)
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @trades_routes.route('/<int:id>', methods=['PUT'])

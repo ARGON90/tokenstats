@@ -11,6 +11,7 @@ class Trade(db.Model):
     token_name = db.Column(db.String(255), nullable=False)
     trade_price = db.Column(db.Float(precision=4), nullable=False)
     amount_traded= db.Column(db.Float(precision=4), nullable=False)
+    total_cost= db.Column(db.Float(precision=4), nullable=False)
     buy = db.Column(db.String, nullable=False)
 
     user = db.relationship("User",back_populates="trades")
@@ -27,4 +28,5 @@ class Trade(db.Model):
             'trade_price': self.trade_price,
             'amount_traded': self.amount_traded,
             'buy': self.buy,
+            'total_cost': self.total_cost
         }

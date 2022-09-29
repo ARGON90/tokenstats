@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createTradeThunk } from "../../store/trades-store";
+import { createTradeThunk, getUserTradesThunk } from "../../store/trades-store";
 
 import "./CreateTradeModal.css"
 
@@ -42,6 +42,8 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         e.preventDefault();
 
         let tradeAmountNumber = Number(tradeAmount)
+        let total_cost = tradeAmountNumber * tradePrice
+        console.log(total_cost, 'TOTALCOST')
 
         const data = {
             amount_traded: tradeAmountNumber,
@@ -50,6 +52,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
             portfolio_id: 1,
             token_name: 'defaultName',
             trade_price: tradePrice,
+            total_cost: total_cost,
             user_id: userId
         };
 
