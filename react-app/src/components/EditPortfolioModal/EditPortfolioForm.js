@@ -67,7 +67,7 @@ const EditPortfolioForm = ({ setShowModal, portfolio }) => {
 
                 <div className="edit-book-form-button-container">
                     <button
-                        className="create-book-form-submit"
+                        className="edit-book-form-submit"
                         type="submit"
                         disabled={
                             Object.values(errors).every((x) => x === "") ? false : true

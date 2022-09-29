@@ -16,7 +16,7 @@ def get_all_trades():
 
 @trades_routes.route('/', methods=["POST"])
 @login_required
-def create_portfolio():
+def create_trade():
     form = TradeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
@@ -33,6 +33,28 @@ def create_portfolio():
         )
 
         db.session.add(trade)
+        db.session.commit()
+        return trade.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@trades_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_user_trade(id):
+    form = TradeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = form.data
+
+    if form.validate_on_submit():
+        trade = Trade.query.get(id)
+        trade.user_id=current_user.id
+        trade.buy=data['buy']
+        trade.token_id=data['token_id']
+        trade.portfolio_id=data['portfolio_id']
+        trade.token_name=data['token_name']
+        trade.trade_price=data['trade_price']
+        trade.amount_traded=data['amount_traded']
+
         db.session.commit()
         return trade.to_dict()
 

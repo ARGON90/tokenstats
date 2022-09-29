@@ -1,7 +1,7 @@
 
 const GET_USER_TRADES = '/portfolios/GET_USER_TRADES';
 const CREATE_TRADE = '/portfolios/ADD_TRADE'
-// const EDIT_PORTFOLIO = '/portfolios/EDIT_PORTFOLIO'
+const EDIT_TRADE = '/portfolios/EDIT_TRADE'
 // const DELETE_PORTFOLIO = '/portfolios/DELETE_PORTFOLIO'
 
 const getUserTrades = (trades) => ({
@@ -14,10 +14,10 @@ const createTrade = (trade) => ({
     trade
 })
 
-// const editPortfolio = (portfolio) => ({
-//     type: EDIT_PORTFOLIO,
-//     portfolio
-// })
+const editTrade = (trade) => ({
+    type: EDIT_TRADE,
+    trade
+})
 
 // const deletePortfolio = (id) => ({
 //     type: DELETE_PORTFOLIO,
@@ -47,18 +47,18 @@ export const createTradeThunk = (data) => async dispatch => {
     }
 }
 
-// export const updatePortfolioThunk = (data) => async dispatch => {
-//     const response = await fetch(`/api/portfolios/${data.id}`, {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-//     if (response.ok) {
-//         const updatedPortfolio = await response.json();
-//         await dispatch(editPortfolio(updatedPortfolio));
-//         return updatedPortfolio;
-//     };
-// };
+export const updateTradeThunk = (data) => async dispatch => {
+    const response = await fetch(`/api/trades/${data.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (response.ok) {
+        const updatedTrade = await response.json();
+        await dispatch(editTrade(updatedTrade));
+        return updatedTrade;
+    };
+};
 
 // export const deletePortfolioThunk = (id) => async dispatch => {
 //     const response = await fetch(`/api/portfolios/${id}`, {
@@ -90,13 +90,13 @@ const tradesReducer = (state = initialState, action) => {
             };
             return newState;
         }
-        // case EDIT_PORTFOLIO: {
-        //     newState = {
-        //         ...state,
-        //         [action.portfolio.id]: action.portfolio
-        //     };
-        //     return newState;
-        // }
+        case EDIT_TRADE: {
+            newState = {
+                ...state,
+                [action.trade.id]: action.trade
+            };
+            return newState;
+        }
         // case DELETE_PORTFOLIO: {
         //     delete newState[action.id];
         //     return newState;

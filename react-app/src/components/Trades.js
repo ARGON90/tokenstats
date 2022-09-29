@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getUserTradesThunk } from '../store/trades-store';
 import CreateTradeModal from './CreateTradeModal';
+import EditTradeModal from './EditTradeModal';
 
 
 function Trades() {
@@ -31,9 +32,9 @@ function Trades() {
         <>
             <div>My Trades</div>
             {userTrades.map((trade) =>
-                <div key={trade.id}>
+                <div key={trade.id} className='flex-row'>
                     <div>You {boughtSold(trade.buy)} {trade.amount_traded} {trade.token_name} at a price of {trade.trade_price} each</div>
-
+                    <EditTradeModal trade={trade}/>
                 </div>
             )}
             <CreateTradeModal />
