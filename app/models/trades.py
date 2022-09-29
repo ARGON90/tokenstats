@@ -13,6 +13,9 @@ class Trade(db.Model):
     amount_traded= db.Column(db.Integer, nullable=False)
     buy = db.Column(db.String, nullable=False)
 
+    user = db.relationship("User",back_populates="trades")
+
+
 
     def to_dict(self):
         return {

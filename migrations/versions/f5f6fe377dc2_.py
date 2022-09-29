@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: b8ae51eab797
+Revision ID: f5f6fe377dc2
 Revises: 
-Create Date: 2022-09-29 14:01:04.773872
+Create Date: 2022-09-29 16:33:43.377029
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b8ae51eab797'
+revision = 'f5f6fe377dc2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -60,8 +60,8 @@ def upgrade():
     sa.Column('portfolio_id', sa.Integer(), nullable=False),
     sa.Column('token_id', sa.Integer(), nullable=False),
     sa.Column('token_name', sa.String(length=255), nullable=False),
-    sa.Column('trade_price', sa.Integer(), nullable=False),
-    sa.Column('amount_traded', sa.Integer(), nullable=False),
+    sa.Column('trade_price', sa.Numeric(precision=4), nullable=False),
+    sa.Column('amount_traded', sa.Numeric(precision=4), nullable=False),
     sa.Column('buy', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ),
     sa.ForeignKeyConstraint(['token_id'], ['tokens.id'], ),

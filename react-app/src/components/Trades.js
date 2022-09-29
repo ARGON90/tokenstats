@@ -10,14 +10,24 @@ import AllTokens from './AllTokens';
 function Trades() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
-    const userId = Number(currentUser.id)
     const allTrades = useSelector((state) => Object.values(state?.trades))
-    const userTrades = allTrades.filter(trades => trades?.user_id === userId)
     const allTokens = useSelector((state) => (state?.tokens))
 
     useEffect(() => {
         dispatch(getUserTradesThunk())
     }, [dispatch])
+
+
+    if (!currentUser) {
+        return <div>Loading Trades</div>
+    }
+
+    const userId = Number(currentUser.id)
+    const userTrades = allTrades.filter(trades => trades?.user_id === userId)
+
+
+
+
 
 
 

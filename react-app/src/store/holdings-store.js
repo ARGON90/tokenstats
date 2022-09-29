@@ -35,7 +35,7 @@ export const getUserHoldingsThunk = () => async (dispatch) => {
 }
 
 export const createHoldingThunk = (data) => async dispatch => {
-    const response = await fetch('/api/portfolios/', {
+    const response = await fetch('/api/holdings/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

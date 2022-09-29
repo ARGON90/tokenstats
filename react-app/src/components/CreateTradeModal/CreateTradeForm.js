@@ -41,8 +41,10 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        let tradeAmountNumber = Number(tradeAmount)
+
         const data = {
-            amount_traded: tradeAmount,
+            amount_traded: tradeAmountNumber,
             buy: buySell,
             token_id: tokenSelect,
             portfolio_id: 1,

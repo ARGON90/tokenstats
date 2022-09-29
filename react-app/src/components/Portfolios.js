@@ -9,13 +9,18 @@ import EditPortfolioModal from './EditPortfolioModal';
 function Portfolios() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
-    const userId = Number(currentUser.id)
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
-    const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
     }, [dispatch])
+
+    if (!currentUser) {
+        return <div>Loading Portfolios</div>
+    }
+
+    const userId = Number(currentUser.id)
+    const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
     if (!userPortfolios) return (<div>No portfolfios</div>)
     return (
