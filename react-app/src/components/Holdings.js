@@ -9,8 +9,7 @@ function Holdings() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const userId = Number(currentUser.id)
-    const allHoldings = useSelector((state) => Object.values(state?.holdings))
-    const userHoldings = allHoldings.filter(holdings => holdings.user_id === userId)
+    const userHoldings = useSelector((state) => (state?.session?.user?.holdings))
 
     useEffect(() => {
         dispatch(getUserHoldingsThunk())
@@ -26,7 +25,7 @@ function Holdings() {
 
             </div>
         )}
-     
+
 
         </>
     )

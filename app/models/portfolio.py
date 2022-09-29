@@ -9,10 +9,12 @@ class Portfolio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(255), nullable=False)
 
+    user = db.relationship("User",back_populates="portfolios")
+    
+
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
             'name': self.name
-
         }
