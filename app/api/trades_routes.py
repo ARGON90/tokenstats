@@ -59,3 +59,13 @@ def edit_user_trade(id):
         return trade.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@trades_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_user_trade(id):
+    trade = Trade.query.get(id)
+    db.session.delete(trade)
+    db.session.commit()
+    trades = Trade.query.all()
+    trades_dict = {trade.id: trade.to_dict() for trade in trades}
+    return trades_dict

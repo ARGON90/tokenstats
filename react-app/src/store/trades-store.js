@@ -2,7 +2,7 @@
 const GET_USER_TRADES = '/portfolios/GET_USER_TRADES';
 const CREATE_TRADE = '/portfolios/ADD_TRADE'
 const EDIT_TRADE = '/portfolios/EDIT_TRADE'
-// const DELETE_PORTFOLIO = '/portfolios/DELETE_PORTFOLIO'
+const DELETE_TRADE = '/portfolios/DELETE_TRADE'
 
 const getUserTrades = (trades) => ({
     type: GET_USER_TRADES,
@@ -19,10 +19,10 @@ const editTrade = (trade) => ({
     trade
 })
 
-// const deletePortfolio = (id) => ({
-//     type: DELETE_PORTFOLIO,
-//     id
-// })
+const deleteTrade = (id) => ({
+    type: DELETE_TRADE,
+    id
+})
 
 
 export const getUserTradesThunk = () => async (dispatch) => {
@@ -60,16 +60,16 @@ export const updateTradeThunk = (data) => async dispatch => {
     };
 };
 
-// export const deletePortfolioThunk = (id) => async dispatch => {
-//     const response = await fetch(`/api/portfolios/${id}`, {
-//         method: 'DELETE'
-//     });
-//     if (response.ok) {
-//         const portfolio = await response.json();
-//         await dispatch(deletePortfolio(id));
-//         return portfolio;
-//     };
-// };
+export const deleteTradeThunk = (id) => async dispatch => {
+    const response = await fetch(`/api/trades/${id}`, {
+        method: 'DELETE'
+    });
+    if (response.ok) {
+        const trade = await response.json();
+        await dispatch(deleteTrade(id));
+        return trade;
+    };
+};
 
 
 const initialState = {}
@@ -97,10 +97,10 @@ const tradesReducer = (state = initialState, action) => {
             };
             return newState;
         }
-        // case DELETE_PORTFOLIO: {
-        //     delete newState[action.id];
-        //     return newState;
-        // }
+        case DELETE_TRADE: {
+            delete newState[action.id];
+            return newState;
+        }
         default:
              return state;
     }

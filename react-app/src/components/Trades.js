@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getUserTradesThunk } from '../store/trades-store';
 import CreateTradeModal from './CreateTradeModal';
 import EditTradeModal from './EditTradeModal';
-
+import DeleteTradeModal from './DeleteTradeModal'
 
 function Trades() {
     const dispatch = useDispatch()
@@ -35,6 +35,7 @@ function Trades() {
                 <div key={trade.id} className='flex-row'>
                     <div>You {boughtSold(trade.buy)} {trade.amount_traded} {trade.token_name} at a price of {trade.trade_price} each</div>
                     <EditTradeModal trade={trade}/>
+                    <DeleteTradeModal trade={trade}/>
                 </div>
             )}
             <CreateTradeModal />
