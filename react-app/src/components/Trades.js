@@ -16,13 +16,23 @@ function Trades() {
         dispatch(getUserTradesThunk())
     }, [dispatch])
 
+    function boughtSold(buy) {
+        if (buy === 'buy') {
+            return 'bought'
+        }
+
+        if (buy === 'sell') {
+            return 'sold'
+        }
+    }
+
     // if (!userPortfolios) return (<div>No portfolfios</div>)
     return (
         <>
             <div>My Trades</div>
             {userTrades.map((trade) =>
                 <div key={trade.id}>
-                    <div>You traded {trade.amount_traded} {trade.token_name} at a price of {trade.trade_price} each</div>
+                    <div>You {boughtSold(trade.buy)} {trade.amount_traded} {trade.token_name} at a price of {trade.trade_price} each</div>
 
                 </div>
             )}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createPortfolioThunk } from "../../store/portfolio-store";
+import { createTradeThunk } from "../../store/trades-store";
 
 import "./CreateTradeModal.css"
 
@@ -14,40 +14,34 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         name: "",
     });
     const [tokenId, setTokenId] = useState("");
-    const [buySell, setBuySell] = useState("Buy");
+    const [buySell, setBuySell] = useState("buy");
     const [tradeAmount, setTradeAmount] = useState("");
 
     const updateTokenId = (e) => setTokenId(e.target.value);
     const updateBuySell = (e) => setBuySell(e.target.value);
     const updateTradeAmount = (e) => setTradeAmount(e.target.value);
 
+    buySell.toLowerCase()
+    console.log(buySell, "buysell")
 
     useEffect(() => {
         const newErrors = {};
 
         if (!tokenId) newErrors.tokenId = "Token Id is required."
-        if (!tradeAmount) {
-            newErrors.tradeAmount = "Trade Amount is required and must be greater than 0."}
-        //  else if (tradeAmount <= 0) {
-        //      newErrors.tradeAmount = "Trade Amount must be greater than 0.";
-        //  }
 
+
+        console.log(newErrors)
         setErrors(newErrors);
-    }, [tokenId], [tradeAmount]);
+    }, [tokenId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let buyBool;
-        if (buySell === 'Buy') {
-            buyBool = true
-        } else {
-            buyBool = false
-        }
+
 
         const data = {
             amount_traded: tradeAmount,
-            buy: buyBool,
+            buy: buySell,
             token_id: tokenId,
             portfolio_id: 1,
             token_name: 'bitcoin',
@@ -55,9 +49,9 @@ const CreatePortfolioForm = ({ setShowModal }) => {
             user_id: 1
         };
 
-        const createdPortfolio = await dispatch(createPortfolioThunk(data));
+        const createdTrade = await dispatch(createTradeThunk(data));
 
-        if (createdPortfolio) {
+        if (createdTrade) {
             setErrors([]);
             setShowModal(false);
             history.push("/tokens");
@@ -89,7 +83,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         onChange={updateBuySell}
                     >
                     <option value='buy'> Buy </option>
-                    <option value='sell' > Sell </option>
+                    <option value='sell'> Sell </option>
                     </select>
                     <div className="edit-book-form-error-message">{errors?.name}</div>
                     <label className="create-book-form-label">Amount of Token Bought/Sold</label>

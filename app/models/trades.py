@@ -11,7 +11,7 @@ class Trade(db.Model):
     token_name = db.Column(db.String(255), nullable=False)
     trade_price = db.Column(db.Integer, nullable=False)
     amount_traded= db.Column(db.Integer, nullable=False)
-    buy = db.Column(db.Boolean, nullable=False)
+    buy = db.Column(db.String, nullable=False)
 
 
     def to_dict(self):

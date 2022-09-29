@@ -5,10 +5,10 @@ from app.models.trades import Trade
 def seed_trades():
 
     demo_one = Trade(
-        user_id=1, portfolio_id=1, token_id=1, token_name='bitcoin', trade_price=20000, amount_traded=0.5, buy=True
+        user_id=1, portfolio_id=1, token_id=1, token_name='bitcoin', trade_price=20000, amount_traded=0.5, buy='buy'
     )
     demo_two = Trade(
-        user_id=1, portfolio_id=2, token_id=2, token_name='ethereum', trade_price=1500, amount_traded=0.5, buy=False
+        user_id=1, portfolio_id=2, token_id=2, token_name='ethereum', trade_price=1500, amount_traded=0.5, buy='sell'
     )
 
 

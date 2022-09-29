@@ -34,15 +34,15 @@ export const getUserTradesThunk = () => async (dispatch) => {
     }
 }
 
-export const createPortfolioThunk = (data) => async dispatch => {
-    const response = await fetch('/api/portfolios/', {
+export const createTradeThunk = (data) => async dispatch => {
+    const response = await fetch('/api/trades/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     });
     if (response.ok) {
         const portfolio = await response.json();
-        await dispatch(createPortfolio(portfolio));
+        await dispatch(createTrade(portfolio));
         return portfolio;
     }
 }
@@ -83,13 +83,13 @@ const tradesReducer = (state = initialState, action) => {
                 ...trades
             }
         }
-        // case CREATE_PORTFOLIO: {
-        //     newState = {
-        //         ...state,
-        //         [action.portfolio.id]: action.portfolio
-        //     };
-        //     return newState;
-        // }
+        case CREATE_TRADE: {
+            newState = {
+                ...state,
+                [action.trade.id]: action.trade
+            };
+            return newState;
+        }
         // case EDIT_PORTFOLIO: {
         //     newState = {
         //         ...state,
