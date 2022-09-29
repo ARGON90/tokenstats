@@ -5,6 +5,7 @@ import { getUserTradesThunk } from '../store/trades-store';
 import CreateTradeModal from './CreateTradeModal';
 import EditTradeModal from './EditTradeModal';
 import DeleteTradeModal from './DeleteTradeModal'
+import AllTokens from './AllTokens';
 
 function Trades() {
     const dispatch = useDispatch()
@@ -12,13 +13,13 @@ function Trades() {
     const userId = Number(currentUser.id)
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const userTrades = allTrades.filter(trades => trades?.user_id === userId)
-    const allToken = useSelector((state) => (state?.tokens))
-
-    console.log(allToken[1].name)
+    const allTokens = useSelector((state) => (state?.tokens))
 
     useEffect(() => {
         dispatch(getUserTradesThunk())
     }, [dispatch])
+
+
 
     function boughtSold(buy) {
         if (buy === 'buy') {
@@ -30,11 +31,12 @@ function Trades() {
         }
     }
 
-    function getTokenName(id) {
-        return allToken[id].name
-    }
 
-    // if (!userPortfolios) return (<div>No portfolfios</div>)
+    function getTokenName(id) {
+        if (!allTokens[id]) {return <div>Loading</div>}
+        return allTokens[id].name
+    }
+    if (!userTrades) return <div>No Trades</div>
     return (
         <>
             <div>My Trades</div>
