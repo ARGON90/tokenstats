@@ -26,32 +26,24 @@ function Holdings() {
         let tradesByToken = userTrades.filter((trade) => trade.token_id === i)
 
         // trades by token gives an array containing all of a token's trades
-        console.log('trades by token', tradesByToken)
-
         // loop through each trade, add the amount traded to a total
         let amount_traded = 0;
         let totalCost = 0;
         for (let i = 0; i < tradesByToken.length; i++) {
             if (tradesByToken[i].buy === 'buy') {
-                console.log('TRADE AMT', tradesByToken[i].amount_traded)
                 amount_traded += tradesByToken[i].amount_traded
                 totalCost += tradesByToken[i].total_cost
             }
             if (tradesByToken[i].buy === 'sell') {
-                console.log('TRADE AMT', tradesByToken[i].amount_traded)
                 amount_traded -= tradesByToken[i].amount_traded
                 totalCost -= tradesByToken[i].total_cost
             }
-            console.log('TRADESBYTOKEN!',tradesByToken[i].token_id)
             if (amount_traded) {
                 holdings[tradesByToken[i].token_id] = {}
                 holdings[tradesByToken[i].token_id].amount_traded = amount_traded
-                // holdings[tradesByToken[i].token_id].amount_traded = amount_traded
                 holdings[tradesByToken[i].token_id].totalCost = totalCost
-                // [tradesByToken[i].token_id]: {
-                //     tokenHoldings: total,
-                //     totalCost: totalCost
-                // }
+                holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
+
             }
         }
     }
@@ -59,6 +51,26 @@ function Holdings() {
 
 
     console.log('HOLDINGS', holdings)
+    let holdingsArray = Object.values(holdings)
+    console.log(holdingsArray[0], 'HOLDINGSARRAY')
+    let sortedHoldingsArray = []
+    for (let j = holdingsArray.length - 1; j >= 0; j--) {
+        let maxIndex;
+        let max = 0;
+        for (let i = holdingsArray.length - 1; i >= 0 ; i--) {
+            // console.log('TOTALCOST', holdingsArray[i].totalCost)
+            if (holdingsArray[i].totalCost > max) {
+                max = holdingsArray[i].totalCost;
+                maxIndex = i;
+            }
+            console.log(max)
+            console.log(maxIndex)
+        }
+        sortedHoldingsArray.unshift(holdingsArray.splice(maxIndex, 1))
+    }
+    console.log(sortedHoldingsArray, 'SORED HOLDINGS ARRAY')
+
+
     // let holdingsArr = []
     // for (let key in holdings) {
     //     holdingsArr.push({ 'tokenId': Number(key), 'total': holdings[key] })
