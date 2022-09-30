@@ -23,7 +23,7 @@ function Holdings() {
         dispatch(getUserTradesThunk())
     }, [dispatch])
 
-
+    if(!allTokens[1]) return null
 
     let holdings = {}
     for (let i = 1; i <= userTrad.length; i++) {
@@ -47,6 +47,8 @@ function Holdings() {
                 holdings[tradesByToken[i].token_id].amount_traded = amount_traded
                 holdings[tradesByToken[i].token_id].totalCost = totalCost
                 holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
+                holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
+                holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
             }
         }
     }
@@ -57,14 +59,14 @@ function Holdings() {
         let maxIndex;
         let max = 0;
         for (let i = holdingsArray.length - 1; i >= 0; i--) {
-            if (holdingsArray[i].totalCost > max) {
-                max = holdingsArray[i].totalCost;
+            if (holdingsArray[i].totalValue > max) {
+                max = holdingsArray[i].totalValue;
                 maxIndex = i;
             }
         }
         sortedHoldingsArray.push(holdingsArray.splice(maxIndex, 1))
     }
-
+    console.log(sortedHoldingsArray, 'SRTHLDINGSARRAY')
 
 
 
@@ -84,17 +86,40 @@ function Holdings() {
         return total.toFixed(0)
 
     }
-    if(!allTokens[1]) return null
+    function getTotalHoldingsPercentChange() {
+        let total = 0;
+        sortedHoldingsArray.map((holding) =>
+        total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
+        )
+        let total24hAgo = 0
+        sortedHoldingsArray.map((holding) =>
+        total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)) )
+        )
+        console.log(total, total24hAgo, 'CHANGE??')
+        // percent change
+        let percentChange = ((total24hAgo - total) / total ) * 100
+        if (percentChange >= 0) {
+            return `+${percentChange.toFixed(2)}`
+        }
+        if (percentChange >= 0) {
+            return `-${percentChange.toFixed(2)}`
+        }
+
+    }
+
+
     return (
         <>
-            <div>My Holdings: ${getTotalHoldingsValue(sortedHoldingsArray)}</div>
+            <div>My Total Holdings: ${getTotalHoldingsValue()}, change of {getTotalHoldingsPercentChange()}%</div>
 
             {sortedHoldingsArray ? sortedHoldingsArray.map((holding) =>
                 <div key={holding[0].totalCost} className='flex-row col-gap-5'>
-                    <div>{holding[0].amount_traded} {tokensObj[holding[0].tokenId]} </div>
+                    <div>{holding[0].amount_traded} </div>
                     {/* <div>You Paid {holding[0].totalCost}</div> */}
-                    <div> {tokensObj[holding[0].tokenId]} is at price {allTokens[holding[0].tokenId].price}</div>
-                    <div>this holding is worth ${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
+                    <div> {tokensObj[holding[0].tokenId]} @ price {allTokens[holding[0].tokenId].price}</div>
+                    <div>, worth ${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
+                    <div>| change from yesterday is {allTokens[holding[0].tokenId].dailyChange.toFixed(2)}% |</div>
+                    <div>24H P/L is ${(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100).toFixed(2)}</div>
                 </div>
             ) : <div>No holdings</div>}
 
