@@ -36,7 +36,7 @@ function Holdings({ portId }) {
 
     console.log(userTrad.length, 'USER TRAD LENGTH - 39')
     let holdings = {}
-    for (let i = 1; i <= userTrad.length; i++) {
+    for (let i = 1; i <= 51; i++) {
         let tradesByToken = userTrad.filter((trade) => trade.token_id === i)
 
         // trades by token gives an array containing all of a token's trades
@@ -44,6 +44,7 @@ function Holdings({ portId }) {
         let amount_traded = 0;
         let totalCost = 0;
         for (let i = 0; i < tradesByToken.length; i++) {
+            console.log(tradesByToken, 'TRADES BY TOKEN - 47')
             if (tradesByToken[i].buy === 'buy') {
                 amount_traded += tradesByToken[i].amount_traded
                 totalCost += tradesByToken[i].total_cost
