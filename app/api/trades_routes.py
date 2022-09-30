@@ -54,6 +54,7 @@ def edit_user_trade(id):
         trade.token_name=data['token_name']
         trade.trade_price=data['trade_price']
         trade.amount_traded=data['amount_traded']
+        trade.total_cost=data['total_cost']
 
         db.session.commit()
         return trade.to_dict()

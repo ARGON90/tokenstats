@@ -10,7 +10,7 @@ function Portfolios() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
-
+    
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
     }, [dispatch])

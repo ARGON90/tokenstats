@@ -7,6 +7,7 @@ import EditTradeModal from './EditTradeModal';
 import DeleteTradeModal from './DeleteTradeModal'
 import AllTokens from './AllTokens';
 
+
 function Trades() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
