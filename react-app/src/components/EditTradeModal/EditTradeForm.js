@@ -51,7 +51,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
             amount_traded: tradeAmountNumber,
             buy: buySell,
             token_id: tokenSelect,
-            portfolio_id: 1,
+            portfolio_id: userPortfolio,
             token_name: 'defaultName',
             trade_price: tradePrice,
             total_cost: total_cost,

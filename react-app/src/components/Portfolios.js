@@ -32,13 +32,9 @@ function Portfolios() {
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
 
-
-    console.log(currentPortfolio, 'current port')
-
     if (!userPortfolios) return (<div>No portfolfios</div>)
     return (
         <>
-
             <div>My Portfolios</div>
             <CreatePortfolioModal />
             <button value='all' onClick={updateCurrentPortfolio}>View All Portfolios</button>
@@ -54,15 +50,14 @@ function Portfolios() {
 
             <br></br>
 
-            <div>
-                <Holdings />
-            </div>
-
-            <br></br>
-
-            <div>
-                <Trades />
-            </div>
+                <div>
+                    <div>
+                        {/* <Trades portId={currentPortfolio}/> */}
+                    </div>
+                    <div>
+                        {/* <Holdings portId={currentPortfolio}/> */}
+                    </div>
+                </div>
 
         </>
     )

@@ -1,30 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { NUMBER } from 'sequelize/types';
 import { getUserHoldingsThunk } from '../store/holdings-store';
 import { getUserTradesThunk } from '../store/trades-store';
 import { tokensObj } from './zTokensList'
 
 
 
-function Holdings() {
+function Holdings({ portId }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
-    // for some reason, accessing through users.trades causes render issue. need to dispatch users?
-    const userId = Number(currentUser.id)
-    const userTrad = allTrades.filter(trade => trade?.user_id === userId)
     const allTokens = useSelector((state) => (state?.tokens))
+    const userId = Number(currentUser.id)
 
+    // for some reason, accessing through users.trades causes render issue. need to dispatch users?
     const userTrades = useSelector((state) => (state?.session?.user?.trades))
 
     useEffect(() => {
         dispatch(getUserHoldingsThunk())
         dispatch(getUserTradesThunk())
-    }, [dispatch])
+    }, [dispatch, portId])
 
-    if(!allTokens[1]) return null
 
+    let userTrad = allTrades.filter(trade => trade?.user_id === userId)
+
+    // console.log(userTrad, 'userTrad in holdings')
+    // console.log(userPortTrad, 'userPortTrad in holdings')
+    // if (portId === 'all') {
+    //     console.log(userTrad, 'user Trad by ALL trad 31')
+    // } else {
+    //     let userTrad = allTrades.filter(trade => trade?.portfolio_id === 1)
+    //     console.log(userTrad, 'user Trad by portfolio number - 33', portId)
+    // }
+
+    if (!allTokens[1]) return null
+
+    console.log(userTrad.length, 'USER TRAD LENGTH - 39')
     let holdings = {}
     for (let i = 1; i <= userTrad.length; i++) {
         let tradesByToken = userTrad.filter((trade) => trade.token_id === i)
@@ -52,8 +65,10 @@ function Holdings() {
             }
         }
     }
+    console.log(holdings, 'HOLDINGS - 67')
     // result is a nested object, need to convert this into a price-sorted array
     let holdingsArray = Object.values(holdings)
+    console.log(holdingsArray.length, 'holdingsArray length - 70')
     let sortedHoldingsArray = []
     for (let j = holdingsArray.length - 1; j >= 0; j--) {
         let maxIndex;
@@ -80,7 +95,7 @@ function Holdings() {
     function getTotalHoldingsValue() {
         let total = 0;
         sortedHoldingsArray.map((holding) =>
-        total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
+            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
         )
         return total.toFixed(0)
 
@@ -88,14 +103,14 @@ function Holdings() {
     function getTotalHoldingsPercentChange() {
         let total = 0;
         sortedHoldingsArray.map((holding) =>
-        total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
+            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
         )
         let total24hAgo = 0
         sortedHoldingsArray.map((holding) =>
-        total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)) )
+            total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)))
         )
         // percent change
-        let percentChange = ((total24hAgo - total) / total ) * 100
+        let percentChange = ((total24hAgo - total) / total) * 100
         if (percentChange >= 0) {
             return `+${percentChange.toFixed(2)}`
         }

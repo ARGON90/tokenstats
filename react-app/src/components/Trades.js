@@ -8,7 +8,7 @@ import DeleteTradeModal from './DeleteTradeModal'
 
 
 
-function Trades() {
+function Trades({portId}) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
@@ -17,7 +17,6 @@ function Trades() {
     useEffect(() => {
         dispatch(getUserTradesThunk())
     }, [dispatch])
-
 
     if (!currentUser) {
         return <div>Loading Trades</div>
@@ -28,6 +27,10 @@ function Trades() {
 
     const userId = Number(currentUser.id)
     const userTrades = allTrades.filter(trades => trades?.user_id === userId)
+
+    
+
+
 
     function boughtSold(buy) {
         if (buy === 'buy') {
