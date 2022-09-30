@@ -1,4 +1,4 @@
-from unicodedata import name
+
 from flask_wtf import FlaskForm
 from wtforms.fields import (
     TextAreaField, DateTimeField, IntegerField, StringField

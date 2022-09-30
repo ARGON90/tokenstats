@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .tokens import seed_tokens, undo_tokens
 from .portfolios_seed import seed_portfolios, undo_portfolios
 from .holdings_seed import seed_holdings, undo_holdings
+from .trades_seed import seed_trades, undo_trades
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
@@ -15,6 +16,7 @@ def seed():
     seed_tokens()
     seed_portfolios()
     seed_holdings()
+    seed_trades()
     # Add other seed functions here
 
 
@@ -25,4 +27,5 @@ def undo():
     undo_tokens()
     undo_portfolios()
     undo_holdings()
+    undo_trades
     # Add other undo functions here

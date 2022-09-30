@@ -1,7 +1,7 @@
 
 const GET_USER_HOLDINGS = '/portfolios/GET_USER_HOLDINGS';
-// const CREATE_PORTFOLIO = '/portfolios/ADD_PORTFOLIO'
-// const EDIT_PORTFOLIO = '/portfolios/EDIT_PORTFOLIO'
+const CREATE_HOLDING = '/portfolios/ADD_HOLDING'
+const EDIT_HOLDING = '/portfolios/EDIT_HOLDING'
 // const DELETE_PORTFOLIO = '/portfolios/DELETE_PORTFOLIO'
 
 const getUserHoldings = (holdings) => ({
@@ -9,15 +9,15 @@ const getUserHoldings = (holdings) => ({
     holdings
 });
 
-// const createPortfolio = (portfolio) => ({
-//     type: CREATE_PORTFOLIO,
-//     portfolio
-// })
+const createHolding = (holding) => ({
+    type: CREATE_HOLDING,
+    holding
+})
 
-// const editPortfolio = (portfolio) => ({
-//     type: EDIT_PORTFOLIO,
-//     portfolio
-// })
+const editHolding = (holding) => ({
+    type: EDIT_HOLDING,
+    holding
+})
 
 // const deletePortfolio = (id) => ({
 //     type: DELETE_PORTFOLIO,
@@ -34,31 +34,31 @@ export const getUserHoldingsThunk = () => async (dispatch) => {
     }
 }
 
-// export const createPortfolioThunk = (data) => async dispatch => {
-//     const response = await fetch('/api/portfolios/', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-//     if (response.ok) {
-//         const portfolio = await response.json();
-//         await dispatch(createPortfolio(portfolio));
-//         return portfolio;
-//     }
-// }
+export const createHoldingThunk = (data) => async dispatch => {
+    const response = await fetch('/api/holdings/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (response.ok) {
+        const portfolio = await response.json();
+        await dispatch(createHolding(portfolio));
+        return portfolio;
+    }
+}
 
-// export const updatePortfolioThunk = (data) => async dispatch => {
-//     const response = await fetch(`/api/portfolios/${data.id}`, {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-//     if (response.ok) {
-//         const updatedPortfolio = await response.json();
-//         await dispatch(editPortfolio(updatedPortfolio));
-//         return updatedPortfolio;
-//     };
-// };
+export const editHoldingThunk = (data) => async dispatch => {
+    const response = await fetch(`/api/portfolios/${data.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (response.ok) {
+        const updatedPortfolio = await response.json();
+        await dispatch(editHolding(updatedPortfolio));
+        return updatedPortfolio;
+    };
+};
 
 // export const deletePortfolioThunk = (id) => async dispatch => {
 //     const response = await fetch(`/api/portfolios/${id}`, {
@@ -83,20 +83,20 @@ const holdingsReducer = (state = initialState, action) => {
                 ...holdings
             }
         }
-        // case CREATE_PORTFOLIO: {
-        //     newState = {
-        //         ...state,
-        //         [action.portfolio.id]: action.portfolio
-        //     };
-        //     return newState;
-        // }
-        // case EDIT_PORTFOLIO: {
-        //     newState = {
-        //         ...state,
-        //         [action.portfolio.id]: action.portfolio
-        //     };
-        //     return newState;
-        // }
+        case CREATE_HOLDING: {
+            newState = {
+                ...state,
+                [action.holding.id]: action.holding
+            };
+            return newState;
+        }
+        case EDIT_HOLDING: {
+            newState = {
+                ...state,
+                [action.holding.id]: action.holding
+            };
+            return newState;
+        }
         // case DELETE_PORTFOLIO: {
         //     delete newState[action.id];
         //     return newState;

@@ -1,0 +1,142 @@
+.create-book-button {
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+    font-size: small;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(170, 170, 170, 0.3);
+    border-radius: 5px;
+    background-color: #F4F1EA;
+    cursor: pointer;
+    width: 90px;
+    height: 23px;
+  }
+
+  .create-book-button:hover {
+    background-color: #ede6d6;
+    font-weight: bold;
+  }
+
+  .create-book-form {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: white;
+    position: relative;
+    font-size: 14px;
+    color: #181818;
+  }
+
+  .create-book-form-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00635d;
+  }
+
+  .create-book-form-errors-container {
+    padding: 10px 0px;
+    color: red;
+  }
+
+  .create-book-form-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 5px;
+    margin-top: 6px;
+  }
+
+  .create-book-form-input {
+    min-width: 300px;
+    width: 800px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    border: 1px solid #DCD6CC;
+    padding: 2px;
+    cursor: pointer;
+    caret-color: black;
+    text-overflow: ellipsis;
+    color: #5d5d5d;
+  }
+
+  .create-book-form-input:focus {
+    outline: none;
+    border: 1px solid #d0ba94;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
+    color: #181818;
+  }
+
+  .create-book-form-input::placeholder {
+    color: #A9A9A9;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .create-book-modal-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: white;
+    position: relative;
+  }
+
+  .create-book-form-body-separator-top {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .create-book-form-body-separator-bottom {
+    display: block;
+    margin-top: 15px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .create-book-form-submit,
+  .create-book-form-cancel {
+    align-items: center;
+    text-align: center;
+    font-size: small;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.7);
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 1px solid rgba(170, 170, 170, 0.3);
+    border-radius: 5px;
+    background-color: #F4F1EA;
+    width: 100px;
+    height: 23px;
+  }
+
+  .create-book-form-submit:disabled {
+    color: #A9A9A9;
+  }
+
+  .create-book-form-submit:hover:enabled,
+  .create-book-form-cancel:hover {
+    cursor: pointer;
+    background-color: #ede6d6;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 900px) {
+    .create-book-form {
+      max-width: 50vh;
+    }
+  }
+
+  @media screen and (max-height: 800px) {
+    .create-book-form {
+      max-height: 50vh;
+    }
+  }

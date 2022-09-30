@@ -14,10 +14,8 @@ const updateAllTokens = (tokens) => ({
 
 
 export const getAllTokensThunk = () => async (dispatch) => {
-    console.log('ALL TOKENS THUNK')
     const response = await fetch('/api/tokens/');
     if (response.ok) {
-        console.log("ALL TOKENS OK", response)
         const data = await response.json();
         dispatch(getAllTokens(data));
         return JSON.stringify(data);

@@ -13,8 +13,8 @@ ReactDOM.render(
     <Provider store={store}>
       <ModalProvider>
         <App />
-        </ModalProvider>
-      </Provider>
+      </ModalProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
