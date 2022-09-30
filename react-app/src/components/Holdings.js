@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { NUMBER } from 'sequelize/types';
 import { getUserHoldingsThunk } from '../store/holdings-store';
 import { getUserTradesThunk } from '../store/trades-store';
 import { tokensObj } from './zTokensList'
@@ -23,17 +22,15 @@ function Holdings({ portId }) {
         dispatch(getUserTradesThunk())
     }, [dispatch, portId])
 
-
     let userTrad = allTrades.filter(trade => trade?.user_id === userId)
 
-    // console.log(userTrad, 'userTrad in holdings')
-    // console.log(userPortTrad, 'userPortTrad in holdings')
-    // if (portId === 'all') {
-    //     console.log(userTrad, 'user Trad by ALL trad 31')
-    // } else {
-    //     let userTrad = allTrades.filter(trade => trade?.portfolio_id === 1)
-    //     console.log(userTrad, 'user Trad by portfolio number - 33', portId)
-    // }
+    console.log(userTrad, 'userTrad in holdings')
+    if (portId === 'all') {
+        console.log(userTrad, 'user Trad by ALL trad 31')
+    } else {
+        userTrad = allTrades.filter(trade => trade?.portfolio_id === Number(portId))
+        console.log(userTrad, 'user Trad by portfolio number - 33', portId)
+    }
 
     if (!allTokens[1]) return null
 
@@ -138,6 +135,7 @@ function Holdings({ portId }) {
 
         </>
     )
+    return null
 }
 
 export default Holdings

@@ -52,10 +52,10 @@ function Portfolios() {
 
                 <div>
                     <div>
-                        {/* <Trades portId={currentPortfolio}/> */}
+                        <Trades portId={currentPortfolio}/>
                     </div>
                     <div>
-                        {/* <Holdings portId={currentPortfolio}/> */}
+                        <Holdings portId={currentPortfolio}/>
                     </div>
                 </div>
 
