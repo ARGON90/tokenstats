@@ -10,20 +10,20 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const currentUser = useSelector((state) => (state?.session?.user))
-    const userId = Number(currentUser.id)
+    const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
 
     const [errors, setErrors] = useState('');
-
-    const [tokenId, setTokenId] = useState("");
     const [tokenSelect, setTokenSelect] = useState("");
     const [buySell, setBuySell] = useState("buy");
     const [tradeAmount, setTradeAmount] = useState("");
     const [tradePrice, setTradePrice] = useState("");
+    const [userPortfolio, setUserPortfolio] = useState("");
 
     const updateTokenSelect = (e) => setTokenSelect(e.target.value);
     const updateBuySell = (e) => setBuySell(e.target.value);
     const updateTradeAmount = (e) => setTradeAmount(e.target.value);
     const updateTradePrice = (e) => setTradePrice(e.target.value);
+    const updateUserPortfolio = (e) => setUserPortfolio(e.target.value);
 
     buySell.toLowerCase()
 
@@ -49,7 +49,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
             amount_traded: tradeAmountNumber,
             buy: buySell,
             token_id: tokenSelect,
-            portfolio_id: 1,
+            portfolio_id: userPortfolio,
             token_name: 'defaultName',
             trade_price: tradePrice,
             total_cost: total_cost,
@@ -65,12 +65,22 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         }
     };
 
+    if (!currentUser) {
+        return <div>Loading Create Trade Modal</div>
+    }
+
+    const userId = Number(currentUser.id)
+    const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
+
+
     const tokenList = [
-        {name: 'Bitcoin', tokenId: 1},
-        {name: 'Cardano', tokenId: 2},
-        {name: 'Ethereum', tokenId: 3},
-        {name: 'Solana', tokenId: 4},
-]
+        { name: 'Bitcoin', tokenId: 1 },
+        { name: 'Cardano', tokenId: 2 },
+        { name: 'Ethereum', tokenId: 3 },
+        { name: 'Solana', tokenId: 4 },
+    ]
+
+    console.log(userPortfolios, "user ports ")
 
     return (
         <>
@@ -78,6 +88,22 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                 <div className="create-book-form-title">Add a Transaction</div>
                 <div className="create-book-form-body-separator-top"></div>
                 <div className="create-book-modal-body">
+
+                    <label className="create-book-form-label">Add trade to Portfolio</label>
+                    <select
+                        className="create-book-form-input"
+                        placeholder="Select One"
+                        required
+                        value={userPortfolio}
+                        onChange={updateUserPortfolio}
+                    >
+                        <option value='select'> Select One </option>
+                        {userPortfolios.map((portfolio) =>
+                            <option value={portfolio.id}>{portfolio.name}</option>
+                        )}
+                    </select>
+                    <div className="edit-book-form-error-message">{errors?.buySell}</div>
+
                     <label className="create-book-form-label">Select a Token</label>
                     <select
                         className="create-book-form-input"
@@ -93,6 +119,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
                     </select>
                     <div className="edit-book-form-error-message">{errors?.tokenSelect}</div>
+
                     <label className="create-book-form-label">Buy or Sell?</label>
                     <select
                         className="create-book-form-input"
@@ -115,6 +142,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         onChange={updateTradeAmount}
                     />
                     <div className="edit-book-form-error-message">{errors?.tradeAmount}</div>
+
                     <label className="create-book-form-label">Trade Price of Token</label>
                     <input
                         className="create-book-form-input"

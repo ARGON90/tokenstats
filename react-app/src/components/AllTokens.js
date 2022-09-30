@@ -33,21 +33,16 @@ function AllTokens() {
 
   return (
     <>
-      <div>
-        <Holdings />
-      </div>
-
-      <br></br>
-
-      <div>
-        <Trades />
-      </div>
 
       <br></br>
 
       <div>
         <Portfolios />
       </div>
+
+      <br></br>
+
+
 
       <br></br>
 
