@@ -26,9 +26,14 @@ function Trades({portId}) {
     }
 
     const userId = Number(currentUser.id)
-    const userTrades = allTrades.filter(trades => trades?.user_id === userId)
+    let userTrades = allTrades.filter(trades => trades?.user_id === userId)
 
-    
+    if (portId === 'all') {
+
+    } else {
+        userTrades = allTrades.filter(trade => trade?.portfolio_id === Number(portId))
+    }
+
 
 
 

@@ -50,14 +50,16 @@ function Portfolios() {
 
             <br></br>
 
-                <div>
-                    <div>
-                        <Trades portId={currentPortfolio}/>
-                    </div>
-                    <div>
-                        <Holdings portId={currentPortfolio}/>
-                    </div>
-                </div>
+            <div>
+                <Holdings portId={currentPortfolio} />
+            </div>
+
+            <br></br>
+            <div>
+
+                <Trades portId={currentPortfolio} />
+            </div>
+
 
         </>
     )
