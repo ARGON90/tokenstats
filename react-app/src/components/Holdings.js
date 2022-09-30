@@ -66,7 +66,6 @@ function Holdings() {
         }
         sortedHoldingsArray.push(holdingsArray.splice(maxIndex, 1))
     }
-    console.log(sortedHoldingsArray, 'SRTHLDINGSARRAY')
 
 
 
@@ -95,7 +94,6 @@ function Holdings() {
         sortedHoldingsArray.map((holding) =>
         total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)) )
         )
-        console.log(total, total24hAgo, 'CHANGE??')
         // percent change
         let percentChange = ((total24hAgo - total) / total ) * 100
         if (percentChange >= 0) {
