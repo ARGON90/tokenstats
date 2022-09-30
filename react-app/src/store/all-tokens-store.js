@@ -11,7 +11,7 @@ const updateAllTokens = (tokens) => ({
     type: GET_ALL_TOKENS,
     tokens
 });
-
+// comment for heroku push
 
 export const getAllTokensThunk = () => async (dispatch) => {
     const response = await fetch('/api/tokens/');
