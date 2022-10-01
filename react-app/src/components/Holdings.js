@@ -109,11 +109,12 @@ function Holdings({ portId }) {
         )
         // percent change
         let percentChange = ((total24hAgo - total) / total) * 100
+
         if (percentChange >= 0) {
             return `+${percentChange.toFixed(2)}`
         }
-        if (percentChange >= 0) {
-            return `-${percentChange.toFixed(2)}`
+        if (percentChange < 0) {
+            return `${percentChange.toFixed(2)}`
         }
 
     }

@@ -7,7 +7,8 @@ import Holdings from './Holdings';
 import Trades from './Trades';
 
 import "./index.css"
-// comment for heroku push
+// todo: add refresh function on the login confirmation and signup confirmation buttons
+
 function AllTokens() {
   const dispatch = useDispatch()
 
