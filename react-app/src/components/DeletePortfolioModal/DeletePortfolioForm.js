@@ -17,7 +17,7 @@ const DeleteBookForm = ({ setShowModal, portfolio }) => {
 
     if (deletedPortfolio) {
       setShowModal(false);
-      history.push("/tokens");
+      history.push("/home");
     }
   };
 

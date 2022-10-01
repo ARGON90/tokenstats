@@ -41,7 +41,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         if (createdPortfolio) {
             setErrors([]);
             setShowModal(false);
-            history.push("/tokens");
+            history.push("/home");
         }
     };
 

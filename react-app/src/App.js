@@ -8,13 +8,16 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import { useSelector } from 'react-redux';
 
 import AllTokens from './components/AllTokens'
 import UpdateTokens from './components/UpdateTokens';
+import SplashPage from './components/SplashPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const currentUser = useSelector(state => state?.session?.user)
 
   useEffect(() => {
     (async() => {
@@ -31,6 +34,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path='/' exact={true} >
+          <SplashPage />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -43,14 +49,11 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/tokens' exact={true}>
+        <ProtectedRoute path='/home' exact={true}>
           <AllTokens />
         </ProtectedRoute>
         <ProtectedRoute path='/tokens/refresh' exact={true}>
           <UpdateTokens />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

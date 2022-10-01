@@ -35,7 +35,6 @@ def create_trade():
         db.session.commit()
         return trade.to_dict()
 
-
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @trades_routes.route('/<int:id>', methods=['PUT'])

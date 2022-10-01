@@ -17,7 +17,7 @@ const DeleteBookForm = ({ setShowModal, trade }) => {
 
     if (deletedTrade) {
       setShowModal(false);
-      history.push("/tokens");
+      history.push("/home");
     }
   };
 

@@ -5,12 +5,19 @@ import { getUserPortfoliosThunk } from '../store/portfolio-store';
 import CreatePortfolioModal from './CreatePortfolioModal';
 import DeletePortfolioModal from './DeletePortfolioModal';
 import EditPortfolioModal from './EditPortfolioModal';
+import Trades from './Trades';
+import Holdings from './Holdings';
 
 function Portfolios() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
-    
+
+    const [currentPortfolio, setCurrentPortfolio] = useState("all")
+    const updateCurrentPortfolio = (e) => setCurrentPortfolio(e.target.value);
+
+
+
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
     }, [dispatch])
@@ -19,24 +26,40 @@ function Portfolios() {
         return <div>Loading Portfolios</div>
     }
 
+
+
     const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
+
 
     if (!userPortfolios) return (<div>No portfolfios</div>)
     return (
         <>
-
             <div>My Portfolios</div>
             <CreatePortfolioModal />
+            <button value='all' onClick={updateCurrentPortfolio}>View All Portfolios</button>
             <div>
                 {userPortfolios.map((portfolio) =>
                     <div key={portfolio.id} className='flex-row'>
-                        <div >{portfolio.name}</div>
-                        <EditPortfolioModal portfolio={portfolio}/>
-                        <DeletePortfolioModal portfolio={portfolio}/>
+                        <button value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
+                        <EditPortfolioModal portfolio={portfolio} />
+                        <DeletePortfolioModal portfolio={portfolio} />
                     </div>
                 )}
             </div>
+
+            <br></br>
+
+            <div>
+                <Holdings portId={currentPortfolio} />
+            </div>
+
+            <br></br>
+            <div>
+
+                <Trades portId={currentPortfolio} />
+            </div>
+
 
         </>
     )

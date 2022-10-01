@@ -42,7 +42,7 @@ const EditPortfolioForm = ({ setShowModal, portfolio }) => {
         if (updatedPortfolio) {
             setErrors([]);
             setShowModal(false);
-            history.push("/tokens");
+            history.push("/home");
         }
     };
 
