@@ -12,6 +12,8 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
     const history = useHistory();
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
+    const allTokens = useSelector((state) => Object.values(state?.tokens))
+
 
     const [errors, setErrors] = useState('');
     const [tokenSelect, setTokenSelect] = useState(trade.token_id);
@@ -75,14 +77,6 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
     const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
-
-    const tokenList = [
-        {name: 'Bitcoin', tokenId: 1},
-        {name: 'Cardano', tokenId: 2},
-        {name: 'Ethereum', tokenId: 3},
-        {name: 'Solana', tokenId: 4},
-]
-
     return (
         <>
             <form className="edit-book-form" onSubmit={handleSubmit}>
@@ -114,8 +108,8 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                         onChange={updateTokenSelect}
                     >
                         <option value='select'> Select One </option>
-                        {tokenList.map((token) =>
-                            <option value={token.tokenId}>{token.name}</option>
+                        {allTokens.map((token) =>
+                            <option value={token.id}>{token.name}</option>
                         )}
                     </select>
                     <div className="edit-book-form-error-message">{errors?.tokenSelect}</div>

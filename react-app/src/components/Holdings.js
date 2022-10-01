@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getUserHoldingsThunk } from '../store/holdings-store';
 import { getUserTradesThunk } from '../store/trades-store';
-import { tokensObj } from './zTokensList'
 
 
 
@@ -128,7 +127,7 @@ function Holdings({ portId }) {
                 <div key={holding[0].totalCost} className='flex-row col-gap-5'>
                     <div>{holding[0].amount_traded} </div>
                     {/* <div>You Paid {holding[0].totalCost}</div> */}
-                    <div> {tokensObj[holding[0].tokenId]} @ price {allTokens[holding[0].tokenId].price}</div>
+                    <div> {allTokens[holding[0].tokenId].name} @ price {allTokens[holding[0].tokenId].price}</div>
                     <div>, worth ${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
                     <div>| change from yesterday is {allTokens[holding[0].tokenId].dailyChange.toFixed(2)}% |</div>
                     <div>24H P/L is ${(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100).toFixed(2)}</div>
