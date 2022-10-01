@@ -28,7 +28,6 @@ const deletePortfolio = (id) => ({
 export const getUserPortfoliosThunk = () => async (dispatch) => {
     const response = await fetch('/api/portfolios/');
     if (response.ok) {
-        console.log("ALL TOKENS OK", response)
         const data = await response.json();
         dispatch(getUserPortfolios(data));
         return JSON.stringify(data);

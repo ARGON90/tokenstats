@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+
 import { getUserTradesThunk } from '../store/trades-store';
 import CreateTradeModal from './CreateTradeModal';
 import EditTradeModal from './EditTradeModal';
@@ -53,7 +53,7 @@ function Trades({portId}) {
     }
     function getTradesTotalProfit() {
         let totalProfit = 0;
-        userTrades.map((trade) => {
+        userTrades.forEach((trade) => {
             totalProfit += ( allTokens[trade.token_id].price * trade.amount_traded - trade.total_cost)
         })
         return `$${totalProfit.toFixed(2)}`

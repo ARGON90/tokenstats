@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
+import React, { useEffect } from 'react';
+import { useDispatch} from 'react-redux';
+
+import { updateAllTokensThunk } from '../store/all-tokens-store';
 
 
 import "./index.css"
