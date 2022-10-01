@@ -61,7 +61,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         if (createdTrade) {
             setErrors([]);
             setShowModal(false);
-            history.push("/tokens");
+            history.push("/home");
         }
     };
 

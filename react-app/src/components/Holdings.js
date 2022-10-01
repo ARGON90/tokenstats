@@ -24,15 +24,17 @@ function Holdings({ portId }) {
 
     let userTrad = allTrades.filter(trade => trade?.user_id === userId)
 
-
+    // console.log(userTrad, 'userTrad in holdings')
     if (portId === 'all') {
-
+        // console.log(userTrad, 'user Trad by ALL trad 31')
     } else {
         userTrad = allTrades.filter(trade => trade?.portfolio_id === Number(portId))
+        // console.log(userTrad, 'user Trad by portfolio number - 33', portId)
     }
 
     if (!allTokens[1]) return null
 
+    // console.log(userTrad.length, 'USER TRAD LENGTH - 39')
     let holdings = {}
     for (let i = 1; i <= 51; i++) {
         let tradesByToken = userTrad.filter((trade) => trade.token_id === i)
@@ -42,7 +44,7 @@ function Holdings({ portId }) {
         let amount_traded = 0;
         let totalCost = 0;
         for (let i = 0; i < tradesByToken.length; i++) {
-
+            // console.log(tradesByToken, 'TRADES BY TOKEN - 47')
             if (tradesByToken[i].buy === 'buy') {
                 amount_traded += tradesByToken[i].amount_traded
                 totalCost += tradesByToken[i].total_cost
@@ -61,10 +63,10 @@ function Holdings({ portId }) {
             }
         }
     }
-
+    // console.log(holdings, 'HOLDINGS - 67')
     // result is a nested object, need to convert this into a price-sorted array
     let holdingsArray = Object.values(holdings)
-
+    // console.log(holdingsArray.length, 'holdingsArray length - 70')
     let sortedHoldingsArray = []
     for (let j = holdingsArray.length - 1; j >= 0; j--) {
         let maxIndex;
