@@ -12,7 +12,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const history = useHistory();
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
-    const allTokens = useSelector((state) => Object.values(state?.tokens))
+    // const allTokens = useSelector((state) => Object.values(state?.tokens))
     // const [showSearchBar, setSearchBar] = useState(true);
 
 
@@ -24,11 +24,13 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const [tradePrice, setTradePrice] = useState("");
     const [userPortfolio, setUserPortfolio] = useState("");
 
-    const updateTokenSelect = (e) => setTokenSelect(e.target.value);
     const updateBuySell = (e) => setBuySell(e.target.value);
     const updateTradeAmount = (e) => setTradeAmount(e.target.value);
     const updateTradePrice = (e) => setTradePrice(e.target.value);
     const updateUserPortfolio = (e) => setUserPortfolio(e.target.value);
+
+    console.log(tokenSelect)
+
 
     buySell.toLowerCase()
 
@@ -47,7 +49,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
         let tradeAmountNumber = Number(tradeAmount)
         let total_cost = tradeAmountNumber * tradePrice
-        console.log(total_cost, 'TOTALCOST')
+
 
         const data = {
             amount_traded: tradeAmountNumber,
@@ -98,7 +100,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                             <option value={portfolio.id}>{portfolio.name}</option>
                         )}
                     </select>
-                    <div className="edit-book-form-error-message">{errors?.buySell}</div>
+                    {/* <div className="edit-book-form-error-message">{errors?.buySell}</div>
 
                     <label className="create-book-form-label">Select a Token</label>
                     <select
@@ -106,7 +108,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         placeholder="Select One"
                         required
                         value={tokenSelect}
-                        onChange={updateTokenSelect}
+                        // onChange={updateTokenSelect}
                     >
                         <option value='select'> Select One </option>
                         {allTokens.map((token) =>
@@ -114,10 +116,10 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         )}
 
                     </select>
-                    <div className="edit-book-form-error-message">{errors?.tokenSelect}</div>
+                    <div className="edit-book-form-error-message">{errors?.tokenSelect}</div> */}
 
                     <div className='navBarSearch'>
-                        <SearchBar setTokenSelect={setTokenSelect} updateTokenSelect={updateTokenSelect} tokenSelect={tokenSelect} />
+                        <SearchBar setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
                     </div>
 
                     <label className="create-book-form-label">Buy or Sell?</label>
