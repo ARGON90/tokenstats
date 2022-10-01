@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createTradeThunk, getUserTradesThunk } from "../../store/trades-store";
+import { createTradeThunk } from "../../store/trades-store";
 
 import "./CreateTradeModal.css"
 
@@ -38,7 +38,6 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
 
         setErrors(newErrors);
-        console.log(errors)
     }, [tradeAmount, tradePrice]);
 
     const handleSubmit = async (e) => {

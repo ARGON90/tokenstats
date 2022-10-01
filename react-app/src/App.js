@@ -8,7 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import AllTokens from './components/AllTokens'
 import UpdateTokens from './components/UpdateTokens';
@@ -17,7 +17,7 @@ import SplashPage from './components/SplashPage';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state?.session?.user)
+  // const currentUser = useSelector(state => state?.session?.user)
 
   useEffect(() => {
     (async() => {

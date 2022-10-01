@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+
 import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
 import Portfolios from './Portfolios';
-import Holdings from './Holdings';
-import Trades from './Trades';
+
 
 import "./index.css"
 // todo: add refresh function on the login confirmation and signup confirmation buttons
