@@ -42,10 +42,7 @@ function AllTokens() {
 
       <br></br>
 
-
-
-      <br></br>
-
+      <button onClick={refreshPrice}>Refresh Price</button>
       {allTokens.map((token) =>
         <div key={token.id} className='flex-row col-gap-5'>
           <div>{token.name}</div>
@@ -55,7 +52,6 @@ function AllTokens() {
           <div>{getDecimals(token.marketCap)}</div>
         </div>
       )}
-      <button onClick={refreshPrice}>Refresh Price</button>
     </>
   );
 }

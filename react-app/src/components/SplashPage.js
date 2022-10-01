@@ -1,20 +1,19 @@
 import { useSelector } from "react-redux"
-import { useHistory} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 function SplashPage() {
     const currentUser = useSelector(state => state?.session?.user)
-    const history = useHistory()
 
     if (currentUser) {
-        // <Redirect to='/home' />
-       return history.push('/home')
+        return <Redirect to='/home' />
     }
 
     return (
 
-        <div>Splash Page</div>
+        <>
+            <h1>Splash Page</h1>
+        </>
     )
-
 }
 
 export default SplashPage

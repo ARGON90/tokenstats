@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTradeThunk } from "../../store/trades-store";
+import SearchBar from "../SearchBar";
 
 import "./CreateTradeModal.css"
 
@@ -12,6 +13,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
     const allTokens = useSelector((state) => Object.values(state?.tokens))
+    // const [showSearchBar, setSearchBar] = useState(true);
 
 
 
@@ -114,6 +116,10 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     </select>
                     <div className="edit-book-form-error-message">{errors?.tokenSelect}</div>
 
+                    <div className='navBarSearch'>
+                        <SearchBar setTokenSelect={setTokenSelect} updateTokenSelect={updateTokenSelect} tokenSelect={tokenSelect} />
+                    </div>
+
                     <label className="create-book-form-label">Buy or Sell?</label>
                     <select
                         className="create-book-form-input"
@@ -165,6 +171,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         Cancel
                     </button>
                 </div>
+
             </form>
         </>
     );
