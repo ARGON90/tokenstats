@@ -12,14 +12,11 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const history = useHistory();
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
-    // const allTokens = useSelector((state) => Object.values(state?.tokens))
-    // const [showSearchBar, setSearchBar] = useState(true);
-
-
+    const allTokens = useSelector((state) => (state?.tokens))
 
     const [errors, setErrors] = useState('');
     const [tokenSelect, setTokenSelect] = useState("");
-    const [buySell, setBuySell] = useState("buy");
+    const [buySell, setBuySell] = useState("");
     const [tradeAmount, setTradeAmount] = useState("");
     const [tradePrice, setTradePrice] = useState("");
     const [userPortfolio, setUserPortfolio] = useState("");
@@ -29,20 +26,19 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const updateTradePrice = (e) => setTradePrice(e.target.value);
     const updateUserPortfolio = (e) => setUserPortfolio(e.target.value);
 
-    console.log(tokenSelect)
-
-
     buySell.toLowerCase()
 
     useEffect(() => {
         const newErrors = {};
 
-        if (!tradeAmount) newErrors.tradeAmount = "Please enter a trade Amount"
-        if (!tradePrice) newErrors.tradePrice = "Please enter a trade Price"
-
+        if (!tradeAmount) newErrors.tradeAmount = "Please enter a trade amount"
+        if (!tradePrice) newErrors.tradePrice = "Please enter a trade price"
+        if (!userPortfolio) newErrors.portfolio = "Please select a portfolio"
+        if (!tokenSelect) newErrors.tokenSelect = "Please select a token"
+        if (!buySell) newErrors.buySell = "Please select a 'buy' or 'sell'"
 
         setErrors(newErrors);
-    }, [tradeAmount, tradePrice]);
+    }, [tradeAmount, tradePrice, userPortfolio, tokenSelect, buySell]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,14 +67,22 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         }
     };
 
+    function tradePricePlaceholder() {
+        console.log(tokenSelect)
+        if (!tokenSelect) {
+            return "Price in $USD"
+        } else {
+            const price = allTokens[tokenSelect].price.toFixed(2)
+            return (`Current price: $${price}`)
+        }
+    }
+
     if (!currentUser) {
         return <div>Loading Create Trade Modal</div>
     }
 
     const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
-
-    console.log(userPortfolios, "user ports ")
 
     return (
         <>
@@ -94,33 +98,19 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         required
                         value={userPortfolio}
                         onChange={updateUserPortfolio}
+
                     >
-                        <option value='select'> Select One </option>
+                        <option value="" disabled={true} > Select Portfolio... </option>
                         {userPortfolios.map((portfolio) =>
                             <option value={portfolio.id}>{portfolio.name}</option>
                         )}
                     </select>
-                    {/* <div className="edit-book-form-error-message">{errors?.buySell}</div>
-
-                    <label className="create-book-form-label">Select a Token</label>
-                    <select
-                        className="create-book-form-input"
-                        placeholder="Select One"
-                        required
-                        value={tokenSelect}
-                        // onChange={updateTokenSelect}
-                    >
-                        <option value='select'> Select One </option>
-                        {allTokens.map((token) =>
-                            <option value={Number(token.id)}>{token.name}</option>
-                        )}
-
-                    </select>
-                    <div className="edit-book-form-error-message">{errors?.tokenSelect}</div> */}
+                    <div className="edit-book-form-error-message">{errors?.portfolio}</div>
 
                     <div className='navBarSearch'>
                         <SearchBar setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
                     </div>
+                    <div className="edit-book-form-error-message">{errors?.tokenSelect}</div>
 
                     <label className="create-book-form-label">Buy or Sell?</label>
                     <select
@@ -130,10 +120,12 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         value={buySell}
                         onChange={updateBuySell}
                     >
+                        <option value="" disabled={true} > Select Buy / Sell .... </option>
                         <option value='buy'> Buy </option>
                         <option value='sell'> Sell </option>
                     </select>
                     <div className="edit-book-form-error-message">{errors?.buySell}</div>
+
                     <label className="create-book-form-label">Amount of Token Bought/Sold</label>
                     <input
                         className="create-book-form-input"
@@ -149,12 +141,13 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     <input
                         className="create-book-form-input"
                         type="number"
-                        placeholder="Trade Price (in USD)"
+                        placeholder={tradePricePlaceholder()}
                         required
                         value={tradePrice}
                         onChange={updateTradePrice}
                     />
                     <div className="edit-book-form-error-message">{errors?.tradePrice}</div>
+
                 </div>
                 <div className="create-book-form-body-separator-bottom"></div>
 

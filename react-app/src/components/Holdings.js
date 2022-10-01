@@ -123,8 +123,8 @@ function Holdings({ portId }) {
         <>
             <div>My Total Holdings: ${getTotalHoldingsValue()}, change of {getTotalHoldingsPercentChange()}%</div>
 
-            {sortedHoldingsArray ? sortedHoldingsArray.map((holding) =>
-                <div key={holding[0].totalCost} className='flex-row col-gap-5'>
+            {sortedHoldingsArray ? sortedHoldingsArray.map((holding, idx) =>
+                <div key={idx} className='flex-row col-gap-5'>
                     <div>{holding[0].amount_traded} </div>
                     {/* <div>You Paid {holding[0].totalCost}</div> */}
                     <div> {allTokens[holding[0].tokenId].name} @ price {allTokens[holding[0].tokenId].price}</div>
@@ -136,7 +136,7 @@ function Holdings({ portId }) {
 
         </>
     )
-   
+
 }
 
 export default Holdings

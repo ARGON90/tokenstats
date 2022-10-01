@@ -6,7 +6,11 @@ import Portfolios from './Portfolios';
 
 
 import "./index.css"
-// todo: add refresh function on the login confirmation and signup confirmation buttons
+// todo:
+// refresh: refresh function on the login confirmation and signup confirmation buttons
+// trades: submitting trade sometimes doesn't autoupdate
+// trades: disable browser auto-fill
+// delete trade: console error
 
 function AllTokens() {
   const dispatch = useDispatch()

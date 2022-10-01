@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateTradeThunk } from "../../store/trades-store";
-
+import SearchBar from "../SearchBar";
 
 import "./EditTradeModal.css"
 
@@ -46,7 +46,6 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
 
         let tradeAmountNumber = Number(tradeAmount)
         let total_cost = tradeAmountNumber * tradePrice
-        console.log(total_cost, 'TOTALCOST')
 
         const data = {
             id: trade.id,
@@ -62,6 +61,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
 
 
         const updatedTrade = await dispatch(updateTradeThunk(data));
+
 
         if (updatedTrade) {
             setErrors([]);
@@ -84,7 +84,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                 <div className="create-book-form-body-separator-top"></div>
                 <div className="edit-book-modal-body">
 
-                <label className="create-book-form-label">Edit trade to Portfolio</label>
+                    <label className="create-book-form-label">Edit trade to Portfolio</label>
                     <select
                         className="create-book-form-input"
                         placeholder="Select One"
@@ -99,7 +99,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                     </select>
                     <div className="edit-book-form-error-message">{errors?.buySell}</div>
 
-                <label className="create-book-form-label">Select a Token</label>
+                    {/* <label className="create-book-form-label">Select a Token</label>
                     <select
                         className="create-book-form-input"
                         placeholder="Select One"
@@ -112,7 +112,12 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                             <option value={token.id}>{token.name}</option>
                         )}
                     </select>
-                    <div className="edit-book-form-error-message">{errors?.tokenSelect}</div>
+                    <div className="edit-book-form-error-message">{errors?.tokenSelect}</div> */}
+
+                    <div className='navBarSearch'>
+                        <SearchBar setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
+                    </div>
+
                     <label className="create-book-form-label">Buy or Sell?</label>
                     <select
                         className="create-book-form-input"

@@ -5,16 +5,11 @@ import './index.css';
 
 const SearchBar = ({ setTokenSelect, tokenSelect }) => {
 
-    const history = useHistory()
+
     const tokens = useSelector(state => state?.tokens)
     const [filterTokens, setFilterTokens] = useState([])
     const [search, setSearch] = useState('')
     const [showResults, setShowResults] = useState(true)
-
-    const updateTokenSelect = (e) => setTokenSelect(e.target.value);
-
-
-    // const updateSearch = (e) => setSearch(e.target.value);
 
     const tokenSearch = (keyword) => {
         setShowResults(true)
@@ -30,14 +25,6 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
             setFilterTokens(findTokenName)
         }
     }
-
-
-    // const handleSubmit = () => {
-    //     // history.push(`/books/${searchable}`)
-    //     history.push(`/home`)
-    //     setFilterTokens([])
-    //     // setSearchBar(false)
-    // }
 
     const clearInput = () => {
         setFilterTokens([])
@@ -58,31 +45,15 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
 
     return (
         <>
-
             <div className='searchBarDiv'>
-                {/* {showResultsField && (
-                    <div onClick={newSearch}>
-                        <input
-                            type='text'
-                            value={tokenSelect}
-                            onChange={tokenSearch}
-                            placeholder='Token NameTop'
-                        />
-                    </div>
-                )} */}
-                {/* <form className='searchBarInput'
-                    onSubmit={handleSubmit}> */}
-
-                        <input
-                            id='searchInputField'
-                            type='text'
-                            value={search}
-                            onChange={tokenSearch}
-                            placeholder='Token Name'
-                            onClick={newSearch}
-                        />
-
-                {/* </form> */}
+                <input
+                    id='searchInputField'
+                    type='text'
+                    value={search}
+                    onChange={tokenSearch}
+                    placeholder='Token Name'
+                    onClick={newSearch}
+                />
                 <div className='tokenResultsDiv'>
                     {showResults && filterTokens && (
                         filterTokens.slice(0, 5).map((token, idx) => (
@@ -92,7 +63,6 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
                                 onClick={() => selectResult(token)}>
                                 <div className="searchBarTitle">{token.name}<br></br></div>
                             </div>
-
                         ))
                     )}
                 </div>
