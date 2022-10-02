@@ -9,28 +9,49 @@
     flex-direction: column;
 }
 
-.holdings-totals-container {
-    display: flex;
-    flex-direction: column;
-}
-
 .holdings-header-container {
     display: flex;
     flex-direction: row;
-    width: 70%;
+    width: 100%;
     justify-content: space-between;
     color: #999999;
     letter-spacing: 1px;
     font-size: 12px;
-    border-top: 1px solid #999999;
-    border-bottom: 1px solid #999999;
+    border-top: 1px solid #404040;
+    border-bottom: 1px solid #404040;
     padding: 10px 0px;
     margin: 10px 0px
+}
+
+
+
+.items-col-1 {
+    display: flex;
+    width: 20%;
+    justify-content: flex-start;
+}
+.items-col-2 {
+    display: flex;
+    width: 10%;
+    justify-content: flex-end;
+}
+
+.reg-cols {
+    display: flex;
+    width: 17%;
+    justify-content: flex-end;
+}
+
+.flex-end {
+    justify-content: flex-end;
 }
 
 .holdings-individual-container {
     display: flex;
     flex-direction: row;
-    width: 70%;
+    width: 100%;
     justify-content: space-between;
+    padding-bottom: 9px;
+    margin-bottom: 9px;
+    border-bottom: 1px solid #282828;
 }

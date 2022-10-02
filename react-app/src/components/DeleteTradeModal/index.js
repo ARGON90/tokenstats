@@ -8,7 +8,7 @@ function DeleteTradeModal({ trade }) {
 
   return (
     <>
-      <div className="delete-book-container">
+      <div>
         <button className="delete-book-button" onClick={() => setShowModal(true)}>
           Delete
         </button>

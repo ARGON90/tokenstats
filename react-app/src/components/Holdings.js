@@ -6,7 +6,7 @@ import { getUserTradesThunk } from '../store/trades-store';
 
 import './CSS/holdings.css'
 
-function Holdings({ portId }) {
+function Holdings({ portId, setTotalHoldingsVar, setTotal24HPLVar, setTotalPctChangeVar }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
@@ -94,6 +94,7 @@ function Holdings({ portId }) {
         sortedHoldingsArray.map((holding) =>
             total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
         )
+        setTotalHoldingsVar(total.toFixed(0));
         return total.toFixed(0)
 
     }
@@ -110,9 +111,11 @@ function Holdings({ portId }) {
         let percentChange = ((total24hAgo - total) / total) * 100
 
         if (percentChange >= 0) {
+            setTotalPctChangeVar(`+${percentChange.toFixed(2)}`)
             return `+${percentChange.toFixed(2)}`
         }
         if (percentChange < 0) {
+            setTotalPctChangeVar(`${percentChange.toFixed(2)}`)
             return `${percentChange.toFixed(2)}`
         }
     }
@@ -120,37 +123,35 @@ function Holdings({ portId }) {
     function getTotal24HPL() {
         const pctChange = getTotalHoldingsPercentChange();
         const totalHolding = getTotalHoldingsValue();
+        setTotal24HPLVar((totalHolding * (pctChange / 100)).toFixed(2))
         return (totalHolding * (pctChange / 100)).toFixed(2)
     }
+
+    getTotalHoldingsValue()
+    getTotal24HPL()
+    getTotalHoldingsPercentChange()
 
     return (
         <>
             <div className='holdings-page'>
-                <div className='holdings-totals-container'>
 
-                    <div>${getTotalHoldingsValue()}, </div>
-                    <div className='flex-row col-gap-5'>
-                        <div>{getTotal24HPL()}</div>
-                        <div>{getTotalHoldingsPercentChange()}%</div>
-                    </div>
-                </div>
                 <div className='holdings-header-container'>
-                    <div>NAME</div>
-                    <div>AMOUNT</div>
-                    <div>PRICE</div>
-                    <div>24H CHANGE</div>
-                    <div>TOTAL</div>
-                    <div>24 HOUR P/L</div>
+                    <div className='items-col-1'>NAME</div>
+                    <div className='items-col-2'>AMOUNT</div>
+                    <div className='reg-cols'>PRICE</div>
+                    <div className='reg-cols'>24H CHANGE</div>
+                    <div className='reg-cols'>TOTAL</div>
+                    <div className='reg-cols flex-end'>24 HOUR P/L</div>
                 </div>
 
                 {sortedHoldingsArray ? sortedHoldingsArray.map((holding, idx) =>
                     <div key={idx} className='holdings-individual-container'>
-                        <div>{allTokens[holding[0].tokenId].name}</div>
-                        <div>{holding[0].amount_traded} </div>
-                        <div>${allTokens[holding[0].tokenId].price}</div>
-                        <div>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>
-                        <div>${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
-                        <div>${(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100).toFixed(2)}</div>
+                        <div className='items-col-1'>{allTokens[holding[0].tokenId].name}</div>
+                        <div className='items-col-2'>{holding[0].amount_traded} </div>
+                        <div className='reg-cols'>${allTokens[holding[0].tokenId].price}</div>
+                        <div className='reg-cols'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>
+                        <div className='reg-cols'>${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
+                        <div className='reg-cols flex-end'>${(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100).toFixed(2)}</div>
                     </div>
                 ) : <div>No holdings</div>}
             </div>

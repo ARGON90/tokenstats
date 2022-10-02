@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* EDIT PORTFOLIO STYLING */
+
+.edit-portfolio-image {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+
+}
+
+.edit-book-form {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: white;
+    font-size: 14px;
+    color: #181818;
+}
+
+.edit-book-form-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00635d;
+}
+
+.edit-book-form-error-message {
+    color: red;
+}
+
+.edit-book-form-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 5px;
+    margin-top: 6px;
+}
+
+.edit-book-form-input {
+    min-width: 300px;
+    width: 800px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    border: 1px solid #DCD6CC;
+    padding: 2px;
+    cursor: pointer;
+    caret-color: black;
+    text-overflow: ellipsis;
+    color: #5d5d5d;
+}
+
+.edit-book-form-input:focus {
+    outline: none;
+    border: 1px solid #d0ba94;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
+    color: #181818;
+}
+
+.edit-book-form-input::placeholder {
+    color: #A9A9A9;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.edit-book-modal-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: white;
+    position: relative;
+}
+
+.edit-book-form-body-separator-top {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.edit-book-form-body-separator-bottom {
+    display: block;
+    margin-top: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.edit-book-form-submit,
+.edit-book-form-cancel {
+    align-items: center;
+    text-align: center;
+    font-size: small;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.7);
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 1px solid rgba(170, 170, 170, 0.3);
+    border-radius: 5px;
+    background-color: #F4F1EA;
+    width: 100px;
+    height: 23px;
+}
+
+.edit-book-form-submit:disabled {
+    color: #A9A9A9;
+}
+
+.edit-book-form-submit:hover:enabled,
+.edit-book-form-cancel:hover {
+    cursor: pointer;
+    background-color: #ede6d6;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 900px) {
+    .edit-book-form {
+        max-width: 50vh;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .edit-book-form {
+        max-height: 50vh;
+    }
+}
+
+/* DELETE PORTFOLIO STYLING */
+
+.delete-portfolio-image {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.delete-book-form {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: white;
+    position: relative;
+}
+
+.delete-book-form-title {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
+    /* padding-bottom: 20px; */
+}
+
+.delete-book-modal-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: white;
+    position: relative;
+    border-radius: 20px;
+}
+
+.delete-book-form-delete-button,
+.delete-book-form-cancel-button {
+    text-align: center;
+    font-size: small;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 5px;
+    border: 1px solid rgba(170, 170, 170, 0.3);
+    border-radius: 5px;
+    background-color: #F4F1EA;
+    cursor: pointer;
+    width: 100px;
+    height: 23px;
+}
+
+.delete-book-form-delete-button:hover,
+.delete-book-form-cancel-button:hover {
+    background-color: #ede6d6;
+    font-weight: bold;
+}

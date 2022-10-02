@@ -14,9 +14,12 @@ function Portfolios() {
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
 
+    const [total24HPLVar, setTotal24HPLVar] = useState('')
+    const [totalPctChangeVar, setTotalPctChangeVar] = useState('')
+    const [totalHoldingsVar, setTotalHoldingsVar] = useState('')
     const [displayTab, setDisplayTab] = useState('holdings')
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
-    const updateCurrentPortfolio = (e) => {setCurrentPortfolio(e.target.value)}
+    const updateCurrentPortfolio = (e) => { setCurrentPortfolio(e.target.value) }
 
 
 
@@ -69,20 +72,30 @@ function Portfolios() {
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
 
+
     if (!userPortfolios) return <div>No portfolfios</div>
     return (
         <>
             <div className='portfolios-page'>
-
                 <div className='portfolios-left-container'>
-                    <CreatePortfolioModal />
-                    <button className={allAssetsClicked()} value='all' onClick={updateCurrentPortfolio}>All Assets</button>
+                    <div className='portfolio-create-div'>
+                        <CreatePortfolioModal />
+                    </div>
+                    <div className='portfolio-assets-container'>
+                        <div className={allAssetsClicked()} >
+                            <button className='portfolio-all-assets' value='all' onClick={updateCurrentPortfolio}>All Assets</button>
+                        </div>
+                    </div>
                     <div>
                         {userPortfolios.map((portfolio) =>
                             <div key={portfolio.id} className='portfolios-buttons-container'>
-                                <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
-                                <EditPortfolioModal portfolio={portfolio} />
-                                <DeletePortfolioModal portfolio={portfolio} />
+                                <div className='portfolio-selection'>
+                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
+                                </div>
+                                <div className='portfolios-edit-delete-buttons'>
+                                    <EditPortfolioModal portfolio={portfolio} />
+                                    <DeletePortfolioModal portfolio={portfolio} />
+                                </div>
                             </div>
                         )}
                     </div>
@@ -90,6 +103,14 @@ function Portfolios() {
 
 
                 <div className='portfolios-right-container'>
+                    <div className='holdings-totals-container'>
+                        <div className='total-holdings'>${totalHoldingsVar}</div>
+                        <div className='holdings-PL-container'>
+                            <div>${total24HPLVar}</div>
+                            <div>{totalPctChangeVar}%</div>
+                        </div>
+                    </div>
+
                     <div className='portfolios-right-header-container'>
                         <div className={holdingsClicked()} onClick={() => setDisplayTab('holdings')}>HOLDINGS</div>
                         <div className={tradesClicked()} onClick={() => setDisplayTab('trades')}>TRADES</div>
@@ -97,7 +118,7 @@ function Portfolios() {
 
                     {displayTab === 'holdings' &&
                         <div>
-                            <Holdings portId={currentPortfolio} />
+                            <Holdings portId={currentPortfolio} setTotalHoldingsVar={setTotalHoldingsVar} setTotal24HPLVar={setTotal24HPLVar} setTotalPctChangeVar={setTotalPctChangeVar} />
                         </div>}
 
                     {displayTab === 'trades' &&
