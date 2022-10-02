@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import CreatePortfolioForm from "./CreatePortfolioForm";
 
+import './CreatePortfolioModal.css'
+
 function CreatePortfolioModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <div className="create-book-container">
-        <button className="create-book-button" onClick={() => setShowModal(true)}>
+      <div className="create-portfolio-button-container">
+        <div className="create-portfolio-button" onClick={() => setShowModal(true)}>
           Create a Portfolio
-        </button>
+        </div>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <CreatePortfolioForm setShowModal={setShowModal} />

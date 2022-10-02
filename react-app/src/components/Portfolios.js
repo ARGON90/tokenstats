@@ -16,7 +16,7 @@ function Portfolios() {
 
     const [displayTab, setDisplayTab] = useState('holdings')
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
-    const updateCurrentPortfolio = (e) => setCurrentPortfolio(e.target.value);
+    const updateCurrentPortfolio = (e) => {setCurrentPortfolio(e.target.value)}
 
 
 
@@ -28,24 +28,59 @@ function Portfolios() {
         return <div>Loading Portfolios</div>
     }
 
+    function holdingsClicked() {
+        if (displayTab === 'holdings') {
+            return 'portfolios-header-clicked'
+        }
+        return 'portfolios-header-unclicked'
+    }
 
+    function tradesClicked() {
+        if (displayTab === 'trades') {
+            return 'portfolios-header-clicked'
+        }
+        return 'portfolios-header-unclicked'
+    }
+
+    function allAssetsClicked() {
+        if (currentPortfolio === 'all') {
+            return 'portfolios-buttons-clicked'
+        }
+        return 'portfolios-buttons'
+    }
+
+    function portfolioButtonClicked(id) {
+        console.log(currentPortfolio, "CURRENT")
+        console.log(id, 'ID')
+        let thisPort = document.getElementById(id)
+        console.log(thisPort)
+
+        if (Number(currentPortfolio) === id) {
+            console.log('inside conditional')
+            document.getElementById(id).className = "portfolios-buttons-clicked"
+        } else {
+            return 'portfolios-buttons'
+        }
+
+
+    }
 
     const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
 
-    if (!userPortfolios) return (<div>No portfolfios</div>)
+    if (!userPortfolios) return <div>No portfolfios</div>
     return (
         <>
             <div className='portfolios-page'>
 
                 <div className='portfolios-left-container'>
                     <CreatePortfolioModal />
-                    <button value='all' onClick={updateCurrentPortfolio}>View All Assets</button>
+                    <button className={allAssetsClicked()} value='all' onClick={updateCurrentPortfolio}>All Assets</button>
                     <div>
                         {userPortfolios.map((portfolio) =>
-                            <div key={portfolio.id} className='flex-row'>
-                                <button value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
+                            <div key={portfolio.id} className='portfolios-buttons-container'>
+                                <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
                                 <EditPortfolioModal portfolio={portfolio} />
                                 <DeletePortfolioModal portfolio={portfolio} />
                             </div>
@@ -56,8 +91,8 @@ function Portfolios() {
 
                 <div className='portfolios-right-container'>
                     <div className='portfolios-right-header-container'>
-                        <div onClick={() => setDisplayTab('holdings')}>HOLDINGS</div>
-                        <div onClick={() => setDisplayTab('trades')}>TRADES</div>
+                        <div className={holdingsClicked()} onClick={() => setDisplayTab('holdings')}>HOLDINGS</div>
+                        <div className={tradesClicked()} onClick={() => setDisplayTab('trades')}>TRADES</div>
                     </div>
 
                     {displayTab === 'holdings' &&
