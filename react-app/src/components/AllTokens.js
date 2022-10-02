@@ -5,8 +5,8 @@ import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-sto
 import Portfolios from './Portfolios';
 
 
-import "./index.css"
-// todo:
+import "./CSS/index.css"
+
 // trades: submitting trade sometimes doesn't autoupdate?
 // trades: disable browser auto-fill
 // delete trade: console error

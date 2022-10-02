@@ -4,7 +4,7 @@ import { useDispatch} from 'react-redux';
 import { updateAllTokensThunk } from '../store/all-tokens-store';
 
 
-import "./index.css"
+import "./CSS/index.css"
 
 function UpdateTokens() {
     const dispatch = useDispatch()

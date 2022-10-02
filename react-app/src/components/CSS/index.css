@@ -24,7 +24,7 @@
 
 .flex-column {
     display: flex;
-    flex: column;
+    flex-direction: column;
 }
 
 /* spacing */

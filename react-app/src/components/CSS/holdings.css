@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+/* coloring */
+
+.holdings-page{
+    color: #e5e5e5;
+    background-color: black;
+    font-family: roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.holdings-totals-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.holdings-header-container {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-between;
+    color: #999999;
+    letter-spacing: 1px;
+    font-size: 12px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    padding: 10px 0px;
+    margin: 10px 0px
+}
+
+.holdings-individual-container {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-between;
+}

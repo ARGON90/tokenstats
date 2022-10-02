@@ -31,7 +31,7 @@ function SplashPage() {
     return (
 
         <>
-            <h1>Splash Page</h1>
+            <h1>Manage Your Crypto Portfolio from One Place!</h1>
             {allTokens.map((token) =>
                 <div key={token.id} className='flex-row col-gap-5'>
                     <div>{token.name}</div>

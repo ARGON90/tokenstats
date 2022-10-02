@@ -1,0 +1,32 @@
+.portfolios-page {
+    display: flex;
+    flex-direction: row;
+    font-family: roboto, sans-serif;
+    color: #e5e5e5;
+    background-color: black;
+    justify-content: center;
+}
+
+.portfolios-left-container {
+    display: flex;
+    flex-direction: column;
+    width: 15%
+}
+
+.portfolios-right-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%
+}
+
+.portfolios-right-header-container {
+    display: flex;
+    flex-direction: row;
+    color: #999999;
+    letter-spacing: 1px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    padding: 10px 0px;
+    margin: 10px 0px;
+    column-gap: 20px
+}

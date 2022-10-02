@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserHoldingsThunk } from '../store/holdings-store';
 import { getUserTradesThunk } from '../store/trades-store';
 
-
+import './CSS/holdings.css'
 
 function Holdings({ portId }) {
     const dispatch = useDispatch()
@@ -115,25 +115,36 @@ function Holdings({ portId }) {
         if (percentChange < 0) {
             return `${percentChange.toFixed(2)}`
         }
-
     }
 
+    function getTotal24HPL() {
+        const pctChange = getTotalHoldingsPercentChange();
+        const totalHolding = getTotalHoldingsValue();
+        return (totalHolding * (pctChange / 100)).toFixed(2)
+    }
 
     return (
         <>
-            <div className='font-white bkgrnd-black roboto'>
-                <div>My Total Holdings: ${getTotalHoldingsValue()}, change of {getTotalHoldingsPercentChange()}%</div>
-                <div className='HOLDINGS-LABELS-DIV flex-row col-gap-20'>
-                    <div>Name</div>
-                    <div>Amount</div>
-                    <div>Price</div>
-                    <div>24H Change</div>
-                    <div>Total</div>
-                    <div>24 Hour P/L</div>
+            <div className='holdings-page'>
+                <div className='holdings-totals-container'>
+
+                    <div>${getTotalHoldingsValue()}, </div>
+                    <div className='flex-row col-gap-5'>
+                        <div>{getTotal24HPL()}</div>
+                        <div>{getTotalHoldingsPercentChange()}%</div>
+                    </div>
+                </div>
+                <div className='holdings-header-container'>
+                    <div>NAME</div>
+                    <div>AMOUNT</div>
+                    <div>PRICE</div>
+                    <div>24H CHANGE</div>
+                    <div>TOTAL</div>
+                    <div>24 HOUR P/L</div>
                 </div>
 
                 {sortedHoldingsArray ? sortedHoldingsArray.map((holding, idx) =>
-                    <div key={idx} className='flex-row col-gap-30'>
+                    <div key={idx} className='holdings-individual-container'>
                         <div>{allTokens[holding[0].tokenId].name}</div>
                         <div>{holding[0].amount_traded} </div>
                         <div>${allTokens[holding[0].tokenId].price}</div>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import './index.css';
+import './CSS/index.css';
 
 const SearchBar = ({ setTokenSelect, tokenSelect }) => {
     const allTokens = useSelector((state) => (state?.tokens))

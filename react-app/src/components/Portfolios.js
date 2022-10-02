@@ -7,11 +7,14 @@ import EditPortfolioModal from './EditPortfolioModal';
 import Trades from './Trades';
 import Holdings from './Holdings';
 
+import './CSS/portfolios.css'
+
 function Portfolios() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
 
+    const [displayTab, setDisplayTab] = useState('holdings')
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
     const updateCurrentPortfolio = (e) => setCurrentPortfolio(e.target.value);
 
@@ -34,30 +37,38 @@ function Portfolios() {
     if (!userPortfolios) return (<div>No portfolfios</div>)
     return (
         <>
-            <div className='font-white bkgrnd-black'>
-                <div>My Portfolios</div>
-                <CreatePortfolioModal />
-                <button value='all' onClick={updateCurrentPortfolio}>View All Portfolios</button>
-                <div>
-                    {userPortfolios.map((portfolio) =>
-                        <div key={portfolio.id} className='flex-row'>
-                            <button value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
-                            <EditPortfolioModal portfolio={portfolio} />
-                            <DeletePortfolioModal portfolio={portfolio} />
-                        </div>
-                    )}
+            <div className='portfolios-page'>
+
+                <div className='portfolios-left-container'>
+                    <CreatePortfolioModal />
+                    <button value='all' onClick={updateCurrentPortfolio}>View All Assets</button>
+                    <div>
+                        {userPortfolios.map((portfolio) =>
+                            <div key={portfolio.id} className='flex-row'>
+                                <button value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
+                                <EditPortfolioModal portfolio={portfolio} />
+                                <DeletePortfolioModal portfolio={portfolio} />
+                            </div>
+                        )}
+                    </div>
                 </div>
 
-                <br></br>
 
-                <div>
-                    <Holdings portId={currentPortfolio} />
-                </div>
+                <div className='portfolios-right-container'>
+                    <div className='portfolios-right-header-container'>
+                        <div onClick={() => setDisplayTab('holdings')}>HOLDINGS</div>
+                        <div onClick={() => setDisplayTab('trades')}>TRADES</div>
+                    </div>
 
-                <br></br>
-                <div>
+                    {displayTab === 'holdings' &&
+                        <div>
+                            <Holdings portId={currentPortfolio} />
+                        </div>}
 
-                    <Trades portId={currentPortfolio} />
+                    {displayTab === 'trades' &&
+                        <div>
+                            <Trades portId={currentPortfolio} />
+                        </div>}
                 </div>
             </div>
 
