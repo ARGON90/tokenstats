@@ -12,7 +12,7 @@ function EditTradeModal({ trade }) {
     <>
       <div className="edit-book-container">
         <button
-          className="edit-book-button"
+          className="edit-button"
           onClick={() => setShowModal(true)}
         >
           Edit

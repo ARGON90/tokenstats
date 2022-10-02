@@ -1,4 +1,4 @@
-.edit-book-button {
+.edit-button {
     display: inline-flex;
     align-items: center;
     text-align: center;
@@ -13,7 +13,7 @@
     height: 23px;
   }
 
-  .edit-book-button:hover {
+  .edit-button:hover {
     background-color: #ede6d6;
     font-weight: bold;
   }

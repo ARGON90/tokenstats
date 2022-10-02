@@ -34,31 +34,32 @@ function Portfolios() {
     if (!userPortfolios) return (<div>No portfolfios</div>)
     return (
         <>
-            <div>My Portfolios</div>
-            <CreatePortfolioModal />
-            <button value='all' onClick={updateCurrentPortfolio}>View All Portfolios</button>
-            <div>
-                {userPortfolios.map((portfolio) =>
-                    <div key={portfolio.id} className='flex-row'>
-                        <button value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
-                        <EditPortfolioModal portfolio={portfolio} />
-                        <DeletePortfolioModal portfolio={portfolio} />
-                    </div>
-                )}
+            <div className='font-white bkgrnd-black'>
+                <div>My Portfolios</div>
+                <CreatePortfolioModal />
+                <button value='all' onClick={updateCurrentPortfolio}>View All Portfolios</button>
+                <div>
+                    {userPortfolios.map((portfolio) =>
+                        <div key={portfolio.id} className='flex-row'>
+                            <button value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
+                            <EditPortfolioModal portfolio={portfolio} />
+                            <DeletePortfolioModal portfolio={portfolio} />
+                        </div>
+                    )}
+                </div>
+
+                <br></br>
+
+                <div>
+                    <Holdings portId={currentPortfolio} />
+                </div>
+
+                <br></br>
+                <div>
+
+                    <Trades portId={currentPortfolio} />
+                </div>
             </div>
-
-            <br></br>
-
-            <div>
-                <Holdings portId={currentPortfolio} />
-            </div>
-
-            <br></br>
-            <div>
-
-                <Trades portId={currentPortfolio} />
-            </div>
-
 
         </>
     )

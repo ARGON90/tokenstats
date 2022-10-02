@@ -8,7 +8,7 @@ import DeleteTradeModal from './DeleteTradeModal'
 
 
 
-function Trades({portId}) {
+function Trades({ portId }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
@@ -48,19 +48,19 @@ function Trades({portId}) {
     }
 
     function getTokenName(id) {
-        if (!allTokens[id]) {return <div>Loading</div>}
+        if (!allTokens[id]) { return <div>Loading</div> }
         return allTokens[id].name
     }
     function getTradesTotalProfit() {
         let totalProfit = 0;
         userTrades.forEach((trade) => {
-            totalProfit += ( allTokens[trade.token_id].price * trade.amount_traded - trade.total_cost)
+            totalProfit += (allTokens[trade.token_id].price * trade.amount_traded - trade.total_cost)
         })
         return `$${totalProfit.toFixed(2)}`
     }
     function getPLTrade(trade) {
         let tradePL = (allTokens[trade.token_id].price * trade.amount_traded) - (trade.total_cost)
-        if (tradePL > 0 ) {
+        if (tradePL > 0) {
             return `+${tradePL.toFixed(2)}`
         }
         return tradePL.toFixed(2)
@@ -71,16 +71,28 @@ function Trades({portId}) {
         <>
             <div>My Trades</div>
             <div>Total Profit: {getTradesTotalProfit()}</div>
+            <div className='TRADES-DIV-HEADER flex-row col-gap-20'>
+                <div>Txn Type</div>
+                <div>Amount</div>
+                <div>Token </div>
+                <div>Trade Value</div>
+                <div>Current Value</div>
+                <div>Profit / Loss</div>
+            </div>
             {userTrades.map((trade) =>
-                <div key={trade.id} className='flex-row'>
-                    <div>You {boughtSold(trade.buy)} {trade.amount_traded} {getTokenName(trade.token_id)} at of ${trade.trade_price} ea |</div>
+                <div key={trade.id} className='flex-row col-gap-30'>
 
-                    <div>total cost: $ {(trade.total_cost).toFixed(0)} |</div>
+                    <div>{boughtSold(trade.buy)}</div>
+                    <div>{trade.amount_traded}</div>
+                    <div>{getTokenName(trade.token_id)}</div>
+                    <div>${(trade.total_cost).toFixed(0)}</div>
+                    <div>${allTokens[trade.token_id].price.toFixed(0) * trade.amount_traded}</div>
+                    <div>{getPLTrade(trade)}</div>
 
-                    <div>Total Worth = ${allTokens[trade.token_id].price.toFixed(0) * trade.amount_traded}</div>
-                    <div>| P/L on this trade: {getPLTrade(trade)}</div>
-                    <EditTradeModal trade={trade}/>
-                    <DeleteTradeModal trade={trade}/>
+                    {/* <div>${trade.trade_price} ea |</div> */}
+
+                    <EditTradeModal trade={trade} />
+                    <DeleteTradeModal trade={trade} />
                 </div>
             )}
             <CreateTradeModal />

@@ -1,3 +1,14 @@
+/* coloring */
+
+.font-white {
+    color: #e5e5e5
+}
+
+.bkgrnd-black {
+    background-color: black;
+}
+
+
 /* displays */
 
 .flex-row {
@@ -5,10 +16,23 @@
     flex: row;
 }
 
+.flex-column {
+    display: flex;
+    flex: column;
+}
+
 /* spacing */
 
 .col-gap-5 {
     column-gap: 5px;
+}
+
+.col-gap-20 {
+    column-gap: 20px;
+}
+
+.col-gap-30 {
+    column-gap: 30px;
 }
 
 

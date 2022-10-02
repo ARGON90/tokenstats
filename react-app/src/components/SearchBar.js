@@ -4,12 +4,19 @@ import { useSelector } from 'react-redux';
 import './index.css';
 
 const SearchBar = ({ setTokenSelect, tokenSelect }) => {
+    const allTokens = useSelector((state) => (state?.tokens))
 
+    function editorNah() {
+        if (tokenSelect && allTokens[tokenSelect]) {
+            return allTokens[tokenSelect].name
+        }
+        return ''
+    }
 
     const tokens = useSelector(state => state?.tokens)
     const [filterTokens, setFilterTokens] = useState([])
-    const [search, setSearch] = useState('')
     const [showResults, setShowResults] = useState(true)
+    const [search, setSearch] = useState(editorNah())
 
     const tokenSearch = (keyword) => {
         setShowResults(true)
@@ -43,30 +50,35 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
     }
 
 
+
+
     return (
         <>
-            <div className='searchBarDiv'>
-                <input
-                    id='searchInputField'
-                    type='text'
-                    value={search}
-                    onChange={tokenSearch}
-                    placeholder='Token Name'
-                    onClick={newSearch}
-                />
-                <div className='tokenResultsDiv'>
-                    {showResults && filterTokens && (
-                        filterTokens.slice(0, 5).map((token, idx) => (
-                            <div className='searchBarResult'
-                                key={idx}
-                                value={token.id}
-                                onClick={() => selectResult(token)}>
-                                <div className="searchBarTitle">{token.name}<br></br></div>
-                            </div>
-                        ))
-                    )}
+
+                <div className='searchBarDiv'>
+                    <label className="create-book-form-label">Choose a Token</label>
+                    <input
+                        id='searchInputField'
+                        type='text'
+                        value={search}
+                        onChange={tokenSearch}
+                        placeholder='Token Name'
+                        onClick={newSearch}
+                    />
+                    <div className='tokenResultsDiv'>
+                        {showResults && filterTokens && (
+                            filterTokens.slice(0, 5).map((token, idx) => (
+                                <div className='searchBarResult'
+                                    key={idx}
+                                    value={token.id}
+                                    onClick={() => selectResult(token)}>
+                                    <div className="searchBarTitle">{token.name}<br></br></div>
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
-            </div>
+
         </>
     )
 }

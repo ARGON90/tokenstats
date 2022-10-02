@@ -121,19 +121,28 @@ function Holdings({ portId }) {
 
     return (
         <>
-            <div>My Total Holdings: ${getTotalHoldingsValue()}, change of {getTotalHoldingsPercentChange()}%</div>
-
-            {sortedHoldingsArray ? sortedHoldingsArray.map((holding, idx) =>
-                <div key={idx} className='flex-row col-gap-5'>
-                    <div>{holding[0].amount_traded} </div>
-                    {/* <div>You Paid {holding[0].totalCost}</div> */}
-                    <div> {allTokens[holding[0].tokenId].name} @ price {allTokens[holding[0].tokenId].price}</div>
-                    <div>, worth ${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
-                    <div>| change from yesterday is {allTokens[holding[0].tokenId].dailyChange.toFixed(2)}% |</div>
-                    <div>24H P/L is ${(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100).toFixed(2)}</div>
+            <div className='font-white bkgrnd-black'>
+                <div>My Total Holdings: ${getTotalHoldingsValue()}, change of {getTotalHoldingsPercentChange()}%</div>
+                <div className='HOLDINGS-LABELS-DIV flex-row col-gap-20'>
+                    <div>Name</div>
+                    <div>Amount</div>
+                    <div>Price</div>
+                    <div>24H Change</div>
+                    <div>Total</div>
+                    <div>24 Hour P/L</div>
                 </div>
-            ) : <div>No holdings</div>}
 
+                {sortedHoldingsArray ? sortedHoldingsArray.map((holding, idx) =>
+                    <div key={idx} className='flex-row col-gap-30'>
+                        <div>{allTokens[holding[0].tokenId].name}</div>
+                        <div>{holding[0].amount_traded} </div>
+                        <div>${allTokens[holding[0].tokenId].price}</div>
+                        <div>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>
+                        <div>${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
+                        <div>${(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100).toFixed(2)}</div>
+                    </div>
+                ) : <div>No holdings</div>}
+            </div>
         </>
     )
 

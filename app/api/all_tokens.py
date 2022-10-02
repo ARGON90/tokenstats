@@ -22,6 +22,10 @@ def update_tokens():
 
     fetch = json.loads(response.text)
 
+    print(fetch, 'FETCH')
+
+    print(fetch.items())
+
     for key, value in fetch.items():
 
         print(key, 'KEY')
