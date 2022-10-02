@@ -121,7 +121,7 @@ function Holdings({ portId }) {
 
     return (
         <>
-            <div className='font-white bkgrnd-black'>
+            <div className='font-white bkgrnd-black roboto'>
                 <div>My Total Holdings: ${getTotalHoldingsValue()}, change of {getTotalHoldingsPercentChange()}%</div>
                 <div className='HOLDINGS-LABELS-DIV flex-row col-gap-20'>
                     <div>Name</div>
