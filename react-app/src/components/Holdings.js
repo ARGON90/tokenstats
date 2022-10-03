@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getUserHoldingsThunk } from '../store/holdings-store';
@@ -12,6 +12,7 @@ function Holdings({ portId}) {
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
     const userId = Number(currentUser.id)
+    
 
     // for some reason, accessing through users.trades causes render issue. need to dispatch users?
     // const userTrades = useSelector((state) => (state?.session?.user?.trades))

@@ -3,7 +3,7 @@ import { Modal } from "../../context/Modal";
 import DeletePortfolioForm from "./DeletePortfolioForm";
 import "./DeletePortfolioModal.css";
 
-function DeletePortfolioModal({ portfolio }) {
+function DeletePortfolioModal({ portfolio, setRerender, rerender, holdVal }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ function DeletePortfolioModal({ portfolio }) {
 
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <DeletePortfolioForm setShowModal={setShowModal} portfolio={portfolio} />
+            <DeletePortfolioForm setShowModal={setShowModal} portfolio={portfolio} holdVal={holdVal} setRerender={setRerender} rerender={rerender} />
           </Modal>
         )}
       </div>

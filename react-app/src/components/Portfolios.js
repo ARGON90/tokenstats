@@ -17,7 +17,7 @@ function Portfolios() {
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
-
+    const [rerender, setRerender] = useState(false)
 
     const [displayTab, setDisplayTab] = useState('holdings')
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
@@ -25,7 +25,7 @@ function Portfolios() {
 
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
-    }, [dispatch, displayTab, currentPortfolio])
+    }, [dispatch, displayTab, currentPortfolio, rerender])
 
     if (!allTokens[1]) return null
     if (!currentUser) return null
@@ -172,7 +172,7 @@ function Portfolios() {
                                 </div>
                                 <div className='portfolios-edit-delete-buttons'>
                                     <EditPortfolioModal portfolio={portfolio} />
-                                    <DeletePortfolioModal portfolio={portfolio} />
+                                    <DeletePortfolioModal portfolio={portfolio} rerender={rerender} setRerender={setRerender} holdVal={getTotalHoldingsValue} />
                                 </div>
                             </div>
                         )}

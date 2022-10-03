@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserPortfoliosThunk, deletePortfolioThunk } from "../../store/portfolio-store";
+import { getUserTradesThunk } from "../../store/trades-store";
 
-const DeleteBookForm = ({ setShowModal, portfolio }) => {
+const DeleteBookForm = ({ setShowModal, portfolio, holdVal, setRerender, rerender }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -15,7 +16,13 @@ const DeleteBookForm = ({ setShowModal, portfolio }) => {
     e.preventDefault();
     let deletedPortfolio = await dispatch(deletePortfolioThunk(portfolio.id));
 
+
     if (deletedPortfolio) {
+      holdVal()
+      console.log(holdVal())
+      setRerender(!rerender)
+      await dispatch(getUserTradesThunk())
+      console.log(rerender  ,'RERENDER')
       setShowModal(false);
       history.push("/home");
       return null

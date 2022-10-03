@@ -9,7 +9,7 @@ import "./CSS/index.css"
 
 // trades: submitting trade sometimes doesn't autoupdate?
 // trades: disable browser auto-fill
-// delete trade: console error?
+// delete trade: still getting console error for state update on unmounted component
 // trades: should list most recent one first?
 // favicons
 // readme
@@ -18,6 +18,7 @@ import "./CSS/index.css"
 // delete portfolio doesn't work on heroku
 // delete trade not working for on cascade when making a new portfio
 // add trade not working with small decimals
+// remove 'required' from forms
 
 function AllTokens() {
   const dispatch = useDispatch()
