@@ -13,7 +13,7 @@
     padding-top: 50px;
     padding-bottom: 300px;
     padding-left: 7%;
-    padding-right: 15%;
+    padding-right: 10%;
     column-gap: 50px;
 }
 
@@ -27,7 +27,7 @@
 .portfolios-right-container {
     display: flex;
     flex-direction: column;
-    width: 80%
+    width: 90%
 }
 
 .portfolios-right-header-container {

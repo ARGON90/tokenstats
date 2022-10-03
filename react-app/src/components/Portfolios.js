@@ -27,7 +27,7 @@ function Portfolios() {
 
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
-    }, [dispatch])
+    }, [dispatch, displayTab, currentPortfolio])
 
     if (!currentUser) {
         return <div>Loading Portfolios</div>
@@ -55,13 +55,7 @@ function Portfolios() {
     }
 
     function portfolioButtonClicked(id) {
-        console.log(currentPortfolio, "CURRENT")
-        console.log(id, 'ID')
-        let thisPort = document.getElementById(id)
-        console.log(thisPort)
-
         if (Number(currentPortfolio) === id) {
-            console.log('inside conditional')
             document.getElementById(id).className = "portfolios-buttons-clicked"
         } else {
             return 'portfolios-buttons'
@@ -72,8 +66,6 @@ function Portfolios() {
 
     const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
-
-
 
     if (!userPortfolios) return <div>No portfolfios</div>
     return (
@@ -131,7 +123,7 @@ function Portfolios() {
                         </div>}
                     {displayTab === 'trades' &&
                         <div>
-                            <Trades portId={currentPortfolio} />
+                            <Trades portId={currentPortfolio} totalHoldingsVar={totalHoldingsVar} />
                         </div>}
 
                 </div>

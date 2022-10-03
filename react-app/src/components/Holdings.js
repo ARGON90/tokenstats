@@ -27,6 +27,7 @@ function Holdings({ portId, setTotalHoldingsVar, setTotal24HPLVar, setTotalPctCh
     if (portId === 'all') {
         // console.log(userTrad, 'user Trad by ALL trad 31')
     } else {
+        console.log('PORTID', portId)
         userTrad = allTrades.filter(trade => trade?.portfolio_id === Number(portId))
         // console.log(userTrad, 'user Trad by portfolio number - 33', portId)
     }

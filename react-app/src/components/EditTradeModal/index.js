@@ -3,26 +3,25 @@ import { Modal } from "../../context/Modal";
 import EditTradeForm from "./EditTradeForm";
 
 
-import "./EditTradeModal.css";
+import '../CSS/modalstyling.css';
 
 function EditTradeModal({ trade }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <div className="edit-book-container">
-        <button
-          className="edit-button"
-          onClick={() => setShowModal(true)}
-        >
-          Edit
-        </button>
+    <img
+    src='https://www.pngmart.com/files/8/Contract-Transparent-PNG.png'
+    alt='edit'
+    onClick={() => setShowModal(true)}
+    className="delete-portfolio-image"
+    >
+    </img>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <EditTradeForm setShowModal={setShowModal} trade={trade} />
           </Modal>
         )}
-      </div>
     </>
   );
 }

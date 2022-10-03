@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import DeleteTradeForm from "./DeleteTradeForm";
-import "./DeleteTradeModal.css";
+
+import "../CSS/modalstyling.css";
+
 
 function DeleteTradeModal({ trade }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <div>
-        <button className="delete-book-button" onClick={() => setShowModal(true)}>
-          Delete
-        </button>
+    <img
+    src='https://images.vexels.com/media/users/3/223479/isolated/preview/8ecc75c9d0cf6d942cce96e196d4953f-trash-bin-icon-flat-by-vexels.png'
+    alt='delete trade'
+    onClick={() => setShowModal(true)}
+    className='delete-portfolio-image'>
+    </img>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <DeleteTradeForm setShowModal={setShowModal} trade={trade} />
           </Modal>
         )}
-      </div>
     </>
   );
 }
