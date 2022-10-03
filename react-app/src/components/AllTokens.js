@@ -19,6 +19,7 @@ import "./CSS/index.css"
 // delete trade not working for on cascade when making a new portfio
 // add trade not working with small decimals
 // remove 'required' from forms
+// race condition upon portfolio creation - check that out!
 
 function AllTokens() {
   const dispatch = useDispatch()

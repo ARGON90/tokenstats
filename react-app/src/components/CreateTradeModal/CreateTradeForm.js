@@ -184,7 +184,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     <label className="create-book-form-label">Trade Price of Token</label>
                     <input
                         className="create-book-form-input"
-                        type="number"
+                        type="decimal"
                         placeholder={tradePricePlaceholder()}
                         required
                         value={tradePrice}
@@ -192,6 +192,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     />
                     <div className="edit-book-form-error-message">{errors?.tradePrice}</div>
                     <div className="edit-book-form-error-message">{errors?.tradePriceZero}</div>
+                            {/* todo  - decimal type or number type? */}
 
                 </div>
                 <div className="create-book-form-body-separator-bottom"></div>

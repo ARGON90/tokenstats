@@ -12,7 +12,7 @@ function Holdings({ portId}) {
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
     const userId = Number(currentUser.id)
-    
+
 
     // for some reason, accessing through users.trades causes render issue. need to dispatch users?
     // const userTrades = useSelector((state) => (state?.session?.user?.trades))
@@ -28,7 +28,7 @@ function Holdings({ portId}) {
     if (portId === 'all') {
         // console.log(userTrad, 'user Trad by ALL trad 31')
     } else {
-        console.log('PORTID', portId)
+        // console.log('PORTID', portId)
         userTrad = allTrades.filter(trade => trade?.portfolio_id === Number(portId))
         // console.log(userTrad, 'user Trad by portfolio number - 33', portId)
     }
@@ -87,8 +87,23 @@ function Holdings({ portId}) {
         return <div>Loading Holdings</div>
     }
 
+
+    function getTokenPrice(rawNum) {
+        const prices = rawNum
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
+    }
+
     function getTokenHoldingValue(quant, price) {
-        return (quant * price).toFixed(2)
+        const prices = quant * price
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
+    }
+
+    function getToken24HPL(rawNum) {
+        const prices = rawNum
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
     }
 
     return (
@@ -108,10 +123,10 @@ function Holdings({ portId}) {
                     <div key={idx} className='holdings-individual-container'>
                         <div className='items-col-1'>{allTokens[holding[0].tokenId].name}</div>
                         <div className='items-col-2'>{holding[0].amount_traded} </div>
-                        <div className='reg-cols'>${allTokens[holding[0].tokenId].price}</div>
+                        <div className='reg-cols'>{getTokenPrice(allTokens[holding[0].tokenId].price)}</div>
                         <div className='reg-cols'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>
-                        <div className='reg-cols'>${getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
-                        <div className='reg-cols flex-end'>${(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100).toFixed(2)}</div>
+                        <div className='reg-cols'>{getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
+                        <div className='reg-cols flex-end'>{getToken24HPL(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div>
                     </div>
                 ) : <div>No holdings</div>}
             </div>

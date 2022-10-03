@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getUserPortfoliosThunk, deletePortfolioThunk } from "../../store/portfolio-store";
 import { getUserTradesThunk } from "../../store/trades-store";
 
-const DeleteBookForm = ({ setShowModal, portfolio, holdVal, setRerender, rerender }) => {
+const DeletePortfolioForm = ({ setShowModal, portfolio, holdVal, setRerender, rerender }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -14,20 +14,24 @@ const DeleteBookForm = ({ setShowModal, portfolio, holdVal, setRerender, rerende
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    let deletedPortfolio = await dispatch(deletePortfolioThunk(portfolio.id));
+    setShowModal(false);
+    let mounted = true
 
+    if (mounted) {
+      let deletedPortfolio = await dispatch(deletePortfolioThunk(portfolio.id));
 
-    if (deletedPortfolio) {
-      holdVal()
-      console.log(holdVal())
-      setRerender(!rerender)
-      await dispatch(getUserTradesThunk())
-      console.log(rerender  ,'RERENDER')
-      setShowModal(false);
-      history.push("/home");
-      return null
+      if (deletedPortfolio) {
+        // holdVal()
+        // console.log(holdVal())
+        // setRerender(!rerender)
+        // await dispatch(getUserTradesThunk())
+        // console.log(rerender, 'RERENDER')
+        history.push("/home")
+
+      }
     }
-    return null
+
+    return () => mounted = false;
   };
 
   return (
@@ -53,4 +57,4 @@ const DeleteBookForm = ({ setShowModal, portfolio, holdVal, setRerender, rerende
   );
 }
 
-export default DeleteBookForm;
+export default DeletePortfolioForm;

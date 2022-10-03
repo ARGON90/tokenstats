@@ -83,7 +83,9 @@ function Portfolios() {
         sortedHoldingsArray.map((holding) =>
             total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
         )
-        return total.toFixed(0)
+        const prices = [total];
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
     }
 
     function getTotalHoldingsPercentChange() {
@@ -106,9 +108,21 @@ function Portfolios() {
     }
 
     function getTotal24HPL() {
-        const pctChange = getTotalHoldingsPercentChange();
-        const totalHolding = getTotalHoldingsValue();
-        return (totalHolding * (pctChange / 100)).toFixed(2)
+        let total = 0;
+        sortedHoldingsArray.map((holding) =>
+            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
+        )
+
+        let total24hAgo = 0
+        sortedHoldingsArray.map((holding) =>
+            total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)))
+        )
+        let percentChange = ((total24hAgo - total) / total) * 100
+
+        const prices =  (total * (percentChange / 100))
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
+
     }
     //END CALCULATE TOTALS BLOCK
 
@@ -182,9 +196,9 @@ function Portfolios() {
 
                 <div className='portfolios-right-container'>
                     <div className='holdings-totals-container'>
-                        <div className='total-holdings'>${getTotalHoldingsValue()}</div>
+                        <div className='total-holdings'>{getTotalHoldingsValue()}</div>
                         <div className='holdings-PL-container'>
-                            <div>${getTotal24HPL()}</div>
+                            <div>{getTotal24HPL()}</div>
                             <div>{getTotalHoldingsPercentChange()}%</div>
                             <div className='grey-font'>24H</div>
                         </div>
@@ -203,7 +217,7 @@ function Portfolios() {
 
                     {displayTab === 'holdings' &&
                         <div>
-                            <Holdings portId={currentPortfolio}/>
+                            <Holdings portId={currentPortfolio} />
                         </div>}
                     {displayTab === 'trades' &&
                         <div>

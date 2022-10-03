@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserTradesThunk, deleteTradeThunk } from "../../store/trades-store";
 
-const DeleteBookForm = ({ setShowModal, trade }) => {
+const DeleteTradeForm = ({ setShowModal, trade }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -13,15 +13,18 @@ const DeleteBookForm = ({ setShowModal, trade }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    let deletedTrade = await dispatch(deleteTradeThunk(trade.id));
+    setShowModal(false);
+    let mounted = true
 
-    if (deletedTrade) {
-      setShowModal(false);
-      history.push("/home");
-      return null
+    if (mounted) {
+      let deletedTrade = await dispatch(deleteTradeThunk(trade.id));
+
+      if (deletedTrade) {
+        history.push("/home");
+      }
     }
 
-    return null
+    return () => mounted = false
   };
 
   return (
@@ -47,4 +50,4 @@ const DeleteBookForm = ({ setShowModal, trade }) => {
   );
 }
 
-export default DeleteBookForm;
+export default DeleteTradeForm;
