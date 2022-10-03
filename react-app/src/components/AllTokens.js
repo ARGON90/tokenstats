@@ -10,6 +10,8 @@ import "./CSS/index.css"
 // trades: submitting trade sometimes doesn't autoupdate?
 // trades: disable browser auto-fill
 // delete trade: console error
+// trades: switching side-bar selector takes two clicks
+// trades: TVLs do not update on switching portfolios
 
 function AllTokens() {
   const dispatch = useDispatch()

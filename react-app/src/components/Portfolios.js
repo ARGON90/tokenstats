@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPortfoliosThunk } from '../store/portfolio-store';
+import CreateTradeModal from './CreateTradeModal';
 import CreatePortfolioModal from './CreatePortfolioModal';
 import DeletePortfolioModal from './DeletePortfolioModal';
 import EditPortfolioModal from './EditPortfolioModal';
 import Trades from './Trades';
 import Holdings from './Holdings';
+
 
 import './CSS/portfolios.css'
 
@@ -108,23 +110,30 @@ function Portfolios() {
                         <div className='holdings-PL-container'>
                             <div>${total24HPLVar}</div>
                             <div>{totalPctChangeVar}%</div>
+                            <div className='grey-font'>24H</div>
                         </div>
                     </div>
 
                     <div className='portfolios-right-header-container'>
-                        <div className={holdingsClicked()} onClick={() => setDisplayTab('holdings')}>HOLDINGS</div>
-                        <div className={tradesClicked()} onClick={() => setDisplayTab('trades')}>TRADES</div>
+                        <div className='holdings-trades-header'>
+                            <div className={holdingsClicked()} onClick={() => setDisplayTab('holdings')}>HOLDINGS</div>
+                            <div className={tradesClicked()} onClick={() => setDisplayTab('trades')}>TRADES</div>
+                        </div>
+                        <div className='holdings-trades-header-add-txn'>
+                            <CreateTradeModal />
+                            {/* <div className=''>hi</div> */}
+                        </div>
                     </div>
 
                     {displayTab === 'holdings' &&
                         <div>
                             <Holdings portId={currentPortfolio} setTotalHoldingsVar={setTotalHoldingsVar} setTotal24HPLVar={setTotal24HPLVar} setTotalPctChangeVar={setTotalPctChangeVar} />
                         </div>}
-
                     {displayTab === 'trades' &&
                         <div>
                             <Trades portId={currentPortfolio} />
                         </div>}
+
                 </div>
             </div>
 

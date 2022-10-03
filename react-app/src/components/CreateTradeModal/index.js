@@ -9,16 +9,14 @@ function CreateTradeModal() {
 
   return (
     <>
-      <div className="create-trade-container">
-        <button className="create-trade-button" onClick={() => setShowModal(true)}>
-          Add a Transaction
-        </button>
+        <div className="add-txn-button" onClick={() => setShowModal(true)}>
+          ADD A TRANSACTION
+        </div>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <CreateTradeForm setShowModal={setShowModal} />
           </Modal>
         )}
-      </div>
     </>
   );
 }

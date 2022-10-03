@@ -1,15 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-/* coloring */
-
-.holdings-page{
-    color: #e5e5e5;
-    background-color: black;
-    font-family: roboto, sans-serif;
-    display: flex;
-    flex-direction: column;
-}
-
-.holdings-header-container {
+.trades-header-container {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -22,6 +11,17 @@
     padding: 10px 0px;
     margin: 10px 0px
 }
+
+.trades-individual-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 9px;
+    margin-bottom: 9px;
+    border-bottom: 1px solid #282828;
+}
+
 
 
 .items-col-1 {
@@ -45,12 +45,16 @@
     justify-content: flex-end;
 }
 
-.holdings-individual-container {
+.add-txn-button {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    padding-bottom: 9px;
-    margin-bottom: 9px;
-    border-bottom: 1px solid #282828;
+    justify-content: flex-end;
+    color: #948CFF;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.add-txn-button:hover {
+
+    color: #AD98FF;
+
 }

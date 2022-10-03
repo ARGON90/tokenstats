@@ -6,7 +6,7 @@ import CreateTradeModal from './CreateTradeModal';
 import EditTradeModal from './EditTradeModal';
 import DeleteTradeModal from './DeleteTradeModal'
 
-
+import './CSS/trades.css'
 
 function Trades({ portId }) {
     const dispatch = useDispatch()
@@ -39,11 +39,11 @@ function Trades({ portId }) {
 
     function boughtSold(buy) {
         if (buy === 'buy') {
-            return 'bought'
+            return 'BUY'
         }
 
         if (buy === 'sell') {
-            return 'sold'
+            return 'SELL'
         }
     }
 
@@ -69,34 +69,36 @@ function Trades({ portId }) {
     if (!userTrades) return <div>No Trades</div>
     return (
         <>
-            <div>My Trades</div>
-            <div>Total Profit: {getTradesTotalProfit()}</div>
-            <div className='TRADES-DIV-HEADER flex-row col-gap-20'>
-                <div>Txn Type</div>
-                <div>Amount</div>
-                <div>Token </div>
-                <div>Trade Value</div>
-                <div>Current Value</div>
-                <div>Profit / Loss</div>
-            </div>
-            {userTrades.map((trade) =>
-                <div key={trade.id} className='flex-row col-gap-30'>
+            <div>
 
-                    <div>{boughtSold(trade.buy)}</div>
-                    <div>{trade.amount_traded}</div>
-                    <div>{getTokenName(trade.token_id)}</div>
-                    <div>${(trade.total_cost).toFixed(0)}</div>
-                    <div>${allTokens[trade.token_id].price.toFixed(0) * trade.amount_traded}</div>
-                    <div>{getPLTrade(trade)}</div>
-
-                    {/* <div>${trade.trade_price} ea |</div> */}
-
-                    <EditTradeModal trade={trade} />
-                    <DeleteTradeModal trade={trade} />
+                <div className='trades-header-container'>
+                    <div className='items-col-1'>TYPE</div>
+                    <div className='items-col-2'>AMOUNT</div>
+                    <div className='reg-cols'>TOKEN </div>
+                    <div className='reg-cols'>TRADE VALUE</div>
+                    <div className='reg-cols'>CURRENT VALUE</div>
+                    <div className='reg-cols flex-end'>PROFIT/LOSS</div>
                 </div>
-            )}
-            <CreateTradeModal />
+                {userTrades.map((trade) =>
+                    <div key={trade.id} className='trades-individual-container'>
 
+                        <div className='items-col-1'>{boughtSold(trade.buy)}</div>
+                        <div className='items-col-2'>{trade.amount_traded}</div>
+                        <div className='reg-cols'>{getTokenName(trade.token_id)}</div>
+                        <div className='reg-cols'>${(trade.total_cost).toFixed(0)}</div>
+                        <div className='reg-cols'>${allTokens[trade.token_id].price.toFixed(0) * trade.amount_traded}</div>
+                        <div className='reg-cols'>{getPLTrade(trade)}</div>
+
+                        {/* <div>${trade.trade_price} ea |</div> */}
+
+                        <EditTradeModal trade={trade} />
+                        <DeleteTradeModal trade={trade} />
+                    </div>
+                )}
+
+                <div>My Trades</div>
+                <div>Total Profit: {getTradesTotalProfit()}</div>
+            </div>
         </>
     )
 }

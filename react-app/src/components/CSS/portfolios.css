@@ -1,3 +1,7 @@
+.grey-font {
+    color: #999999
+}
+
 .portfolios-page {
     display: flex;
     flex-direction: row;
@@ -41,9 +45,11 @@
 .portfolios-header-clicked {
     border-bottom: 2px solid #9c84ff;
     cursor: pointer;
+    padding-bottom: 5px;
 }
 .portfolios-header-unclicked {
     cursor: pointer;
+    padding-bottom: 5px;
 }
 
 .portfolios-buttons-container {
@@ -122,4 +128,17 @@ button {
 
 .total-holdings {
     font-size: 28px;
+}
+
+.holdings-trades-header {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.holdings-trades-header-add-txn {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
 }
