@@ -6,7 +6,7 @@ import { getUserTradesThunk } from '../store/trades-store';
 
 import './CSS/holdings.css'
 
-function Holdings({ portId, setTotalHoldingsVar, setTotal24HPLVar, setTotalPctChangeVar }) {
+function Holdings({ portId}) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
@@ -89,48 +89,6 @@ function Holdings({ portId, setTotalHoldingsVar, setTotal24HPLVar, setTotalPctCh
     function getTokenHoldingValue(quant, price) {
         return (quant * price).toFixed(2)
     }
-
-    function getTotalHoldingsValue() {
-        let total = 0;
-        sortedHoldingsArray.map((holding) =>
-            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
-        )
-        setTotalHoldingsVar(total.toFixed(0));
-        return total.toFixed(0)
-
-    }
-    function getTotalHoldingsPercentChange() {
-        let total = 0;
-        sortedHoldingsArray.map((holding) =>
-            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
-        )
-        let total24hAgo = 0
-        sortedHoldingsArray.map((holding) =>
-            total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)))
-        )
-        // percent change
-        let percentChange = ((total24hAgo - total) / total) * 100
-
-        if (percentChange >= 0) {
-            setTotalPctChangeVar(`+${percentChange.toFixed(2)}`)
-            return `+${percentChange.toFixed(2)}`
-        }
-        if (percentChange < 0) {
-            setTotalPctChangeVar(`${percentChange.toFixed(2)}`)
-            return `${percentChange.toFixed(2)}`
-        }
-    }
-
-    function getTotal24HPL() {
-        const pctChange = getTotalHoldingsPercentChange();
-        const totalHolding = getTotalHoldingsValue();
-        setTotal24HPLVar((totalHolding * (pctChange / 100)).toFixed(2))
-        return (totalHolding * (pctChange / 100)).toFixed(2)
-    }
-
-    getTotalHoldingsValue()
-    getTotal24HPL()
-    getTotalHoldingsPercentChange()
 
     return (
         <>

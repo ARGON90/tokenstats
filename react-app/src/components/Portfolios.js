@@ -15,19 +15,104 @@ function Portfolios() {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
+    const allTrades = useSelector((state) => Object.values(state?.trades))
+    const allTokens = useSelector((state) => (state?.tokens))
 
-    const [total24HPLVar, setTotal24HPLVar] = useState('')
-    const [totalPctChangeVar, setTotalPctChangeVar] = useState('')
-    const [totalHoldingsVar, setTotalHoldingsVar] = useState('')
+
     const [displayTab, setDisplayTab] = useState('holdings')
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
     const updateCurrentPortfolio = (e) => { setCurrentPortfolio(e.target.value) }
 
-
-
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
     }, [dispatch, displayTab, currentPortfolio])
+
+    if (!allTokens[1]) return null
+    if (!currentUser) return null
+
+    //BEGIN CALCULATE TOTALS BLOCK
+    const userId = Number(currentUser.id)
+    let userTrad = allTrades.filter(trade => trade?.user_id === userId)
+    let portId = currentPortfolio
+    if (portId === 'all') {
+    } else {
+        userTrad = allTrades.filter(trade => trade?.portfolio_id === Number(portId))
+    }
+
+    let holdings = {}
+    for (let i = 1; i <= 51; i++) {
+        let tradesByToken = userTrad.filter((trade) => trade.token_id === i)
+        let amount_traded = 0;
+        let totalCost = 0;
+        for (let i = 0; i < tradesByToken.length; i++) {
+            if (tradesByToken[i].buy === 'buy') {
+                amount_traded += tradesByToken[i].amount_traded
+                totalCost += tradesByToken[i].total_cost
+            }
+            if (tradesByToken[i].buy === 'sell') {
+                amount_traded -= tradesByToken[i].amount_traded
+                totalCost -= tradesByToken[i].total_cost
+            }
+            if (amount_traded) {
+                holdings[tradesByToken[i].token_id] = {}
+                holdings[tradesByToken[i].token_id].amount_traded = amount_traded
+                holdings[tradesByToken[i].token_id].totalCost = totalCost
+                holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
+                holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
+                holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
+            }
+        }
+    }
+
+    let holdingsArray = Object.values(holdings)
+    let sortedHoldingsArray = []
+    for (let j = holdingsArray.length - 1; j >= 0; j--) {
+        let maxIndex;
+        let max = 0;
+        for (let i = holdingsArray.length - 1; i >= 0; i--) {
+            if (holdingsArray[i].totalValue > max) {
+                max = holdingsArray[i].totalValue;
+                maxIndex = i;
+            }
+        }
+        sortedHoldingsArray.push(holdingsArray.splice(maxIndex, 1))
+    }
+
+    function getTotalHoldingsValue() {
+        let total = 0;
+        sortedHoldingsArray.map((holding) =>
+            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
+        )
+        return total.toFixed(0)
+    }
+
+    function getTotalHoldingsPercentChange() {
+        let total = 0;
+        sortedHoldingsArray.map((holding) =>
+            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
+        )
+        let total24hAgo = 0
+        sortedHoldingsArray.map((holding) =>
+            total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)))
+        )
+        let percentChange = ((total24hAgo - total) / total) * 100
+
+        if (percentChange >= 0) {
+            return `+${percentChange.toFixed(2)}`
+        }
+        if (percentChange < 0) {
+            return `${percentChange.toFixed(2)}`
+        }
+    }
+
+    function getTotal24HPL() {
+        const pctChange = getTotalHoldingsPercentChange();
+        const totalHolding = getTotalHoldingsValue();
+        return (totalHolding * (pctChange / 100)).toFixed(2)
+    }
+    //END CALCULATE TOTALS BLOCK
+
+
 
     if (!currentUser) {
         return <div>Loading Portfolios</div>
@@ -64,7 +149,6 @@ function Portfolios() {
 
     }
 
-    const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
     if (!userPortfolios) return <div>No portfolfios</div>
@@ -98,10 +182,10 @@ function Portfolios() {
 
                 <div className='portfolios-right-container'>
                     <div className='holdings-totals-container'>
-                        <div className='total-holdings'>${totalHoldingsVar}</div>
+                        <div className='total-holdings'>${getTotalHoldingsValue()}</div>
                         <div className='holdings-PL-container'>
-                            <div>${total24HPLVar}</div>
-                            <div>{totalPctChangeVar}%</div>
+                            <div>${getTotal24HPL()}</div>
+                            <div>{getTotalHoldingsPercentChange()}%</div>
                             <div className='grey-font'>24H</div>
                         </div>
                     </div>
@@ -119,11 +203,11 @@ function Portfolios() {
 
                     {displayTab === 'holdings' &&
                         <div>
-                            <Holdings portId={currentPortfolio} setTotalHoldingsVar={setTotalHoldingsVar} setTotal24HPLVar={setTotal24HPLVar} setTotalPctChangeVar={setTotalPctChangeVar} />
+                            <Holdings portId={currentPortfolio}/>
                         </div>}
                     {displayTab === 'trades' &&
                         <div>
-                            <Trades portId={currentPortfolio} totalHoldingsVar={totalHoldingsVar} />
+                            <Trades portId={currentPortfolio} />
                         </div>}
 
                 </div>
