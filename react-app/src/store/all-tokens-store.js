@@ -23,10 +23,10 @@ export const getAllTokensThunk = () => async (dispatch) => {
 
 
 export const updateAllTokensThunk = () => async (dispatch) => {
-    console.log('UPDATE TOKENS THUNK')
+
     const response = await fetch('/api/tokens/refresh');
     if (response.ok) {
-        console.log("ALL TOKENS OK", response)
+    
         const data = await response.json();
         dispatch(updateAllTokens(data));
         return JSON.stringify(data);

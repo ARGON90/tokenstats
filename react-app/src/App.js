@@ -13,6 +13,7 @@ import { authenticate } from './store/session';
 import AllTokens from './components/AllTokens'
 import UpdateTokens from './components/UpdateTokens';
 import SplashPage from './components/SplashPage';
+import Home from './components/Home'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,6 +52,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/home' exact={true}>
           <AllTokens />
+        </ProtectedRoute>
+        <ProtectedRoute path='/homes' exact={true}>
+          <Home />
         </ProtectedRoute>
         <ProtectedRoute path='/tokens/refresh' exact={true}>
           <UpdateTokens />

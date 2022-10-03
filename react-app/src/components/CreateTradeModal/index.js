@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import CreateTradeForm from "./CreateTradeForm";
 
+import './CreateTradeModal.css'
+
 function CreateTradeModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <div className="create-book-container">
-        <button className="create-book-button" onClick={() => setShowModal(true)}>
-          Add a Transaction
-        </button>
+        <div className="add-txn-button" onClick={() => setShowModal(true)}>
+          ADD A TRANSACTION
+        </div>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <CreateTradeForm setShowModal={setShowModal} />
           </Modal>
         )}
-      </div>
     </>
   );
 }

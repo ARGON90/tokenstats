@@ -20,6 +20,8 @@ const DeleteBookForm = ({ setShowModal, trade }) => {
       history.push("/home");
       return null
     }
+
+    return null
   };
 
   return (

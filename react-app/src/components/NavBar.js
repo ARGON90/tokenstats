@@ -1,18 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import { useSelector } from 'react-redux';
-
+import SearchBar from './SearchBar';
 
 const NavBar = () => {
 
   const currentUser = useSelector((state) => (state?.session?.user))
 
+
   return (
     <nav>
       <div className='flex-row col-gap-5'>
-
 
         {currentUser ?
 

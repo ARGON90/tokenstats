@@ -5,8 +5,13 @@ import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-sto
 import Portfolios from './Portfolios';
 
 
-import "./index.css"
-// todo: add refresh function on the login confirmation and signup confirmation buttons
+import "./CSS/index.css"
+
+// trades: submitting trade sometimes doesn't autoupdate?
+// trades: disable browser auto-fill
+// delete trade: console error
+// trades: switching side-bar selector takes two clicks
+// trades: TVLs do not update on switching portfolios
 
 function AllTokens() {
   const dispatch = useDispatch()
@@ -42,10 +47,7 @@ function AllTokens() {
 
       <br></br>
 
-
-
-      <br></br>
-
+      {/* <button onClick={refreshPrice}>Refresh Price</button>
       {allTokens.map((token) =>
         <div key={token.id} className='flex-row col-gap-5'>
           <div>{token.name}</div>
@@ -54,8 +56,7 @@ function AllTokens() {
           <div>{getDecimals(token.dailyVolume)}</div>
           <div>{getDecimals(token.marketCap)}</div>
         </div>
-      )}
-      <button onClick={refreshPrice}>Refresh Price</button>
+      )} */}
     </>
   );
 }

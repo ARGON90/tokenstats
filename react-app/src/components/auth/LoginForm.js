@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { updateAllTokensThunk } from '../../store/all-tokens-store';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -12,6 +13,7 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+    dispatch(updateAllTokensThunk())
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);

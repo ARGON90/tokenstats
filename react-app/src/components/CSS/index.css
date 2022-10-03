@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+/* coloring */
+
+.font-white {
+    color: #e5e5e5
+}
+
+.bkgrnd-black {
+    background-color: black;
+}
+
+/* text */
+
+.roboto {
+    font-family: roboto, sans-serif;
+}
+
+/* displays */
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* spacing */
+
+.col-gap-5 {
+    column-gap: 5px;
+}
+
+.col-gap-20 {
+    column-gap: 20px;
+}
+
+.col-gap-30 {
+    column-gap: 30px;
+}
+
+
+/* SEARCHBAR */
+
+.searchBarDiv {
+    position: relative;
+    display: flex;
+}
+
+.searchBarDiv input{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 200px;
+    border: #DCD6CC 1px solid;
+    background: #FFFFFF;
+    margin-top: 10px;
+    border-radius: 3px;
+    color: #333333;
+    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+    resize: none;
+    height: 32px;
+}
+
+.searchClear {
+    position: sticky;
+    display: flex;
+    align-items: center;
+}
+
+.tokenResultsDiv {
+    position: absolute;
+    top: 47px;
+    /* right: 125px; */
+    width: 206px;
+    z-index: 101;
+}
+
+.searchBarResult {
+    padding: 8px;
+    border-bottom: #DCD6CC 0.5px solid;
+    border-left: #DCD6CC 0.5px solid;;
+    border-right: #DCD6CC 0.5px solid;;
+    background: #FFFFFF;
+    z-index: 101;
+}
+
+.searchBarTitle {
+    color: #333333;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 101;
+}

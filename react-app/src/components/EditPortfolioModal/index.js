@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import EditPortfolioForm from "./EditPortfolioForm";
 
+import '../CSS/modalstyling.css'
 
-import "./EditPortfolioModal.css";
 
 function EditPortfolioModal({ portfolio }) {
   const [showModal, setShowModal] = useState(false);
@@ -11,12 +11,10 @@ function EditPortfolioModal({ portfolio }) {
   return (
     <>
       <div className="edit-book-container">
-        <button
-          className="edit-book-button"
-          onClick={() => setShowModal(true)}
-        >
-          Edit
-        </button>
+      <img src='https://www.pngmart.com/files/8/Contract-Transparent-PNG.png'
+      className="edit-portfolio-image"
+      onClick={() => setShowModal(true)}
+      alt='edit'></img>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <EditPortfolioForm setShowModal={setShowModal} portfolio={portfolio} />

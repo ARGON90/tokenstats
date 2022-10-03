@@ -1,0 +1,144 @@
+.grey-font {
+    color: #999999
+}
+
+.portfolios-page {
+    display: flex;
+    flex-direction: row;
+    color: #e5e5e5;
+    font-weight: 400;
+    background-color: black;
+    font-family: roboto, sans-serif;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 300px;
+    padding-left: 7%;
+    padding-right: 10%;
+    column-gap: 50px;
+}
+
+.portfolios-left-container {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%
+}
+
+.portfolios-right-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%
+}
+
+.portfolios-right-header-container {
+    display: flex;
+    flex-direction: row;
+    color: #999999;
+    letter-spacing: 1px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 20px 0px 10px 0px;
+    column-gap: 20px;
+}
+
+
+.portfolios-header-clicked {
+    border-bottom: 2px solid #9c84ff;
+    cursor: pointer;
+    padding-bottom: 5px;
+}
+.portfolios-header-unclicked {
+    cursor: pointer;
+    padding-bottom: 5px;
+}
+
+.portfolios-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button {
+    color: #e5e5e5;
+    border: none;
+    background-color: black;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.portfolios-buttons {
+    color: #e5e5e5;
+    border: none;
+    background-color: black;
+    padding: 15px;
+    cursor: pointer;
+}
+
+
+.portfolios-buttons-clicked {
+    color: #e5e5e5;
+    background-color: black;
+    border-left: 2px solid #9c84ff;
+    padding: 15px;
+    padding-left: 13px;
+    cursor: pointer;
+}
+
+.portfolios-edit-delete-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 34%;
+    justify-content: space-around;
+}
+
+.portfolio-selection {
+    width: 66%;
+    height: 60px;
+}
+
+.portfolio-create-div {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #404040;
+}
+
+.portfolio-all-assets {
+    font-size: 20px;
+    height: 100%;
+}
+
+.portfolio-assets-container {
+    display: flex;
+    flex-direction: row;
+    height: 75px;
+    align-items: center;
+}
+
+.holdings-totals-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.holdings-PL-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+}
+
+.total-holdings {
+    font-size: 28px;
+}
+
+.holdings-trades-header {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.holdings-trades-header-add-txn {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+}

@@ -2,6 +2,7 @@ from app.models.tokens import db, Token
 import requests
 import json
 
+
 def seed_tokens():
 
     # response = requests.get('')
@@ -12,13 +13,15 @@ def seed_tokens():
 
     for key, value in test.items():
 
+        v1 = key.split('-')
+        v2 = ' '.join(v1)
+        v3 = v2.title()
 
-
-        name=key
-        price=value['usd']
-        dailyVolume=value['usd_24h_vol']
-        dailyChange=value['usd_24h_change']
-        marketCap=value['usd_market_cap']
+        name = v3
+        price = value['usd']
+        dailyVolume = value['usd_24h_vol']
+        dailyChange = value['usd_24h_change']
+        marketCap = value['usd_market_cap']
 
         db.session.add(Token(
             name=name, price=price, dailyVolume=dailyVolume, dailyChange=dailyChange, marketCap=marketCap
