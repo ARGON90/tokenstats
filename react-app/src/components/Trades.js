@@ -6,6 +6,7 @@ import EditTradeModal from './EditTradeModal';
 import DeleteTradeModal from './DeleteTradeModal'
 
 import './CSS/trades.css'
+import './CSS/index.css'
 
 function Trades({ portId, totalHoldingsVar }) {
     const dispatch = useDispatch()
@@ -58,7 +59,7 @@ function Trades({ portId, totalHoldingsVar }) {
     function getPLTrade(trade) {
         let tradePL = (allTokens[trade.token_id].price * trade.amount_traded) - (trade.total_cost)
         if (tradePL > 0) {
-            return `+${tradePL.toFixed(2)}`
+            return tradePL.toFixed(2)
         }
         return tradePL.toFixed(2)
     }
@@ -85,7 +86,7 @@ function Trades({ portId, totalHoldingsVar }) {
                         <div className='trade-cols'>{getTokenName(trade.token_id)}</div>
                         <div className='trade-cols'>${(trade.total_cost).toFixed(0)}</div>
                         <div className='trade-cols-5'>${allTokens[trade.token_id].price.toFixed(0) * trade.amount_traded}</div>
-                        <div className='trade-cols'>{getPLTrade(trade)}</div>
+                        { getPLTrade(trade) >= 0 ? <div className='trade-cols-green'>+${getPLTrade(trade)}</div> : <div className='trade-cols-red'>${getPLTrade(trade)}</div>}
                         <div className='image-cols'>
                             <EditTradeModal trade={trade} />
                             <DeleteTradeModal trade={trade} />

@@ -15,6 +15,14 @@
     font-family: roboto, sans-serif;
 }
 
+.green {
+    color: green
+}
+
+.red {
+    color: red
+}
+
 /* displays */
 
 .flex-row {

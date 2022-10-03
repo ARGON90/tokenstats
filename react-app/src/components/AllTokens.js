@@ -9,9 +9,15 @@ import "./CSS/index.css"
 
 // trades: submitting trade sometimes doesn't autoupdate?
 // trades: disable browser auto-fill
-// delete trade: console error
-// trades: switching side-bar selector takes two clicks
-// trades: TVLs do not update on switching portfolios
+// delete trade: console error?
+// trades: should list most recent one first?
+// favicons
+// readme
+// error handling
+// javascript method for to localstring us (1 arg, other arg would be style, USD)
+// delete portfolio doesn't work on heroku
+// delete trade not working for on cascade when making a new portfio
+// add trade not working with small decimals
 
 function AllTokens() {
   const dispatch = useDispatch()
@@ -47,7 +53,7 @@ function AllTokens() {
 
       <br></br>
 
-      {/* <button onClick={refreshPrice}>Refresh Price</button>
+      <button onClick={refreshPrice}>Refresh Price</button>
       {allTokens.map((token) =>
         <div key={token.id} className='flex-row col-gap-5'>
           <div>{token.name}</div>
@@ -56,7 +62,7 @@ function AllTokens() {
           <div>{getDecimals(token.dailyVolume)}</div>
           <div>{getDecimals(token.marketCap)}</div>
         </div>
-      )} */}
+      )}
     </>
   );
 }
