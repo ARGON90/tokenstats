@@ -21,6 +21,8 @@ import "./CSS/index.css"
 // remove 'required' from forms
 // race condition upon portfolio creation - check that out!
 // tokens and holdings: make message saying "no holdings/tokens when they're empty"
+// search - clear dropdown on clickoff
+// trades current value on refresh: too many decimals (try bitcoin to see it)
 
 function AllTokens() {
   const dispatch = useDispatch()

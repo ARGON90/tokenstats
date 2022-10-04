@@ -20,11 +20,9 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     useEffect(() => {
         const newErrors = {};
 
-        if (name.length <= 0) {
-            newErrors["name"] = "Portfolio Name is required.";
-        } else if (name.length > 255) {
-            newErrors["name"] = "Portfolio Name must be 255 characters or less.";
-        }
+        if (name.length <= 0) newErrors.name = "Portfolio Name is required.";
+        if (name.length > 255) newErrors.name = "Portfolio Name must be 255 characters or less.";
+
 
         setErrors(newErrors);
     }, [name]);
@@ -47,35 +45,32 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
     return (
         <>
-            <form className="create-book-form" onSubmit={handleSubmit}>
-                <div className="create-book-form-title">Create a Portfolio</div>
-                <div className="create-book-form-body-separator-top"></div>
-                <div className="create-book-modal-body">
-                    <label className="create-book-form-label">Portfolio Name</label>
+            <form className="create-portfolio-form" onSubmit={handleSubmit}>
+                <div className="create-portfolio-form-title">Create a Portfolio</div>
+                <div className="create-portfolio-modal-body">
+                    <label className="create-portfolio-form-label">PORTFOLIO NAME</label>
                     <input
-                        className="create-book-form-input"
+                        className="create-portfolio-form-input"
                         type="string"
                         placeholder="Name"
                         required
                         value={name}
                         onChange={updateName}
                     />
-                    <div className="edit-book-form-error-message">{errors?.name}</div>
+                    <div className="edit-portfolio-form-error-message">{errors?.name}</div>
                 </div>
-                <div className="create-book-form-body-separator-bottom"></div>
 
-                <div className="create-book-form-button-container">
+
+                <div className="create-portfolio-button-container">
                     <button
-                        className="create-book-form-submit"
+                        className="create-portfolio-form-submit"
                         type="submit"
-                        disabled={
-                            Object.values(errors).every((x) => x === "") ? false : true
-                        }
+                        disabled={Object.values(errors).length}
                     >
                         Submit
                     </button>
                     <button
-                        className="create-book-form-cancel"
+                        className="create-book-form-cancel-here"
                         onClick={() => setShowModal(false)}
                     >
                         Cancel

@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+.edit-trade-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  background-color: #1a1a1a;
+  font-size: 14px;
+  color: #9c84ff;
+}
+
+.edit-trade-form-title {
+  display: flex;
+  justify-content: center;
+  font-family: roboto, sans-serif;
+  font-size: 24px;
+  color: white;
+}
+
+.edit-trade-modal-body {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  max-width: 100%;
+  background-color: #1a1a1a;
+  position: relative;
+  padding-top: 18px;
+}
+
+.edit-trade-form-label {
+  letter-spacing: 1px;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
+
+.edit-trade-form-input {
+  min-width: 300px;
+  width: 80%;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #404040;
+  background-color: #1a1a1a;
+  padding: 2px;
+  cursor: pointer;
+  caret-color: black;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+.edit-trade-form-input::placeholder {
+  color: #A9A9A9;
+}
+
+
+.edit-trade-form-error-message {
+  font-family: roboto, sans-serif;
+  color: #ff4d4d
+}
+
+.edit-trade-button-container {
+  padding-top: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.edit-trade-form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9c84ff;
+  color: black;
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+}
+
+.edit-trade-form-submit:hover {
+  background-color: #ad98ff;
+}
+
+.edit-trade-form-cancel-here {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  border: 1px solid #404040;
+  color: white;
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+}
+
+.edit-trade-form-cancel-here:hover {
+  background-color: black;
+}
+
+.input-separator-div {
+  padding-bottom: 12px;
+}

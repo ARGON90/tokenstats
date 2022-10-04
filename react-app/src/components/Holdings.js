@@ -6,7 +6,7 @@ import { getUserTradesThunk } from '../store/trades-store';
 
 import './CSS/holdings.css'
 
-function Holdings({ portId}) {
+function Holdings({ portId }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
@@ -124,9 +124,9 @@ function Holdings({ portId}) {
                         <div className='items-col-1'>{allTokens[holding[0].tokenId].name}</div>
                         <div className='items-col-2'>{holding[0].amount_traded} </div>
                         <div className='reg-cols'>{getTokenPrice(allTokens[holding[0].tokenId].price)}</div>
-                   {allTokens[holding[0].tokenId].dailyChange >= 0 ? <div className='reg-cols'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div> :<div className='reg-cols'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div> }
+                        {allTokens[holding[0].tokenId].dailyChange >= 0 ? <div className='reg-cols green-font'>+{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div> : <div className='reg-cols red-font'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>}
                         <div className='reg-cols'>{getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
-                        <div className='reg-cols flex-end'>{getToken24HPL(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div>
+                        {(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100) >= 0 ? <div className='reg-cols flex-end green-font'>{getToken24HPL(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div> : <div className='reg-cols flex-end red-font'>{getToken24HPL(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div>}
                     </div>
                 ) : <div>No holdings</div>}
             </div>

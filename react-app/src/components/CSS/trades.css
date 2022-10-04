@@ -1,3 +1,11 @@
+.green-font {
+    color: #6CCF59
+}
+
+.red-font {
+    color: #FF4D4D
+}
+
 .trades-header-container {
     display: flex;
     flex-direction: row;
@@ -49,12 +57,14 @@
     justify-content: flex-end;
     min-width: 15px;
 }
+
 .trade-cols {
     display: flex;
     width: 12%;
     justify-content: flex-end;
     min-width: 15px;
 }
+
 .trade-cols-green {
     display: flex;
     width: 12%;
@@ -62,6 +72,7 @@
     min-width: 15px;
     color: #6CCF59;
 }
+
 .trade-cols-red {
     display: flex;
     width: 12%;

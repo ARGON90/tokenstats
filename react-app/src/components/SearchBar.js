@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import './CSS/index.css';
+
+import './CreateTradeModal/CreateTradeModal.css'
+
 
 const SearchBar = ({ setTokenSelect, tokenSelect }) => {
     const allTokens = useSelector((state) => (state?.tokens))
@@ -55,8 +57,8 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
     return (
         <>
 
-                <div className='searchBarDiv'>
-                    <label className="create-book-form-label">Choose a Token</label>
+
+                    <label className="create-trade-form-label">Choose a Token</label>
                     <input
                         id='searchInputField'
                         type='text'
@@ -64,20 +66,22 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
                         onChange={tokenSearch}
                         placeholder='Token Name'
                         onClick={newSearch}
+                        className='create-trade-form-input'
+                        autoComplete="off"
                     />
                     <div className='tokenResultsDiv'>
                         {showResults && filterTokens && (
                             filterTokens.slice(0, 5).map((token, idx) => (
-                                <div className='searchBarResult'
+                                <div className='search-entries-container'
                                     key={idx}
                                     value={token.id}
                                     onClick={() => selectResult(token)}>
-                                    <div className="searchBarTitle">{token.name}<br></br></div>
+                                    <div className="search-entries">{token.name}<br></br></div>
                                 </div>
                             ))
                         )}
                     </div>
-                </div>
+
 
         </>
     )

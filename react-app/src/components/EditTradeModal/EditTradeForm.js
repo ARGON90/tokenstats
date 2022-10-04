@@ -12,7 +12,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
     const history = useHistory();
     const currentUser = useSelector((state) => (state?.session?.user))
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
-    const allTokens = useSelector((state) =>(state?.tokens))
+    const allTokens = useSelector((state) => (state?.tokens))
     const allTrades = useSelector((state) => Object.values(state?.trades))
 
 
@@ -131,14 +131,14 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
 
     return (
         <>
-            <form className="edit-book-form" onSubmit={handleSubmit}>
-                <div className="edit-book-form-title">Edit this Transaction</div>
-                <div className="create-book-form-body-separator-top"></div>
-                <div className="edit-book-modal-body">
+            <form className="edit-trade-form" onSubmit={handleSubmit}>
+                <div className="edit-trade-form-title">Edit this Transaction</div>
+                <div className="edit-trade-form-body-separator-top"></div>
+                <div className="edit-trade-modal-body">
 
-                    <label className="create-book-form-label">Edit trade to Portfolio</label>
+                    <label className="create-trade-form-label">Edit trade to Portfolio</label>
                     <select
-                        className="create-book-form-input"
+                        className="create-trade-form-input"
                         placeholder="Select One"
                         required
                         value={userPortfolio}
@@ -149,15 +149,17 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                             <option value={portfolio.id}>{portfolio.name}</option>
                         )}
                     </select>
-                    <div className="edit-book-form-error-message">{errors?.buySell}</div>
+                    <div className="edit-trade-form-error-message">{errors?.buySell}</div>
 
-                    <div className='navBarSearch'>
-                        <SearchBar setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
-                    </div>
+                    <div className="input-separator-div"></div>
 
-                    <label className="create-book-form-label">Buy or Sell?</label>
+                    <SearchBar setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
+
+                    <div className="input-separator-div"></div>
+
+                    <label className="create-trade-form-label">Buy or Sell?</label>
                     <select
-                        className="create-book-form-input"
+                        className="create-trade-form-input"
                         placeholder="Select One"
                         required
                         value={buySell}
@@ -166,45 +168,54 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                         <option value='buy'> Buy </option>
                         <option value='sell'> Sell </option>
                     </select>
-                    <div className="edit-book-form-error-message">{errors?.buySell}</div>
-                    <label className="create-book-form-label">Amount of Token Bought/Sold</label>
+
+
+                        <div className="input-separator-div"></div>
+
+                    <div className="edit-trade-form-error-message">{errors?.buySell}</div>
+                    <label className="create-trade-form-label">Amount of Token Bought/Sold</label>
                     <input
-                        className="create-book-form-input"
+                        className="create-trade-form-input"
                         type="number"
                         placeholder={amountPlaceholder()}
                         required
                         value={tradeAmount}
                         onChange={updateTradeAmount}
                     />
-                    <div className="edit-book-form-error-message">{errors?.tradeAmount}</div>
-                    <div className="edit-book-form-error-message">{errors?.tradeAmountZero}</div>
-                    <div className="edit-book-form-error-message">{errors?.noBalance}</div>
+                    <div className="edit-trade-form-error-message">{errors?.tradeAmount}</div>
+                    <div className="edit-trade-form-error-message">{errors?.tradeAmountZero}</div>
+                    <div className="edit-trade-form-error-message">{errors?.noBalance}</div>
 
-                    <label className="create-book-form-label">Trade Price of Token</label>
+                    <div className="input-separator-div"></div>
+
+                    <label className="create-trade-form-label">Trade Price of Token</label>
                     <input
-                        className="create-book-form-input"
+                        className="create-trade-form-input"
                         type="number"
                         placeholder={tradePricePlaceholder}
                         required
                         value={tradePrice}
                         onChange={updateTradePrice}
                     />
-                    <div className="edit-book-form-error-message">{errors?.tradePrice}</div>
-                    <div className="edit-book-form-error-message">{errors?.tradePriceZero}</div>
+                    <div className="edit-trade-form-error-message">{errors?.tradePrice}</div>
+                    <div className="edit-trade-form-error-message">{errors?.tradePriceZero}</div>
+
+                    <div className="input-separator-div"></div>
 
                 </div>
-                <div className="edit-book-form-body-separator-bottom"></div>
+                <div className="edit-trade-form-body-separator-bottom"></div>
 
-                <div className="edit-book-form-button-container">
+
+                <div className="edit-trade-button-container">
                     <button
-                        className="edit-book-form-submit"
+                        className="edit-trade-form-submit"
                         type="submit"
                         disabled={Object.values(errors).length}
                     >
                         Submit
                     </button>
                     <button
-                        className="edit-book-form-cancel"
+                        className="edit-trade-form-cancel-here"
                         onClick={() => setShowModal(false)}
                     >
                         Cancel

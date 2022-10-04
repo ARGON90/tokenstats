@@ -37,21 +37,23 @@ const DeletePortfolioForm = ({ setShowModal, portfolio, holdVal, setRerender, re
 
   return (
     <>
-      <div className="delete-book-form">
-        <div className="delete-book-form-title">Are you sure you want to delete this portfolio?</div>
-        <div className="delete-book-modal-body">
-          <button
-            className="delete-book-form-delete-button"
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
-          <button
-            className="delete-book-form-cancel-button"
-            onClick={() => setShowModal(false)}
-          >
-            Cancel
-          </button>
+      <div className="delete-portfolio-form">
+        <div className="delete-portfolio-form-title">Are you sure you want to delete this portfolio?</div>
+        <div className="delete-portfolio-modal-body">
+          <div className="delete-portfolio-button-container">
+            <button
+              className="delete-portfolio-form-submit"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+            <button
+              className="delete-portfolio-form-cancel-here"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </>
