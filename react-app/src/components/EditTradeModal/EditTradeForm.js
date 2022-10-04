@@ -168,7 +168,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                         <option value='buy'> Buy </option>
                         <option value='sell'> Sell </option>
                     </select>
-
+                    <div className="edit-trade-form-error-message">{errors?.buySell}</div>
 
                         <div className="input-separator-div"></div>
 

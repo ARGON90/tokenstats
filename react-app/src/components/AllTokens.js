@@ -23,6 +23,7 @@ import "./CSS/index.css"
 // tokens and holdings: make message saying "no holdings/tokens when they're empty"
 // search - clear dropdown on clickoff
 // trades current value on refresh: too many decimals (try bitcoin to see it)
+// spacing on search menu - put tokens at the top??
 
 function AllTokens() {
   const dispatch = useDispatch()
