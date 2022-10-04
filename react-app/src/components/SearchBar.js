@@ -35,10 +35,7 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
         }
     }
 
-    const clearInput = () => {
-        setFilterTokens([])
-        setSearch('')
-    }
+
 
     function selectResult(token) {
         setShowResults(false)

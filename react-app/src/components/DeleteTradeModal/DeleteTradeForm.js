@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserTradesThunk, deleteTradeThunk } from "../../store/trades-store";
 
+
 import './DeleteTradeModal.css'
 
 const DeleteTradeForm = ({ setShowModal, trade }) => {

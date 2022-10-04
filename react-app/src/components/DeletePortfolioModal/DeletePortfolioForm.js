@@ -3,10 +3,14 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserPortfoliosThunk, deletePortfolioThunk } from "../../store/portfolio-store";
 import { getUserTradesThunk } from "../../store/trades-store";
+import { deleteTradeThunk } from "../../store/trades-store";
+import { useSelector } from "react-redux";
 
-const DeletePortfolioForm = ({ setShowModal, portfolio, holdVal, setRerender, rerender }) => {
+const DeletePortfolioForm = ({ setShowModal, portfolio, holdVal, setRerender, rerender, setCurrentPortfolio }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const allTrades = useSelector((state) => Object.values(state?.trades))
+  let portfolioTrades = allTrades.filter(trade => trade?.portfolio_id === Number(portfolio.id))
 
   useEffect(() => {
     dispatch(getUserPortfoliosThunk());
@@ -18,12 +22,23 @@ const DeletePortfolioForm = ({ setShowModal, portfolio, holdVal, setRerender, re
     let mounted = true
 
     if (mounted) {
+      for (let i = 0; i < portfolioTrades.length; i++) {
+        await dispatch((deleteTradeThunk(portfolioTrades[i].id)))
+        console.log('deleted TRADE', portfolioTrades[i].id)
+      }
+
+
+
       let deletedPortfolio = await dispatch(deletePortfolioThunk(portfolio.id));
 
+
+
+      await dispatch(getUserPortfoliosThunk())
+      await dispatch(getUserTradesThunk())
+      setCurrentPortfolio('all')
+      console.log('DELETE PORTFOLIO FORM - LINE 25')
+
       if (deletedPortfolio) {
-        console.log('DELETE PORTFOLIO FORM - LINE 24')
-        await dispatch(getUserPortfoliosThunk())
-        await dispatch(getUserTradesThunk())
         history.push("/home")
         console.log(rerender, 'RERENDER BOOL', 'DEL TRADE FORM')
         holdVal()
