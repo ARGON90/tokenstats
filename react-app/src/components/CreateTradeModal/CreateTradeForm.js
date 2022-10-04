@@ -19,10 +19,10 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
 
     const [errors, setErrors] = useState('');
-    const [tokenSelect, setTokenSelect] = useState("");
-    const [buySell, setBuySell] = useState("");
-    const [tradeAmount, setTradeAmount] = useState("");
-    const [tradePrice, setTradePrice] = useState("");
+    const [tokenSelect, setTokenSelect] = useState(1);
+    const [buySell, setBuySell] = useState("buy");
+    const [tradeAmount, setTradeAmount] = useState(0.1);
+    const [tradePrice, setTradePrice] = useState(1);
     const [userPortfolio, setUserPortfolio] = useState("");
 
     const updateBuySell = (e) => setBuySell(e.target.value);

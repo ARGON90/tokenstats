@@ -8,15 +8,18 @@ import DeleteTradeModal from './DeleteTradeModal'
 import './CSS/trades.css'
 import './CSS/index.css'
 
-function Trades({ portId, totalHoldingsVar }) {
+function Trades({ portId, totalHoldingsVar, rerender }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
 
     useEffect(() => {
+        console.log('TRADE.JS - LINE 18')
         dispatch(getUserTradesThunk())
-    }, [dispatch, portId])
+    }, [dispatch, portId, rerender])
+
+    console.log(rerender, 'RERENDER FROM TRAD.JS')
 
     if (!currentUser) {
         return <div>Loading Trades</div>

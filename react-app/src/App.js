@@ -14,6 +14,7 @@ import AllTokens from './components/AllTokens'
 import UpdateTokens from './components/UpdateTokens';
 import SplashPage from './components/SplashPage';
 import Home from './components/Home'
+import Portfolios from './components/Portfolios';
 
 function App() {
   const [loaded, setLoaded] = useState(false);

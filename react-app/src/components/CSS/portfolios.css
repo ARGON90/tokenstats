@@ -2,6 +2,14 @@
     color: #999999
 }
 
+.green-font {
+    color: #6CCF59
+}
+
+.red-font {
+    color: #FF4D4D
+}
+
 .portfolios-page {
     display: flex;
     flex-direction: row;

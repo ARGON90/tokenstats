@@ -21,10 +21,12 @@ function Portfolios() {
 
     const [displayTab, setDisplayTab] = useState('holdings')
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
+    console.log('PORTFOLIO.JS - CURRENT PORTFOLIO USESTATE - LINE 24 : ', currentPortfolio)
     const updateCurrentPortfolio = (e) => { setCurrentPortfolio(e.target.value) }
 
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
+        console.log('!!!!!!!!!!!   USE EFFECT PORTFOLIOS.JS')
     }, [dispatch, displayTab, currentPortfolio, rerender])
 
     if (!allTokens[1]) return null
@@ -94,6 +96,7 @@ function Portfolios() {
             total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
         )
         let total24hAgo = 0
+
         sortedHoldingsArray.map((holding) =>
             total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)))
         )
@@ -106,6 +109,12 @@ function Portfolios() {
             return `${percentChange.toFixed(2)}`
         }
     }
+
+    // let totalh = getTotalHoldingsPercentChange()
+    // if (!totalh) {
+    //     return null
+    // }
+
 
     function getTotal24HPL() {
         let total = 0;
@@ -120,8 +129,16 @@ function Portfolios() {
         let percentChange = ((total24hAgo - total) / total) * 100
 
         const prices =  (total * (percentChange / 100))
-        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
-        return localeString
+
+        if (prices < 0) {
+            let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+            return `-${localeString}`
+        }
+        if (prices >= 0) {
+            let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+            return `${localeString}`
+        }
+
 
     }
     //END CALCULATE TOTALS BLOCK
@@ -198,8 +215,10 @@ function Portfolios() {
                     <div className='holdings-totals-container'>
                         <div className='total-holdings'>{getTotalHoldingsValue()}</div>
                         <div className='holdings-PL-container'>
-                            <div>{getTotal24HPL()}</div>
-                            <div>{getTotalHoldingsPercentChange()}%</div>
+                            {/* <div>{getTotal24HPL()}%</div> */}
+                            {/* <div>{getTotalHoldingsPercentChange()}%</div> */}
+                            {getTotal24HPL() && getTotal24HPL()[0] === '$' ? <div className='green-font'>{getTotal24HPL()}</div> : <div className='red-font'>{getTotal24HPL()}</div>}
+                            {getTotal24HPL() && getTotalHoldingsPercentChange()[0] === '+' ? <div className='green-font'>{getTotalHoldingsPercentChange()}%</div> : <div className='red-font'>{getTotalHoldingsPercentChange()}%</div>}
                             <div className='grey-font'>24H</div>
                         </div>
                     </div>
@@ -221,7 +240,7 @@ function Portfolios() {
                         </div>}
                     {displayTab === 'trades' &&
                         <div>
-                            <Trades portId={currentPortfolio} />
+                            <Trades portId={currentPortfolio} rerender={rerender} />
                         </div>}
 
                 </div>

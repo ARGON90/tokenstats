@@ -16,14 +16,14 @@ import "./CSS/index.css"
 // error handling
 // javascript method for to localstring us (1 arg, other arg would be style, USD)
 // delete portfolio doesn't work on heroku
-// delete trade not working for on cascade when making a new portfio
+// delete trade not working for on cascade deleting a portfio
 // add trade not working with small decimals
 // remove 'required' from forms
 // race condition upon portfolio creation - check that out!
+// tokens and holdings: make message saying "no holdings/tokens when they're empty"
 
 function AllTokens() {
   const dispatch = useDispatch()
-
   const allTokens = useSelector((state) => Object.values(state?.tokens))
 
   const getDecimals = (num) => {

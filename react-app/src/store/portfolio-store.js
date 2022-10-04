@@ -67,6 +67,7 @@ export const deletePortfolioThunk = (id) => async dispatch => {
     if (response.ok) {
         const portfolio = await response.json();
         await dispatch(deletePortfolio(id));
+        console.log('PORTFOLIO STORE - LINE 70')
         return portfolio;
     };
 };

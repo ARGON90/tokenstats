@@ -21,13 +21,14 @@ const DeletePortfolioForm = ({ setShowModal, portfolio, holdVal, setRerender, re
       let deletedPortfolio = await dispatch(deletePortfolioThunk(portfolio.id));
 
       if (deletedPortfolio) {
-        // holdVal()
-        // console.log(holdVal())
-        // setRerender(!rerender)
-        // await dispatch(getUserTradesThunk())
-        // console.log(rerender, 'RERENDER')
+        console.log('DELETE PORTFOLIO FORM - LINE 24')
+        await dispatch(getUserPortfoliosThunk())
+        await dispatch(getUserTradesThunk())
         history.push("/home")
-
+        console.log(rerender, 'RERENDER BOOL', 'DEL TRADE FORM')
+        holdVal()
+        console.log(holdVal())
+        setRerender(!rerender)
       }
     }
 
