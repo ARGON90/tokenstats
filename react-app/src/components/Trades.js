@@ -8,16 +8,17 @@ import DeleteTradeModal from './DeleteTradeModal'
 import './CSS/trades.css'
 import './CSS/index.css'
 
-function Trades({ portId, totalHoldingsVar, rerender }) {
+function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
 
+
     useEffect(() => {
         console.log('TRADE.JS - LINE 18')
         dispatch(getUserTradesThunk())
-    }, [dispatch, portId, rerender])
+    }, [dispatch, portId, rerender, portfolios])
 
     console.log(rerender, 'RERENDER FROM TRAD.JS')
 
@@ -67,6 +68,7 @@ function Trades({ portId, totalHoldingsVar, rerender }) {
             return localeString
             // return tradePL.toFixed(2)
         }
+
         const prices = [tradePL];
         let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
         return localeString

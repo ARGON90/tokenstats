@@ -9,6 +9,11 @@
     color: #FF4D4D
 }
 
+.splash-header {
+    font-size: 34px;
+    font-weight: 700;
+}
+
 .holdings-page{
     color: #e5e5e5;
     background-color: black;

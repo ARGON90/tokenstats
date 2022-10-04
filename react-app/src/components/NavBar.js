@@ -40,13 +40,19 @@ const NavBar = () => {
 
           <div className='nav-logged-out'>
 
-              <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                Sign Up
-              </NavLink>
+            <NavLink className='home-button-container' to='/home' exact={true} activeClassName='active'>
+              <div className='token'>Token</div>
+              <div className='stats'>Stats</div>
+            </NavLink>
 
-              <NavLink to='/login' exact={true} activeClassName='active'>
-                Login
-              </NavLink>
+
+            <NavLink className={'signup-login-buttons'} to='/sign-up' exact={true} activeClassName='active'>
+              SIGN UP
+            </NavLink>
+
+            <NavLink className={'signup-login-buttons'} to='/login' exact={true} activeClassName='active'>
+              LOG IN
+            </NavLink>
 
           </div>
 

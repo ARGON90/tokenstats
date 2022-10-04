@@ -156,6 +156,7 @@
     display: flex;
     flex-direction: row;
     width: 90%;
+    column-gap: 40px;
 }
 
 .signup-login-buttons {
@@ -166,4 +167,161 @@
     border-radius: 12px;
     color: #9c84ff;
     cursor: pointer;
+    letter-spacing: 1px;
 }
+
+/* SPLASH PAGE */
+
+
+.splash-page {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: roboto, sans-serif;
+    justify-content: center;
+    align-items: center;
+    row-gap: 75px;
+}
+
+.splash-header {
+    font-size: 12px;
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+
+.splash-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+
+.splash-header-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    color: #999999;
+    letter-spacing: 1px;
+    font-size: 12px;
+    border-top: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    padding: 10px 0px;
+    margin: 10px 0px
+}
+
+
+.splash-col-1 {
+    display: flex;
+    width: 20%;
+    justify-content: flex-start;
+}
+.splash-col-2 {
+    display: flex;
+    width: 10%;
+    justify-content: flex-end;
+}
+
+.splash-cols {
+    display: flex;
+    width: 17%;
+    justify-content: flex-end;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.splash-individual-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 9px;
+    margin-bottom: 9px;
+    border-bottom: 1px solid #282828;
+}
+
+.splash-portfolio-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 40px;
+    width: 100%;
+    column-gap: 30px;
+}
+
+.splash-item-portfolio-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.splash-portfolio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: roboto, sans-serif;
+    border-radius: 12px;
+    background-color: #262626;
+    color: #CCCCCC;
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.splash-portfolio:hover {
+    background-color: #9C84FF;
+    color: black;
+}
+
+/* SIGN UP */
+
+.signup-form-label {
+    letter-spacing: 1px;
+    font-family: roboto, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+    margin-top: 6px;
+  }
+
+  .signup-form-input {
+    display: flex;
+    min-width: 300px;
+    width: 10%;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid #404040;
+    background-color: #1a1a1a;
+    padding: 2px;
+    cursor: pointer;
+    caret-color: black;
+    text-overflow: ellipsis;
+    color: white;
+  }
+
+  .signup-form-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9c84ff;
+    color: black;
+    font-family: roboto, sans-serif;
+    font-weight: bold;
+    border-radius: 18px;
+    width: 100px;
+    height: 20px;
+  }
+
+  .signup-form-separator {
+    padding-bottom: 10px;
+  }

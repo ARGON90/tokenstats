@@ -17,14 +17,14 @@ function Portfolios() {
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
+
+    const portfoliosObj = {}
+    allPortfolios.forEach((portfolio) => portfoliosObj[portfolio.id] = portfolio )
+
     const [rerender, setRerender] = useState(false)
-
     const [displayTab, setDisplayTab] = useState('holdings')
-
-
+    const [ portfolios, setPortfolios ] = useState(portfoliosObj)
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
-    const updateCurrentPortfolio = (id) => { setCurrentPortfolio(id) }
-
 
 
     console.log('PORTFOLIO.JS - CURRENT PORTFOLIO USESTATE - LINE 24 : ', currentPortfolio)
@@ -197,18 +197,18 @@ function Portfolios() {
                     </div>
                     <div className='portfolio-assets-container'>
                         <div className={allAssetsClicked()} >
-                            <button className='portfolio-all-assets' value='all' onClick={() => updateCurrentPortfolio('all')}>All Assets</button>
+                            <button className='portfolio-all-assets' value='all' onClick={ () => setCurrentPortfolio('all')}>All Assets</button>
                         </div>
                     </div>
                     <div>
                         {userPortfolios.map((portfolio) =>
                             <div key={portfolio.id} className='portfolios-buttons-container'>
                                 <div className='portfolio-selection'>
-                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={() => updateCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
+                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={ () => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
                                 </div>
                                 <div className='portfolios-edit-delete-buttons'>
                                     <EditPortfolioModal portfolio={portfolio} />
-                                    <DeletePortfolioModal portfolio={portfolio} rerender={rerender} setRerender={setRerender} holdVal={getTotalHoldingsValue} setCurrentPortfolio={setCurrentPortfolio} />
+                                    <DeletePortfolioModal setPortfolios={setPortfolios} portfolios={portfolios} portfolio={portfolio} rerender={rerender} setRerender={setRerender} holdVal={getTotalHoldingsValue} setCurrentPortfolio={setCurrentPortfolio} />
                                 </div>
                             </div>
                         )}
@@ -245,7 +245,7 @@ function Portfolios() {
                         </div>}
                     {displayTab === 'trades' &&
                         <div>
-                            <Trades portId={currentPortfolio} rerender={rerender} />
+                            <Trades portfolios={portfolios} setPortfolios={setPortfolios} portId={currentPortfolio} rerender={rerender} />
                         </div>}
 
                 </div>
