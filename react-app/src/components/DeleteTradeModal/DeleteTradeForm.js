@@ -3,7 +3,10 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserTradesThunk, deleteTradeThunk } from "../../store/trades-store";
 
-const DeleteBookForm = ({ setShowModal, trade }) => {
+
+import './DeleteTradeModal.css'
+
+const DeleteTradeForm = ({ setShowModal, trade }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -13,38 +16,43 @@ const DeleteBookForm = ({ setShowModal, trade }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    let deletedTrade = await dispatch(deleteTradeThunk(trade.id));
+    setShowModal(false);
+    let mounted = true
 
-    if (deletedTrade) {
-      setShowModal(false);
-      history.push("/home");
-      return null
+    if (mounted) {
+      let deletedTrade = await dispatch(deleteTradeThunk(trade.id));
+
+      if (deletedTrade) {
+        history.push("/home");
+      }
     }
 
-    return null
+    return () => mounted = false
   };
 
   return (
     <>
-      <div className="delete-book-form">
-        <div className="delete-book-form-title">Are you sure you want to delete this trade?</div>
-        <div className="delete-book-modal-body">
-          <button
-            className="delete-book-form-delete-button"
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
-          <button
-            className="delete-book-form-cancel-button"
-            onClick={() => setShowModal(false)}
-          >
-            Cancel
-          </button>
+      <div className="delete-trade-form">
+        <div className="delete-trade-form-title">Are you sure you want to delete this trade?</div>
+        <div className="delete-trade-modal-body">
+          <div className="delete-portfolio-button-container">
+            <button
+              className="delete-trade-form-submit"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+            <button
+              className="delete-trade-form-cancel-here"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default DeleteBookForm;
+export default DeleteTradeForm;

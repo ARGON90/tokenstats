@@ -15,6 +15,14 @@
     font-family: roboto, sans-serif;
 }
 
+.green {
+    color: green
+}
+
+.red {
+    color: red
+}
+
 /* displays */
 
 .flex-row {
@@ -41,57 +49,534 @@
     column-gap: 30px;
 }
 
+/* NAVBAR */
 
-/* SEARCHBAR */
-
-.searchBarDiv {
-    position: relative;
+.nav-page {
     display: flex;
-}
-
-.searchBarDiv input{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 200px;
-    border: #DCD6CC 1px solid;
-    background: #FFFFFF;
-    margin-top: 10px;
-    border-radius: 3px;
-    color: #333333;
-    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
-    resize: none;
-    height: 32px;
-}
-
-.searchClear {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 65px;
+    width: 100%;
     position: sticky;
+    top: 0;
+    align-items: center;
+    z-index: 100;
+    background: #1a1a1a;
+    border-bottom: 1px solid #282828;
+
+}
+
+.nav-container {
+    width: 100%;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-logged-in {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.nav-left-panel {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+}
+
+
+.portfolio-tracker {
+    display: flex;
+    font-family: roboto, sans-serif;
+    text-decoration: none;
+    border-radius: 12px;
+    background-color: #262626;
+    color: #CCCCCC;
+}
+
+.portfolio-tracker:hover {
+    background-color: #9C84FF;
+    color: black;
+}
+
+.tracker-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.home-button-container {
+    display: flex;
+    font-size: 24px;
+    flex-direction: row;
+    font-family: roboto, sans-serif;
+    text-decoration: none;
+    letter-spacing: 1px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+}
+
+.token {
+    font-weight: 200;
+}
+
+.stats {
+    font-weight: 500;
+}
+
+.logout-button-div {
+    display: flex;
+    font-family: roboto, sans-serif;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 12px;
+    color: #9c84ff;
+    cursor: pointer;
+    padding-right: 40px;
+}
+
+.logout-button-div:hover {
+    color: #AD98FF;
+}
+
+.logout-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    letter-spacing: 1px;
+}
+
+.nav-logged-out {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    column-gap: 40px;
+}
+
+.signup-login-buttons {
+    display: flex;
+    font-family: roboto, sans-serif;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 12px;
+    color: #9c84ff;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+
+/* FOOTER */
+
+.footer-page {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 65px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    align-items: center;
+    z-index: 100;
+    background: #1a1a1a;
+    border-bottom: 1px solid #282828;
+
+}
+
+.nav-container {
+    width: 100%;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-logged-in {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.nav-left-panel {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+}
+
+
+.git-linked-container {
     display: flex;
     align-items: center;
-}
-
-.tokenResultsDiv {
-    position: absolute;
-    top: 47px;
-    /* right: 125px; */
-    width: 206px;
-    z-index: 101;
-}
-
-.searchBarResult {
-    padding: 8px;
-    border-bottom: #DCD6CC 0.5px solid;
-    border-left: #DCD6CC 0.5px solid;;
-    border-right: #DCD6CC 0.5px solid;;
-    background: #FFFFFF;
-    z-index: 101;
-}
-
-.searchBarTitle {
-    color: #333333;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+    font-family: roboto, sans-serif;
     text-decoration: none;
-    z-index: 101;
+    border-radius: 12px;
+    background-color: #262626;
+    color: #CCCCCC;
+    cursor: pointer;
+    padding-right: 8px;
+
+}
+
+.git-linked-container:hover {
+    background-color: #9C84FF;
+    color: black;
+}
+
+.footer-spacer {
+    padding: 20px;
+}
+
+.tracker-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.home-button-container {
+    display: flex;
+    font-size: 24px;
+    flex-direction: row;
+    font-family: roboto, sans-serif;
+    text-decoration: none;
+    letter-spacing: 1px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+}
+
+.token {
+    font-weight: 200;
+}
+
+.stats {
+    font-weight: 500;
+}
+
+.logout-button-div {
+    display: flex;
+    font-family: roboto, sans-serif;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 12px;
+    color: #9c84ff;
+    cursor: pointer;
+    padding-right: 40px;
+}
+
+.logout-button-div:hover {
+    color: #AD98FF;
+}
+
+.logout-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    letter-spacing: 1px;
+}
+
+.nav-logged-out {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    column-gap: 40px;
+}
+
+.signup-login-buttons {
+    display: flex;
+    font-family: roboto, sans-serif;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 12px;
+    color: #9c84ff;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+/* SPLASH PAGE */
+
+
+.splash-page {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: roboto, sans-serif;
+    justify-content: center;
+    align-items: center;
+    row-gap: 30px;
+    height: 100%;
+    width: 100%;
+}
+
+.splash-header {
+    font-size: 12px;
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+
+.splash-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 120px;
+    width: 100%
+}
+
+.splash-portfolio-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 40px;
+    width: 100%;
+    column-gap: 30px;
+}
+
+
+
+.splash-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+.splash-header-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    color: #999999;
+    letter-spacing: 1px;
+    font-size: 12px;
+    border-top: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    padding: 10px 0px;
+    margin: 10px 0px
+}
+
+.splash-item-portfolio-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.splash-portfolio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: roboto, sans-serif;
+    border-radius: 12px;
+    background-color: #262626;
+    color: #CCCCCC;
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.splash-portfolio-clicked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: roboto, sans-serif;
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
+    background-color: #9C84FF;
+    color: black;
+    cursor: pointer;
+}
+
+/* SIGNUP FORM-SHOW */
+
+.signup-splash-top {
+    display: flex;
+    height: 100%;
+    width: 62%
+}
+
+.signup-splash-portfolio-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    column-gap: 30px;
+}
+
+.signup-splash-item-portfolio-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.signup-splash-portfolio-clicked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: roboto, sans-serif;
+    border-radius: 12px;
+    height: 40px;
+    width: 25%;
+    padding: 0 10px;
+    background-color: #9C84FF;
+    color: black;
+}
+
+.sign-up-form-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* SPLASH TOKENS */
+.splash-col-1 {
+    display: flex;
+    width: 20%;
+    justify-content: flex-start;
+}
+
+.splash-col-2 {
+    display: flex;
+    width: 10%;
+    justify-content: flex-end;
+}
+
+.splash-cols {
+    display: flex;
+    width: 17%;
+    justify-content: flex-end;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.splash-individual-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 9px;
+    margin-bottom: 9px;
+    border-bottom: 1px solid #282828;
+}
+
+.splash-portfolio:hover {
+    background-color: #9C84FF;
+    color: black;
+}
+
+/* SIGN UP */
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.signup-form-label {
+    letter-spacing: 1px;
+    font-family: roboto, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+    margin-top: 6px;
+}
+
+.signup-form-input {
+    display: flex;
+    min-width: 300px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid #404040;
+    background-color: #1a1a1a;
+    padding: 2px;
+    cursor: pointer;
+    caret-color: black;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.signup-form-error-message {
+    font-family: roboto, sans-serif;
+    color: #ff4d4d
+  }
+
+.signup-submit-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.splash-button-container {
+    padding-top: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+  }
+
+.signup-form-submit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #9c84ff;
+    color: black;
+    font-family: roboto, sans-serif;
+    font-weight: bold;
+    border-radius: 18px;
+    width: 100px;
+    height: 20px;
+}
+
+.signup-form-submit:hover {
+    background-color: #ad98ff;
+  }
+
+.splash-form-cancel-here {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    border: 1px solid #404040;
+    color: white;
+    font-family: roboto, sans-serif;
+    font-weight: bold;
+    border-radius: 18px;
+    width: 100px;
+    height: 20px;
+  }
+
+  .splash-form-cancel-here:hover {
+    background-color: black;
+  }
+
+
+.signup-form-separator {
+    padding-bottom: 10px;
 }

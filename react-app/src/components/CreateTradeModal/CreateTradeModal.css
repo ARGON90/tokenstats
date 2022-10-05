@@ -1,133 +1,154 @@
-.create-book-button {
-    display: inline-flex;
-    align-items: center;
-    text-align: center;
-    font-size: small;
-    justify-content: center;
-    color: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(170, 170, 170, 0.3);
-    border-radius: 5px;
-    background-color: #F4F1EA;
-    cursor: pointer;
-    width: 90px;
-    height: 23px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
-  .create-book-button:hover {
-    background-color: #ede6d6;
-    font-weight: bold;
-  }
 
-  .create-book-form {
-    display: flex;
-    overflow: auto;
-    flex-direction: column;
-    max-height: 100%;
-    max-width: 100%;
-    background-color: white;
-    position: relative;
-    font-size: 14px;
-    color: #181818;
-  }
+.create-trade-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  background-color: #1a1a1a;
+  font-size: 14px;
+  color: #9c84ff;
+}
 
-  .create-book-form-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #00635d;
-  }
+.create-trade-form-title {
+  display: flex;
+  justify-content: center;
+  font-family: roboto, sans-serif;
+  font-size: 24px;
+  color: white;
+}
 
-  .create-book-form-errors-container {
-    padding: 10px 0px;
-    color: red;
-  }
+.create-trade-modal-body {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  max-width: 100%;
+  background-color: #1a1a1a;
+  position: relative;
+  padding-top: 18px;
+}
 
-  .create-book-form-label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 5px;
-    margin-top: 6px;
-  }
+.create-trade-form-label {
+  letter-spacing: 1px;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
 
-  .create-book-form-input {
-    min-width: 300px;
-    width: 800px;
-    height: 30px;
-    border-radius: 3px;
-    background-color: #FFFFFF;
-    border: 1px solid #DCD6CC;
-    padding: 2px;
-    cursor: pointer;
-    caret-color: black;
-    text-overflow: ellipsis;
-    color: #5d5d5d;
-  }
+.create-trade-form-input {
+  min-width: 300px;
+  width: 80%;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #404040;
+  background-color: #1a1a1a;
+  padding: 2px;
+  cursor: pointer;
+  caret-color: black;
+  text-overflow: ellipsis;
+  color: white;
+}
 
-  .create-book-form-input:focus {
-    outline: none;
-    border: 1px solid #d0ba94;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
-    color: #181818;
-  }
+.create-trade-form-input::placeholder {
+  color: #A9A9A9;
+}
 
-  .create-book-form-input::placeholder {
-    color: #A9A9A9;
-  }
 
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+.edit-trade-form-error-message {
+  font-family: roboto, sans-serif;
+  color: #ff4d4d
+}
 
-  .create-book-modal-body {
-    display: flex;
-    flex-direction: column;
-    max-height: 100%;
-    max-width: 100%;
-    background-color: white;
-    position: relative;
-  }
+.create-trade-button-container {
+  padding-top: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
 
-  .create-book-form-body-separator-top {
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #eee;
-  }
+.create-trade-form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9c84ff;
+  color: black;
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+}
 
-  .create-book-form-body-separator-bottom {
-    display: block;
-    margin-top: 15px;
-    border-bottom: 1px solid #eee;
-  }
+.create-trade-form-submit:hover {
+  background-color: #ad98ff;
+}
 
-  .create-book-form-submit,
-  .create-book-form-cancel {
-    align-items: center;
-    text-align: center;
-    font-size: small;
-    justify-content: center;
-    color: rgba(0, 0, 0, 0.7);
-    margin-top: 10px;
-    margin-right: 10px;
-    border: 1px solid rgba(170, 170, 170, 0.3);
-    border-radius: 5px;
-    background-color: #F4F1EA;
-    width: 100px;
-    height: 23px;
-  }
+.create-trade-form-cancel-here {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  border: 1px solid #404040;
+  color: white;
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+}
 
-  .create-book-form-submit:disabled {
-    color: #A9A9A9;
-  }
+.create-trade-form-cancel-here:hover {
+  background-color: black;
+}
 
-  .create-book-form-submit:hover:enabled,
-  .create-book-form-cancel:hover {
-    cursor: pointer;
-    background-color: #ede6d6;
-    font-weight: bold;
-  }
+.input-separator-div {
+  padding-bottom: 12px;
+}
+
+/* SEARCHBAR */
+
+.tokenResultsDiv {
+  position: absolute;
+  top: 171px;
+  /* right: 125px; */
+  width: 206px;
+  z-index: 101;
+}
+
+.search-entries-container {
+  padding: 8px;
+  border: 1px solid #404040;
+  background-color: #1a1a1a;
+  z-index: 101;
+}
+
+.search-entries-container:hover {
+background-color: black;
+}
+
+/* .searchClear {
+  position: sticky;
+  display: flex;
+  align-items: center;
+} */
+
+.search-entries {
+  font-family: roboto, sans-serif;
+  color: white;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  z-index: 101;
+}
 
   @media screen and (max-width: 900px) {
     .create-book-form {

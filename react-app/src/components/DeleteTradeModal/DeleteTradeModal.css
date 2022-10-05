@@ -1,69 +1,111 @@
-.delete-book-button {
-    display: inline-flex;
-    align-items: center;
-    text-align: center;
-    font-size: small;
-    justify-content: center;
-    color: rgba(0, 0, 0, 0.7);
-    padding: 3px;
-    border: 1px solid rgba(170, 170, 170, 0.3);
-    border-radius: 5px;
-    background-color: #F4F1EA;
-    cursor: pointer;
-    width: 60px;
-    height: 23px;
-  }
+.delete-trade-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  background-color: #1a1a1a;
+  font-size: 14px;
+  color: #9c84ff;
+}
 
-  .delete-book-button:hover {
-    background-color: #ede6d6;
-    font-weight: bold;
-  }
+.delete-trade-form-title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-family: roboto, sans-serif;
+  font-size: 24px;
+  color: white;
+}
 
-  .delete-book-form {
-    display: flex;
-    overflow: hidden;
-    flex-direction: column;
-    max-height: 100%;
-    max-width: 100%;
-    background-color: white;
-    position: relative;
-  }
+.delete-trade-modal-body {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  max-width: 100%;
+  background-color: #1a1a1a;
+  position: relative;
+  padding-top: 18px;
+}
 
-  .delete-book-form-title {
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 10px;
-    /* padding-bottom: 20px; */
-  }
+.delete-trade-form-label {
+  letter-spacing: 1px;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
 
-  .delete-book-modal-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-height: 100%;
-    max-width: 100%;
-    background-color: white;
-    position: relative;
-    border-radius: 20px;
-  }
+.delete-trade-form-input {
+  min-width: 300px;
+  width: 80%;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #404040;
+  background-color: #1a1a1a;
+  padding: 2px;
+  cursor: pointer;
+  caret-color: black;
+  text-overflow: ellipsis;
+  color: white;
+}
 
-  .delete-book-form-delete-button,
-  .delete-book-form-cancel-button {
-    text-align: center;
-    font-size: small;
-    color: rgba(0, 0, 0, 0.7);
-    margin: 5px;
-    border: 1px solid rgba(170, 170, 170, 0.3);
-    border-radius: 5px;
-    background-color: #F4F1EA;
-    cursor: pointer;
-    width: 100px;
-    height: 23px;
-  }
+.create-trade-form-input::placeholder {
+  color: #A9A9A9;
+}
 
-  .delete-book-form-delete-button:hover,
-  .delete-book-form-cancel-button:hover {
-    background-color: #ede6d6;
-    font-weight: bold;
-  }
+
+.edit-trade-form-error-message {
+  font-family: roboto, sans-serif;
+  color: #ff4d4d
+}
+
+.delete-trade-button-container {
+  padding-top: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.delete-trade-form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9c84ff;
+  color: black;
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+}
+
+.delete-trade-form-submit:hover {
+  background-color: #ad98ff;
+}
+
+.delete-trade-form-cancel-here {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  border: 1px solid #404040;
+  color: white;
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+}
+
+.delete-trade-form-cancel-here:hover {
+  background-color: black;
+}

@@ -7,30 +7,35 @@ import Portfolios from './Portfolios';
 
 import "./CSS/index.css"
 
+// FUNCTIONALITY
+// readme
+// update wiki
+// delete portfolio doesn't work on heroku
+// search: clear dropdown on clickoff
+// add a 404
+// double clicking on modals can create two trades - disable that!
+
+// STYLING
+//Navbar - put tokens at the top?
+//Trades: where to put total P/L?
+//Trades: should list most recent one first?
+//Holdings: make message saying "no holdings/tokens when they're empty"
+//Trade: remove default trade information in the create trade form
+//Edit/Delete buttons: change to ionicons, add hover
+
+
+
+
+
+
+// TESTING
 // trades: submitting trade sometimes doesn't autoupdate?
-// trades: disable browser auto-fill
-// delete trade: console error
-// trades: switching side-bar selector takes two clicks
-// trades: TVLs do not update on switching portfolios
+// race condition upon portfolio creation - check that out!
+
+
 
 function AllTokens() {
   const dispatch = useDispatch()
-
-  const allTokens = useSelector((state) => Object.values(state?.tokens))
-
-  const getDecimals = (num) => {
-    let str = num.toString()
-    let array = str.split('.')
-    if (array[0].length > 3) {
-      return array[0]
-    } else {
-      return num.toFixed(2)
-    }
-  }
-
-  function refreshPrice() {
-    dispatch(updateAllTokensThunk())
-  }
 
   useEffect(() => {
     dispatch(getAllTokensThunk())
@@ -39,15 +44,11 @@ function AllTokens() {
   return (
     <>
 
-      <br></br>
-
-      <div>
+      <div >
         <Portfolios />
       </div>
 
-      <br></br>
-
-      {/* <button onClick={refreshPrice}>Refresh Price</button>
+      {/* <br></br>
       {allTokens.map((token) =>
         <div key={token.id} className='flex-row col-gap-5'>
           <div>{token.name}</div>

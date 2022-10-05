@@ -10,7 +10,8 @@ class Portfolio(db.Model):
     name = db.Column(db.String(255), nullable=False)
 
     user = db.relationship("User",back_populates="portfolios")
-    
+    trades = db.relationship("Trade",back_populates="portfolio", cascade="all, delete")
+
 
     def to_dict(self):
         return {

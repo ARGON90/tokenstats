@@ -2,6 +2,18 @@
     color: #999999
 }
 
+.green-font {
+    color: #6CCF59
+}
+
+.red-font {
+    color: #FF4D4D
+}
+
+.padding-right-8px{
+    padding-right: 8px;
+}
+
 .portfolios-page {
     display: flex;
     flex-direction: row;
@@ -15,6 +27,7 @@
     padding-left: 7%;
     padding-right: 10%;
     column-gap: 50px;
+    height: 1000px;
 }
 
 .portfolios-left-container {
@@ -67,6 +80,9 @@ button {
 }
 
 .portfolios-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     color: #e5e5e5;
     border: none;
     background-color: black;
@@ -76,6 +92,9 @@ button {
 
 
 .portfolios-buttons-clicked {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     color: #e5e5e5;
     background-color: black;
     border-left: 2px solid #9c84ff;
@@ -115,6 +134,10 @@ button {
     align-items: center;
 }
 
+.briefcase {
+    color: #9c84FF;
+}
+
 .holdings-totals-container {
     display: flex;
     flex-direction: column;
@@ -127,8 +150,26 @@ button {
 }
 
 .total-holdings {
+    display: flex;
     font-size: 28px;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    padding-bottom: 2px;
 }
+
+.refresh-outline {
+    padding-top: 3px;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.refresh-outline:hover {
+    color: #ad98ff
+}
+
 
 .holdings-trades-header {
     display: flex;

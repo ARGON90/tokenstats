@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPortfoliosThunk } from '../store/portfolio-store';
+import { updateAllTokensThunk } from '../store/all-tokens-store';
 import CreateTradeModal from './CreateTradeModal';
 import CreatePortfolioModal from './CreatePortfolioModal';
 import DeletePortfolioModal from './DeletePortfolioModal';
@@ -18,14 +19,21 @@ function Portfolios() {
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
 
+    const portfoliosObj = {}
+    allPortfolios.forEach((portfolio) => portfoliosObj[portfolio.id] = portfolio)
 
+    const [rerender, setRerender] = useState(false)
     const [displayTab, setDisplayTab] = useState('holdings')
+    const [portfolios, setPortfolios] = useState(portfoliosObj)
     const [currentPortfolio, setCurrentPortfolio] = useState("all")
-    const updateCurrentPortfolio = (e) => { setCurrentPortfolio(e.target.value) }
+
+
+    console.log('PORTFOLIO.JS - CURRENT PORTFOLIO USESTATE - LINE 24 : ', currentPortfolio)
 
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
-    }, [dispatch, displayTab, currentPortfolio])
+        console.log('USE EFFECT PORTFOLIOS.JS')
+    }, [dispatch, displayTab, currentPortfolio, rerender])
 
     if (!allTokens[1]) return null
     if (!currentUser) return null
@@ -83,7 +91,9 @@ function Portfolios() {
         sortedHoldingsArray.map((holding) =>
             total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
         )
-        return total.toFixed(0)
+        const prices = [total];
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
     }
 
     function getTotalHoldingsPercentChange() {
@@ -92,6 +102,7 @@ function Portfolios() {
             total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
         )
         let total24hAgo = 0
+
         sortedHoldingsArray.map((holding) =>
             total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)))
         )
@@ -105,10 +116,34 @@ function Portfolios() {
         }
     }
 
+    // let totalh = getTotalHoldingsPercentChange()
+    // if (!totalh) {
+    //     return null
+    // }
+
+
     function getTotal24HPL() {
-        const pctChange = getTotalHoldingsPercentChange();
-        const totalHolding = getTotalHoldingsValue();
-        return (totalHolding * (pctChange / 100)).toFixed(2)
+        let total = 0;
+        sortedHoldingsArray.map((holding) =>
+            total += (allTokens[holding[0].tokenId].price * holding[0].amount_traded)
+        )
+
+        let total24hAgo = 0
+        sortedHoldingsArray.map((holding) =>
+            total24hAgo += (allTokens[holding[0].tokenId].price * holding[0].amount_traded + (allTokens[holding[0].tokenId].price * holding[0].amount_traded * (allTokens[holding[0].tokenId].dailyChange / 100)))
+        )
+        let percentChange = ((total24hAgo - total) / total) * 100
+
+        const prices = (total * (percentChange / 100))
+
+        if (prices < 0) {
+            let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+            return `${localeString}`
+        }
+        if (prices >= 0) {
+            let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+            return `${localeString}`
+        }
     }
     //END CALCULATE TOTALS BLOCK
 
@@ -145,8 +180,10 @@ function Portfolios() {
         } else {
             return 'portfolios-buttons'
         }
+    }
 
-
+    function refreshPrice() {
+        dispatch(updateAllTokensThunk())
     }
 
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
@@ -161,18 +198,21 @@ function Portfolios() {
                     </div>
                     <div className='portfolio-assets-container'>
                         <div className={allAssetsClicked()} >
-                            <button className='portfolio-all-assets' value='all' onClick={updateCurrentPortfolio}>All Assets</button>
+                            <div className='briefcase'>
+                            <ion-icon name="briefcase"></ion-icon>
+                            </div>
+                            <button className='portfolio-all-assets' value='all' onClick={() => setCurrentPortfolio('all')}>All Assets</button>
                         </div>
                     </div>
                     <div>
                         {userPortfolios.map((portfolio) =>
                             <div key={portfolio.id} className='portfolios-buttons-container'>
                                 <div className='portfolio-selection'>
-                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={updateCurrentPortfolio}>{portfolio.name}</button>
+                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={() => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
                                 </div>
                                 <div className='portfolios-edit-delete-buttons'>
                                     <EditPortfolioModal portfolio={portfolio} />
-                                    <DeletePortfolioModal portfolio={portfolio} />
+                                    <DeletePortfolioModal setPortfolios={setPortfolios} portfolios={portfolios} portfolio={portfolio} rerender={rerender} setRerender={setRerender} holdVal={getTotalHoldingsValue} setCurrentPortfolio={setCurrentPortfolio} />
                                 </div>
                             </div>
                         )}
@@ -182,10 +222,15 @@ function Portfolios() {
 
                 <div className='portfolios-right-container'>
                     <div className='holdings-totals-container'>
-                        <div className='total-holdings'>${getTotalHoldingsValue()}</div>
+                        <div className='total-holdings'>
+                            <div >{getTotalHoldingsValue()}</div>
+                            <div className="refresh-outline">
+                                <ion-icon name="refresh-outline" onClick={() => refreshPrice()}></ion-icon>
+                            </div>
+                        </div>
                         <div className='holdings-PL-container'>
-                            <div>${getTotal24HPL()}</div>
-                            <div>{getTotalHoldingsPercentChange()}%</div>
+                            {getTotal24HPL() && getTotal24HPL()[0] === '$' ? <div className='green-font'>{getTotal24HPL()}</div> : <div className='red-font padding-right-8px'>{getTotal24HPL()}</div>}
+                            {getTotal24HPL() && getTotalHoldingsPercentChange()[0] === '+' ? <div className='green-font'>{getTotalHoldingsPercentChange()}%</div> : <div className='red-font'>{getTotalHoldingsPercentChange()}%</div>}
                             <div className='grey-font'>24H</div>
                         </div>
                     </div>
@@ -203,11 +248,11 @@ function Portfolios() {
 
                     {displayTab === 'holdings' &&
                         <div>
-                            <Holdings portId={currentPortfolio}/>
+                            <Holdings portId={currentPortfolio} />
                         </div>}
                     {displayTab === 'trades' &&
                         <div>
-                            <Trades portId={currentPortfolio} />
+                            <Trades portfolios={portfolios} setPortfolios={setPortfolios} portId={currentPortfolio} rerender={rerender} />
                         </div>}
 
                 </div>

@@ -1,3 +1,11 @@
+.green-font {
+    color: #6CCF59
+}
+
+.red-font {
+    color: #FF4D4D
+}
+
 .trades-header-container {
     display: flex;
     flex-direction: row;
@@ -49,11 +57,28 @@
     justify-content: flex-end;
     min-width: 15px;
 }
+
 .trade-cols {
     display: flex;
     width: 12%;
     justify-content: flex-end;
     min-width: 15px;
+}
+
+.trade-cols-green {
+    display: flex;
+    width: 12%;
+    justify-content: flex-end;
+    min-width: 15px;
+    color: #6CCF59;
+}
+
+.trade-cols-red {
+    display: flex;
+    width: 12%;
+    justify-content: flex-end;
+    min-width: 15px;
+    color:#FF4D4D;
 }
 
 .flex-end {
@@ -63,7 +88,7 @@
 .add-txn-button {
     display: flex;
     justify-content: flex-end;
-    color: #948CFF;
+    color: #9C84FF;
     font-weight: 900;
     cursor: pointer;
 }

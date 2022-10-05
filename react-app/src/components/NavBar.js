@@ -5,48 +5,59 @@ import LogoutButton from './auth/LogoutButton';
 import { useSelector } from 'react-redux';
 import SearchBar from './SearchBar';
 
-const NavBar = () => {
+import './CSS/index.css'
+
+const NavBar = ({setShowSignup}) => {
 
   const currentUser = useSelector((state) => (state?.session?.user))
 
 
   return (
-    <nav>
-      <div className='flex-row col-gap-5'>
+    <div className='nav-page'>
+      <div className='nav-container'>
 
         {currentUser ?
 
-          <div className='flex-row col-gap-5'>
-            <NavLink to='/home' exact={true} activeClassName='active'>
-              Home
-            </NavLink>
+          <div className='nav-logged-in'>
+            <div className='nav-left-panel'>
+              <NavLink className={'home-button-container'} to='/home' exact={true} activeClassName='active'>
+                <div className='token'>Token</div>
+                <div className='stats'>Stats</div>
+              </NavLink>
 
-            <br></br>
+              <NavLink className={'portfolio-tracker'} to='/home' exact={true} activeClassName='active'>
+                <div className='tracker-div'>Portfolio Tracker</div>
+              </NavLink>
 
-            <LogoutButton />
+
+              <NavLink className={'portfolio-tracker'} to='/tokens' exact={true} activeClassName='active'>
+                <div className='tracker-div'>See All Tokens</div>
+              </NavLink>
+            </div>
+
+            <div className='nav-right-panel'>
+              <div className='logout-button-div'>
+                <LogoutButton />
+              </div>
+            </div>
           </div>
           :
 
-          <div className='flex-row col-gap-5'>
-            <NavLink to='/' exact={true} activeClassName='active'>
-              Home
-            </NavLink>
+          <div className='nav-logged-out'>
 
-            <br></br>
-
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>
-
-            <br></br>
-
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
+            <NavLink className='home-button-container' to='/home' exact={true} activeClassName='active'>
+              <div className='token'>Token</div>
+              <div className='stats'>Stats</div>
             </NavLink>
 
 
-            <br></br>
+            <div className={'signup-login-buttons'} onClick={() => setShowSignup('sign-up')}>
+              SIGN UP
+            </div>
 
+            <div className={'signup-login-buttons'} onClick={() => setShowSignup('sign-up')}>
+              LOG IN
+            </div>
 
           </div>
 
@@ -62,7 +73,7 @@ const NavBar = () => {
 
 
       </div>
-    </nav>
+    </div >
   );
 }
 

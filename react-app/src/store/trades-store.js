@@ -34,6 +34,8 @@ export const getUserTradesThunk = () => async (dispatch) => {
     }
 }
 
+
+
 export const createTradeThunk = (data) => async dispatch => {
     const response = await fetch('/api/trades/', {
         method: 'POST',

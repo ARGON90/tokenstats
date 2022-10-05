@@ -1,18 +1,23 @@
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect } from "react-router-dom"
 import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import SignUpForm from "./auth/SignUpForm";
+import LoginForm from "./auth/LoginForm";
+import { signUp } from "../store/session";
+import { login } from "../store/session";
 
-function SplashPage() {
+function SplashPage({ showSignup, setShowSignup }) {
     const currentUser = useSelector(state => state?.session?.user)
     const allTokens = useSelector((state) => Object.values(state?.tokens))
     const dispatch = useDispatch()
+
 
     useEffect(() => {
         dispatch(getAllTokensThunk())
         // todo: comment in update AllTokens
         // dispatch(updateAllTokensThunk())
-      }, [dispatch])
+    }, [dispatch, showSignup])
 
     const getDecimals = (num) => {
         let str = num.toString()
@@ -28,19 +33,98 @@ function SplashPage() {
         return <Redirect to='/home' />
     }
 
-    return (
+    function getTokenPrice(rawNum) {
+        const prices = rawNum
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
+    }
 
+    const demoLogin = async () => {
+        dispatch(updateAllTokensThunk())
+        await dispatch(login('demo@aa.io', 'password'));
+
+      };
+
+    return (
         <>
-            <h1>Manage Your Crypto Portfolio from One Place!</h1>
-            {allTokens.map((token) =>
-                <div key={token.id} className='flex-row col-gap-5'>
-                    <div>{token.name}</div>
-                    <div>${getDecimals(token.price)}</div>
-                    <div>{getDecimals(token.dailyChange)}</div>
-                    <div>{getDecimals(token.dailyVolume)}</div>
-                    <div>{getDecimals(token.marketCap)}</div>
+            <div className='splash-page' >
+                <div className="splash-header">Manage Your Crypto Portfolio in One Place!</div>
+
+
+                {/* SHOW ALL BUTTONS */}
+                {showSignup === 'all' &&
+                    <div className="splash-top">
+                        <div className="splash-portfolio-div">
+                            <div className="splash-item-portfolio-container" onClick={() => demoLogin()}>
+                                <div className="splash-portfolio">Click here to try a Demo User!</div>
+                            </div>
+
+                            <div className="splash-item-portfolio-container" onClick={() => setShowSignup('sign-up')}>
+                                <div className="splash-portfolio">New User? Sign up!</div>
+                            </div>
+
+                            <div className="splash-item-portfolio-container" onClick={() => setShowSignup('login')}>
+                                <div className="splash-portfolio">Already a User? Login!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                {showSignup === 'sign-up' &&
+                    <div className="signup-splash-top">
+                        <div className="signup-splash-portfolio-div">
+
+                            {/* <div className="signup-splash-item-portfolio-container"> */}
+                                <div className="signup-splash-portfolio-clicked">New User? Sign up!</div>
+                            {/* </div> */}
+
+                            <div>
+                                <SignUpForm setShowSignup={setShowSignup} />
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                {showSignup === 'login' &&
+                    <div className="signup-splash-top">
+                        <div className="signup-splash-portfolio-div">
+
+                                <div className="signup-splash-portfolio-clicked">Already a User? Login!</div>
+
+
+                            <div >
+                                <LoginForm setShowSignup={setShowSignup} />
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
+
+                <div className="splash-body">
+                    <div className='splash-header-container'>
+                        <div className='splash-col-1'>TOKEN</div>
+                        <div className='splash-col-2'>PRICE</div>
+                        <div className='splash-cols'>24H CHANGE</div>
+                        <div className='splash-cols'>24H VOLUME</div>
+                        <div className='splash-cols flex-end'>MARKET CAP</div>
+                    </div>
+
+
+                    {allTokens.map((token) =>
+                        <div key={token.id} className='splash-individual-container'>
+                            <div className="splash-col-1">{token.name}</div>
+                            <div className="splash-col-2">{getTokenPrice(token.price)}</div>
+                            {token.dailyChange >= 0 ? <div className="splash-cols green-font">{getDecimals(token.dailyChange)}%</div> : <div className="splash-cols red-font">{getDecimals(token.dailyChange)}%</div>}
+                            <div className="splash-cols">{getTokenPrice(token.dailyVolume)}</div>
+                            <div className="splash-cols flex-end">{getTokenPrice(token.marketCap)}</div>
+                        </div>
+                    )}
                 </div>
-            )}
+            </div>
         </>
     )
 }

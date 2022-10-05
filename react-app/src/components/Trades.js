@@ -6,16 +6,21 @@ import EditTradeModal from './EditTradeModal';
 import DeleteTradeModal from './DeleteTradeModal'
 
 import './CSS/trades.css'
+import './CSS/index.css'
 
-function Trades({ portId, totalHoldingsVar }) {
+function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
     const allTokens = useSelector((state) => (state?.tokens))
 
+
     useEffect(() => {
+        console.log('TRADE.JS - LINE 18')
         dispatch(getUserTradesThunk())
-    }, [dispatch, portId])
+    }, [dispatch, portId, rerender, portfolios])
+
+    console.log(rerender, 'RERENDER FROM TRAD.JS')
 
     if (!currentUser) {
         return <div>Loading Trades</div>
@@ -58,9 +63,18 @@ function Trades({ portId, totalHoldingsVar }) {
     function getPLTrade(trade) {
         let tradePL = (allTokens[trade.token_id].price * trade.amount_traded) - (trade.total_cost)
         if (tradePL > 0) {
-            return `+${tradePL.toFixed(2)}`
+            const prices = [tradePL];
+            let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+            return localeString
         }
-        return tradePL.toFixed(2)
+        const prices = [tradePL];
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+       return localeString
+    }
+    function getTotalCostTrade(rawNum) {
+        const prices = [rawNum];
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+       return localeString
     }
 
     if (!userTrades) return <div>No Trades</div>
@@ -83,9 +97,9 @@ function Trades({ portId, totalHoldingsVar }) {
                         <div className='trade-col-1'>{boughtSold(trade.buy)}</div>
                         <div className='trade-col-2'>{trade.amount_traded}</div>
                         <div className='trade-cols'>{getTokenName(trade.token_id)}</div>
-                        <div className='trade-cols'>${(trade.total_cost).toFixed(0)}</div>
-                        <div className='trade-cols-5'>${allTokens[trade.token_id].price.toFixed(0) * trade.amount_traded}</div>
-                        <div className='trade-cols'>{getPLTrade(trade)}</div>
+                        <div className='trade-cols'>{getTotalCostTrade(trade.total_cost)}</div>
+                        <div className='trade-cols-5'>${(allTokens[trade.token_id].price * trade.amount_traded).toFixed(2)}</div>
+                        { getPLTrade(trade) && getPLTrade(trade)[0] === '$' ? <div className='trade-cols-green'>{getPLTrade(trade)}</div> : <div className='trade-cols-red'>{getPLTrade(trade)}</div>}
                         <div className='image-cols'>
                             <EditTradeModal trade={trade} />
                             <DeleteTradeModal trade={trade} />
@@ -95,7 +109,7 @@ function Trades({ portId, totalHoldingsVar }) {
                 )}
 
                 <div>My Trades</div>
-                <div>Total Profit: {getTradesTotalProfit()}</div>
+                {getTradesTotalProfit() && getTradesTotalProfit()[0] === '$' ? <div className='green-font'>Total Profit: {getTradesTotalProfit()}</div> : <div className='red-font'>Total Profit: {getTradesTotalProfit()}</div>}
             </div>
         </>
     )

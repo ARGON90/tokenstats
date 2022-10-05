@@ -12,8 +12,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     holdings = db.relationship("Holdings",back_populates="user")
-    portfolios = db.relationship("Portfolio",back_populates="user")
-    trades = db.relationship("Trade",back_populates="user")
+    portfolios = db.relationship("Portfolio",back_populates="user", cascade='all, delete')
+    trades = db.relationship("Trade",back_populates="user", cascade='all, delete')
 
     @property
     def password(self):
