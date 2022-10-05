@@ -19,10 +19,10 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
 
     const [errors, setErrors] = useState('');
-    const [tokenSelect, setTokenSelect] = useState(1);
-    const [buySell, setBuySell] = useState("buy");
-    const [tradeAmount, setTradeAmount] = useState(0.1);
-    const [tradePrice, setTradePrice] = useState(1);
+    const [tokenSelect, setTokenSelect] = useState('');
+    const [buySell, setBuySell] = useState("");
+    const [tradeAmount, setTradeAmount] = useState('');
+    const [tradePrice, setTradePrice] = useState('');
     const [userPortfolio, setUserPortfolio] = useState("");
 
     const updateBuySell = (e) => setBuySell(e.target.value);
@@ -137,7 +137,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     <select
                         className="create-trade-form-input"
                         placeholder="Select One"
-                        required
+                        
                         value={userPortfolio}
                         onChange={updateUserPortfolio}
 
@@ -152,7 +152,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     <div className="input-separator-div"></div>
 
                         <SearchBar setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
-                    
+
                     <div className="edit-trade-form-error-message">{errors?.tokenSelect}</div>
 
                     <div className="input-separator-div"></div>
@@ -161,7 +161,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                     <select
                         className="create-trade-form-input"
                         placeholder="Select One"
-                        required
+                        
                         value={buySell}
                         onChange={updateBuySell}
                     >
@@ -178,7 +178,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         className="create-trade-form-input"
                         type="number"
                         placeholder={amountPlaceholder()}
-                        required
+                        
                         value={tradeAmount}
                         onChange={updateTradeAmount}
                     />
@@ -193,7 +193,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         className="create-trade-form-input"
                         type="decimal"
                         placeholder={tradePricePlaceholder()}
-                        required
+                        
                         value={tradePrice}
                         onChange={updateTradePrice}
                     />

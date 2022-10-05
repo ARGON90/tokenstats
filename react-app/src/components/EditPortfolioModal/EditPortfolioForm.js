@@ -55,7 +55,7 @@ const EditPortfolioForm = ({ setShowModal, portfolio }) => {
                         className="edit-portfolio-form-input"
                         type="string"
                         placeholder="Name"
-                        required
+                        
                         value={name}
                         onChange={updateName}
                     />

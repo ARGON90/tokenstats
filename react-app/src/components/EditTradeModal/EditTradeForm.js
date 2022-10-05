@@ -140,7 +140,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                     <select
                         className="create-trade-form-input"
                         placeholder="Select One"
-                        required
+
                         value={userPortfolio}
                         onChange={updateUserPortfolio}
                     >
@@ -161,7 +161,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                     <select
                         className="create-trade-form-input"
                         placeholder="Select One"
-                        required
+
                         value={buySell}
                         onChange={updateBuySell}
                     >
@@ -178,7 +178,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                         className="create-trade-form-input"
                         type="number"
                         placeholder={amountPlaceholder()}
-                        required
+                        
                         value={tradeAmount}
                         onChange={updateTradeAmount}
                     />
@@ -193,7 +193,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                         className="create-trade-form-input"
                         type="number"
                         placeholder={tradePricePlaceholder}
-                        required
+
                         value={tradePrice}
                         onChange={updateTradePrice}
                     />

@@ -7,42 +7,35 @@ import Portfolios from './Portfolios';
 
 import "./CSS/index.css"
 
-// trades: submitting trade sometimes doesn't autoupdate?
-// trades: disable browser auto-fill
-// delete trade: still getting console error for state update on unmounted component
-// trades: should list most recent one first?
-// favicons
+// FUNCTIONALITY
 // readme
-// error handling
-// javascript method for to localstring us (1 arg, other arg would be style, USD)
+// update wiki
 // delete portfolio doesn't work on heroku
-// delete trade not working for on cascade deleting a portfio
-// add trade not working with small decimals
-// remove 'required' from forms
+// search: clear dropdown on clickoff
+// add a 404
+// double clicking on modals can create two trades - disable that!
+
+// STYLING
+//Navbar - put tokens at the top?
+//Trades: where to put total P/L?
+//Trades: should list most recent one first?
+//Holdings: make message saying "no holdings/tokens when they're empty"
+//Trade: remove default trade information in the create trade form
+//Edit/Delete buttons: change to ionicons, add hover
+
+
+
+
+
+
+// TESTING
+// trades: submitting trade sometimes doesn't autoupdate?
 // race condition upon portfolio creation - check that out!
-// tokens and holdings: make message saying "no holdings/tokens when they're empty"
-// search - clear dropdown on clickoff
-// trades current value on refresh: too many decimals (try bitcoin to see it)
-// spacing on search menu - put tokens at the top??
-// takeout default trade information in the create trade form
+
+
 
 function AllTokens() {
   const dispatch = useDispatch()
-  const allTokens = useSelector((state) => Object.values(state?.tokens))
-
-  const getDecimals = (num) => {
-    let str = num.toString()
-    let array = str.split('.')
-    if (array[0].length > 3) {
-      return array[0]
-    } else {
-      return num.toFixed(2)
-    }
-  }
-
-  function refreshPrice() {
-    dispatch(updateAllTokensThunk())
-  }
 
   useEffect(() => {
     dispatch(getAllTokensThunk())
@@ -51,15 +44,11 @@ function AllTokens() {
   return (
     <>
 
-      <br></br>
-
-      <div>
+      <div >
         <Portfolios />
       </div>
 
-      <br></br>
-
-      <button onClick={refreshPrice}>Refresh Price</button>
+      {/* <br></br>
       {allTokens.map((token) =>
         <div key={token.id} className='flex-row col-gap-5'>
           <div>{token.name}</div>
@@ -68,7 +57,7 @@ function AllTokens() {
           <div>{getDecimals(token.dailyVolume)}</div>
           <div>{getDecimals(token.marketCap)}</div>
         </div>
-      )}
+      )} */}
     </>
   );
 }

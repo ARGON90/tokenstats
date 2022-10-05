@@ -53,7 +53,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         className="create-portfolio-form-input"
                         type="string"
                         placeholder="Name"
-                        required
+                        
                         value={name}
                         onChange={updateName}
                     />

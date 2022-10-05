@@ -66,13 +66,15 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
             const prices = [tradePL];
             let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
             return localeString
-            // return tradePL.toFixed(2)
         }
-
         const prices = [tradePL];
         let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
-        return localeString
-        // return tradePL.toFixed(2)
+       return localeString
+    }
+    function getTotalCostTrade(rawNum) {
+        const prices = [rawNum];
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+       return localeString
     }
 
     if (!userTrades) return <div>No Trades</div>
@@ -95,8 +97,8 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
                         <div className='trade-col-1'>{boughtSold(trade.buy)}</div>
                         <div className='trade-col-2'>{trade.amount_traded}</div>
                         <div className='trade-cols'>{getTokenName(trade.token_id)}</div>
-                        <div className='trade-cols'>${(trade.total_cost).toFixed(0)}</div>
-                        <div className='trade-cols-5'>${allTokens[trade.token_id].price.toFixed(0) * trade.amount_traded}</div>
+                        <div className='trade-cols'>{getTotalCostTrade(trade.total_cost)}</div>
+                        <div className='trade-cols-5'>${(allTokens[trade.token_id].price * trade.amount_traded).toFixed(2)}</div>
                         { getPLTrade(trade) && getPLTrade(trade)[0] === '$' ? <div className='trade-cols-green'>{getPLTrade(trade)}</div> : <div className='trade-cols-red'>{getPLTrade(trade)}</div>}
                         <div className='image-cols'>
                             <EditTradeModal trade={trade} />

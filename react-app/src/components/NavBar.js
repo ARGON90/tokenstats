@@ -28,6 +28,11 @@ const NavBar = ({setShowSignup}) => {
               <NavLink className={'portfolio-tracker'} to='/home' exact={true} activeClassName='active'>
                 <div className='tracker-div'>Portfolio Tracker</div>
               </NavLink>
+
+
+              <NavLink className={'portfolio-tracker'} to='/tokens' exact={true} activeClassName='active'>
+                <div className='tracker-div'>See All Tokens</div>
+              </NavLink>
             </div>
 
             <div className='nav-right-panel'>

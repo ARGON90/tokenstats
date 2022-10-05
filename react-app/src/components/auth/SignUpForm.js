@@ -8,6 +8,7 @@ import '../CSS/index.css'
 
 const SignUpForm = ({setShowSignup}) => {
   const [errors, setErrors] = useState([]);
+  const [Berrors, setBerrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,12 +31,15 @@ const SignUpForm = ({setShowSignup}) => {
     if (!email) newErrors.email = "Please enter an email"
     if (password.length < 6) newErrors.password = "Password must be atleast 6 characters"
     if (!password) newErrors.password = "Please enter a password"
-    if (password !== repeatPassword) newErrors.repeatPassword = "Passwords must match"
     if (!repeatPassword) newErrors.repeatPassword = "Please repeat your password"
+    if (password !== repeatPassword) newErrors.repeatPassword = "Passwords must match"
 
 
     setErrors(newErrors);
-}, [username, email, password]);
+}, [username, email, password, repeatPassword]);
+
+console.log('PASS', password)
+console.log('REAPEAT', repeatPassword)
 
 
   const onSignUp = async (e) => {
@@ -43,10 +47,10 @@ const SignUpForm = ({setShowSignup}) => {
     setErrors([])
     dispatch(updateAllTokensThunk())
     if (password === repeatPassword) {
-      await dispatch(signUp(username, email, password));
-      // if (data) {
-      //   setErrors(data)
-      // }
+      const data = await dispatch(signUp(username, email, password));
+      if (data) {
+        setBerrors(data)
+      }
     }
   };
 
@@ -59,11 +63,12 @@ const SignUpForm = ({setShowSignup}) => {
   return (
     <>
       <form className='signup-form' onSubmit={onSignUp}>
-        {/* <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+        
+        <div>
+          {Berrors.map((error, ind) => (
+            <div className='signup-form-error-message' key={ind}>{error}</div>
           ))}
-        </div> */}
+        </div>
 
           <label className='signup-form-label'>User Name</label>
           <input

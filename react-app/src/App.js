@@ -13,8 +13,9 @@ import { authenticate } from './store/session';
 import AllTokens from './components/AllTokens'
 import UpdateTokens from './components/UpdateTokens';
 import SplashPage from './components/SplashPage';
-import Home from './components/Home'
+import Tokens from './components/Tokens'
 import Portfolios from './components/Portfolios';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,6 +36,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar setShowSignup={setShowSignup}/>
+      <Footer />
       <Switch>
         <Route path='/' exact={true} >
           <SplashPage showSignup={showSignup} setShowSignup={setShowSignup} />
@@ -54,11 +56,8 @@ function App() {
         <ProtectedRoute path='/home' exact={true}>
           <AllTokens />
         </ProtectedRoute>
-        <ProtectedRoute path='/homes' exact={true}>
-          <Home />
-        </ProtectedRoute>
-        <ProtectedRoute path='/tokens/refresh' exact={true}>
-          <UpdateTokens />
+        <ProtectedRoute path='/tokens' exact={true}>
+          <Tokens />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

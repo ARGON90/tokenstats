@@ -126,7 +126,7 @@ function Holdings({ portId }) {
                         <div className='reg-cols'>{getTokenPrice(allTokens[holding[0].tokenId].price)}</div>
                         {allTokens[holding[0].tokenId].dailyChange >= 0 ? <div className='reg-cols green-font'>+{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div> : <div className='reg-cols red-font'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>}
                         <div className='reg-cols'>{getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
-                        {(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100) >= 0 ? <div className='reg-cols flex-end green-font'>{getToken24HPL(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div> : <div className='reg-cols flex-end red-font'>{getToken24HPL(allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div>}
+                        {(holding[0].amount_traded * allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100) >= 0 ? <div className='reg-cols flex-end green-font'>{getToken24HPL(holding[0].amount_traded * allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div> : <div className='reg-cols flex-end red-font'>{getToken24HPL(holding[0].amount_traded * allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div>}
                     </div>
                 ) : <div>No holdings</div>}
             </div>

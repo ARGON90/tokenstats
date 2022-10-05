@@ -64,6 +64,7 @@
     z-index: 100;
     background: #1a1a1a;
     border-bottom: 1px solid #282828;
+
 }
 
 .nav-container {
@@ -138,6 +139,139 @@
     border-radius: 12px;
     color: #9c84ff;
     cursor: pointer;
+    padding-right: 40px;
+}
+
+.logout-button-div:hover {
+    color: #AD98FF;
+}
+
+.logout-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    letter-spacing: 1px;
+}
+
+.nav-logged-out {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    column-gap: 40px;
+}
+
+.signup-login-buttons {
+    display: flex;
+    font-family: roboto, sans-serif;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 12px;
+    color: #9c84ff;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+
+/* FOOTER */
+
+.footer-page {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 65px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    align-items: center;
+    z-index: 100;
+    background: #1a1a1a;
+    border-bottom: 1px solid #282828;
+
+}
+
+.nav-container {
+    width: 100%;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-logged-in {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.nav-left-panel {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+}
+
+
+.git-linked-container {
+    display: flex;
+    align-items: center;
+    font-family: roboto, sans-serif;
+    text-decoration: none;
+    border-radius: 12px;
+    background-color: #262626;
+    color: #CCCCCC;
+    cursor: pointer;
+    padding-right: 8px;
+
+}
+
+.git-linked-container:hover {
+    background-color: #9C84FF;
+    color: black;
+}
+
+.footer-spacer {
+    padding: 20px;
+}
+
+.tracker-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.home-button-container {
+    display: flex;
+    font-size: 24px;
+    flex-direction: row;
+    font-family: roboto, sans-serif;
+    text-decoration: none;
+    letter-spacing: 1px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+}
+
+.token {
+    font-weight: 200;
+}
+
+.stats {
+    font-weight: 500;
+}
+
+.logout-button-div {
+    display: flex;
+    font-family: roboto, sans-serif;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 12px;
+    color: #9c84ff;
+    cursor: pointer;
+    padding-right: 40px;
 }
 
 .logout-button-div:hover {
