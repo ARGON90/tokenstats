@@ -1,65 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { updateAllTokensThunk } from '../../store/all-tokens-store';
 
-const LoginForm = () => {
+const LoginForm = ({setShowSignup}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  const updateEmail = (e) => setEmail(e.target.value)
+  const updatePassword = (e) => setPassword(e.target.value)
+
+
+  useEffect(() => {
+    const newErrors = {};
+
+    if (!email.includes('@') || !email.includes('.')) newErrors.email = "Invalid Email"
+    if (!email) newErrors.email = "Please enter an email"
+    if (password.length < 6) newErrors.password = "Password must be atleast 6 characters"
+    if (!password) newErrors.password = "Please enter a password"
+
+
+    setErrors(newErrors);
+  }, [email, password]);
+
+
   const onLogin = async (e) => {
     e.preventDefault();
     dispatch(updateAllTokensThunk())
     const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
+    // if (data) {
+    //   setErrors(data);
+    // }
   };
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
 
   if (user) {
     return <Redirect to='/home' />;
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
+    <form className='signup-form' onSubmit={onLogin}>
+      {/* <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
+      </div> */}
+
+      <label className='signup-form-label' htmlFor='email'>Email</label>
+      <input
+        name='email'
+        type='text'
+        placeholder='Email'
+        value={email}
+        onChange={updateEmail}
+      />
+      <div className="signup-form-error-message">{errors?.email}</div>
+
+
+      <label className='signup-form-label' htmlFor='password'>Password</label>
+      <input
+        name='password'
+        type='password'
+        placeholder='Password'
+        value={password}
+        onChange={updatePassword}
+      />
+      <div className="signup-form-error-message">{errors?.password}</div>
+
+      <div className='splash-button-container'>
+          <div className='signup-submit-container'>
+            <button
+            className='signup-form-submit'
+            disabled={Object.values(errors).length}
+            type='submit'>Sign Up</button>
+          </div>
+          <div className='splash-page-form-'>
+            <button className='splash-form-cancel-here' onClick={() => setShowSignup('all')}>Cancel</button>
+          </div>
+          </div>
+
     </form>
   );
 };

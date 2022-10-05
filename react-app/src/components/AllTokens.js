@@ -24,6 +24,7 @@ import "./CSS/index.css"
 // search - clear dropdown on clickoff
 // trades current value on refresh: too many decimals (try bitcoin to see it)
 // spacing on search menu - put tokens at the top??
+// takeout default trade information in the create trade form
 
 function AllTokens() {
   const dispatch = useDispatch()

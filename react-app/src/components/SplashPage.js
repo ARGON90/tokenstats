@@ -3,18 +3,21 @@ import { Redirect } from "react-router-dom"
 import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
 import { useEffect, useState } from "react";
 import SignUpForm from "./auth/SignUpForm";
+import LoginForm from "./auth/LoginForm";
+import { signUp } from "../store/session";
+import { login } from "../store/session";
 
-function SplashPage() {
+function SplashPage({ showSignup, setShowSignup }) {
     const currentUser = useSelector(state => state?.session?.user)
     const allTokens = useSelector((state) => Object.values(state?.tokens))
     const dispatch = useDispatch()
-    const [showSignup, setShowSignup] = useState(false)
+
 
     useEffect(() => {
         dispatch(getAllTokensThunk())
         // todo: comment in update AllTokens
         // dispatch(updateAllTokensThunk())
-    }, [dispatch])
+    }, [dispatch, showSignup])
 
     const getDecimals = (num) => {
         let str = num.toString()
@@ -36,27 +39,70 @@ function SplashPage() {
         return localeString
     }
 
-    return (
+    const demoLogin = async () => {
+        dispatch(updateAllTokensThunk())
+        await dispatch(login('demo@aa.io', 'password'));
 
+      };
+
+    return (
         <>
             <div className='splash-page' >
                 <div className="splash-header">Manage Your Crypto Portfolio in One Place!</div>
 
-                <div className="splash-portfolio-div">
-                    <div className="splash-item-portfolio-container" onClick={() => setShowSignup(!showSignup)}>
-                        <div className="splash-portfolio">Create Your Portfolio!</div>
-                    </div>
-                    {showSignup &&
-                        <div>
-                            <SignUpForm />
-                            <div className='signup-form-separator'></div>
+
+                {/* SHOW ALL BUTTONS */}
+                {showSignup === 'all' &&
+                    <div className="splash-top">
+                        <div className="splash-portfolio-div">
+                            <div className="splash-item-portfolio-container" onClick={() => demoLogin()}>
+                                <div className="splash-portfolio">Click here to try a Demo User!</div>
+                            </div>
+
+                            <div className="splash-item-portfolio-container" onClick={() => setShowSignup('sign-up')}>
+                                <div className="splash-portfolio">New User? Sign up!</div>
+                            </div>
+
+                            <div className="splash-item-portfolio-container" onClick={() => setShowSignup('login')}>
+                                <div className="splash-portfolio">Already a User? Login!</div>
+                            </div>
                         </div>
-                    }
-                    <div className="splash-item-portfolio-container" onClick={() => setShowSignup(!showSignup)}>
-                        <div className="splash-portfolio">Already a User? Login!</div>
                     </div>
 
-                </div>
+                }
+
+                {showSignup === 'sign-up' &&
+                    <div className="signup-splash-top">
+                        <div className="signup-splash-portfolio-div">
+
+                            {/* <div className="signup-splash-item-portfolio-container"> */}
+                                <div className="signup-splash-portfolio-clicked">New User? Sign up!</div>
+                            {/* </div> */}
+
+                            <div>
+                                <SignUpForm setShowSignup={setShowSignup} />
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                {showSignup === 'login' &&
+                    <div className="signup-splash-top">
+                        <div className="signup-splash-portfolio-div">
+
+                                <div className="signup-splash-portfolio-clicked">Already a User? Login!</div>
+
+
+                            <div >
+                                <LoginForm setShowSignup={setShowSignup} />
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
 
                 <div className="splash-body">
                     <div className='splash-header-container'>

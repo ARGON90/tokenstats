@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 
 import './CSS/index.css'
 
-const NavBar = () => {
+const NavBar = ({setShowSignup}) => {
 
   const currentUser = useSelector((state) => (state?.session?.user))
 
@@ -46,13 +46,13 @@ const NavBar = () => {
             </NavLink>
 
 
-            <NavLink className={'signup-login-buttons'} to='/sign-up' exact={true} activeClassName='active'>
+            <div className={'signup-login-buttons'} onClick={() => setShowSignup('sign-up')}>
               SIGN UP
-            </NavLink>
+            </div>
 
-            <NavLink className={'signup-login-buttons'} to='/login' exact={true} activeClassName='active'>
+            <div className={'signup-login-buttons'} onClick={() => setShowSignup('sign-up')}>
               LOG IN
-            </NavLink>
+            </div>
 
           </div>
 

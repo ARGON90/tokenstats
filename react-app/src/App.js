@@ -20,7 +20,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   // const currentUser = useSelector(state => state?.session?.user)
-
+  const [showSignup, setShowSignup] = useState('all')
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -34,10 +34,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar setShowSignup={setShowSignup}/>
       <Switch>
         <Route path='/' exact={true} >
-          <SplashPage />
+          <SplashPage showSignup={showSignup} setShowSignup={setShowSignup} />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
