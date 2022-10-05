@@ -6,6 +6,7 @@ import { updateAllTokensThunk } from '../../store/all-tokens-store';
 
 const LoginForm = ({setShowSignup}) => {
   const [errors, setErrors] = useState([]);
+  const [Berrors, setBerrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
@@ -23,18 +24,22 @@ const LoginForm = ({setShowSignup}) => {
     if (password.length < 6) newErrors.password = "Password must be atleast 6 characters"
     if (!password) newErrors.password = "Please enter a password"
 
-
     setErrors(newErrors);
   }, [email, password]);
 
 
   const onLogin = async (e) => {
     e.preventDefault();
+    setBerrors([])
     dispatch(updateAllTokensThunk())
     const data = await dispatch(login(email, password));
-    // if (data) {
-    //   setErrors(data);
-    // }
+    if (data) {
+      setBerrors(data);
+    }
+
+    if (!data) {
+      setShowSignup('all')
+    }
   };
 
 
@@ -44,11 +49,12 @@ const LoginForm = ({setShowSignup}) => {
 
   return (
     <form className='signup-form' onSubmit={onLogin}>
-      {/* <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+
+      <div>
+        {Berrors.map((error, ind) => (
+          <div className='signup-form-error-message' key={ind}>{error}</div>
         ))}
-      </div> */}
+      </div>
 
       <label className='signup-form-label' htmlFor='email'>Email</label>
       <input

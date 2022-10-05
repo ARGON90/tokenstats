@@ -44,13 +44,18 @@ console.log('REAPEAT', repeatPassword)
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    setErrors([])
+    setBerrors([])
     dispatch(updateAllTokensThunk())
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
+      console.log(data, 'DATA CONDITIONAL SIGNUP')
       if (data) {
         setBerrors(data)
       }
+
+    if (!data) {
+      setShowSignup('all')
+    }
     }
   };
 
@@ -63,7 +68,7 @@ console.log('REAPEAT', repeatPassword)
   return (
     <>
       <form className='signup-form' onSubmit={onSignUp}>
-        
+
         <div>
           {Berrors.map((error, ind) => (
             <div className='signup-form-error-message' key={ind}>{error}</div>
