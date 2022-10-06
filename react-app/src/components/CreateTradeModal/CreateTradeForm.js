@@ -32,6 +32,16 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
     buySell.toLowerCase()
 
+    function editorNah() {
+        if (tokenSelect && allTokens[tokenSelect]) {
+            return allTokens[tokenSelect].name
+        }
+        return ''
+    }
+    const [search, setSearch] = useState(editorNah())
+
+
+
     useEffect(() => {
         const name = allTokens[tokenSelect]?.name
         const newErrors = {};
@@ -41,7 +51,8 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         if (!tradePrice) newErrors.tradePrice = "Please enter a trade price"
         if (!tradePrice) newErrors.tradePriceZero = "Trade price must be greater than 0"
         if (!userPortfolio) newErrors.portfolio = "Please select a portfolio"
-        if (!tokenSelect) newErrors.tokenSelect = "Please select a token"
+        if (!alltokenNames.includes(search)) newErrors.tokenSelect = "Token must be chosen from search results"
+        if (!search) newErrors.tokenSelect = "Please enter a token"
         if (!buySell) newErrors.buySell = "Please select a 'buy' or 'sell'"
 
         if (buySell == 'sell' && userPortfolio && tradeAmount > tokenTotal) {
@@ -49,7 +60,11 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         }
 
         setErrors(newErrors);
-    }, [tradeAmount, tradePrice, userPortfolio, tokenSelect, buySell]);
+    }, [tradeAmount, tradePrice, userPortfolio, tokenSelect, buySell, search]);
+
+
+
+    const alltokenNames = ['The Sandbox', 'Ftx Token', 'Eos', 'Tron', 'Lido Dao', 'Bitcoin Cash', 'Usd Coin', 'Dai', 'Uniswap', 'Chiliz', 'Tezos', 'Polkadot', 'Dogecoin', 'Iota', 'Frax', 'Filecoin', 'Chainlink', 'Ethereum Classic', 'Internet Computer', 'Binance Usd', 'Axie Infinity', 'Vechain', 'Litecoin', 'Near', 'Stellar', 'Cardano', 'Algorand', 'Solana', 'Tether', 'Ethereum', 'Bitcoin', 'Decentraland', 'Aave', 'Flow', 'Okb', 'Leo Token', 'Usdd', 'Kucoin Shares', 'Monero', 'True Usd', 'Bittorrent', 'Apecoin', 'The Graph']
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -78,17 +93,14 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         }
     };
 
-    if (!currentUser) {
-        return <div>Loading Create Trade Modal</div>
-    }
-    if (!allTokens) {
-        return <div>Loading All Tokens</div>
-    }
+    if (!currentUser) return <div>Loading Create Trade Modal</div>
+    if (!allTokens) return <div>Loading All Tokens</div>
 
     const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
     const portfolioTrades = allTrades.filter(trade => trade?.portfolio_id === Number(userPortfolio))
     const tradesByToken = portfolioTrades.filter((trade) => trade?.token_id === tokenSelect)
+    if (!userPortfolios) return null
 
     function tradePricePlaceholder() {
 
@@ -133,39 +145,40 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                 <div className="create-trade-form-body-separator-top"></div>
                 <div className="create-trade-modal-body">
 
+                    <SearchBar search={search} setSearch={setSearch} setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
+                    <div className="edit-trade-form-error-message">{errors?.tokenSelect}</div>
+
+                    <div className="input-separator-div"></div>
+
                     <label className="create-trade-form-label">Add trade to Portfolio</label>
                     <select
                         className="create-trade-form-input"
                         placeholder="Select One"
-                        
+
                         value={userPortfolio}
                         onChange={updateUserPortfolio}
 
                     >
-                        <option value="" disabled={true} > Select Portfolio... </option>
+                        <option value="" disabled={true} > Select Portfolio ... </option>
                         {userPortfolios.map((portfolio) =>
-                            <option value={portfolio.id}>{portfolio.name}</option>
+                            <option key={portfolio.id} value={portfolio.id}>{portfolio.name}</option>
                         )}
                     </select>
                     <div className="edit-trade-form-error-message">{errors?.portfolio}</div>
 
                     <div className="input-separator-div"></div>
 
-                        <SearchBar setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
 
-                    <div className="edit-trade-form-error-message">{errors?.tokenSelect}</div>
-
-                    <div className="input-separator-div"></div>
 
                     <label className="create-trade-form-label">Buy or Sell?</label>
                     <select
                         className="create-trade-form-input"
                         placeholder="Select One"
-                        
+
                         value={buySell}
                         onChange={updateBuySell}
                     >
-                        <option value="" disabled={true} > Select Buy / Sell .... </option>
+                        <option value="" disabled={true} > Select Buy / Sell ... </option>
                         <option value='buy'> Buy </option>
                         <option value='sell'> Sell </option>
                     </select>
@@ -178,7 +191,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         className="create-trade-form-input"
                         type="number"
                         placeholder={amountPlaceholder()}
-                        
+
                         value={tradeAmount}
                         onChange={updateTradeAmount}
                     />
@@ -193,27 +206,40 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         className="create-trade-form-input"
                         type="decimal"
                         placeholder={tradePricePlaceholder()}
-                        
+
                         value={tradePrice}
                         onChange={updateTradePrice}
                     />
                     <div className="edit-trade-form-error-message">{errors?.tradePrice}</div>
                     <div className="edit-trade-form-error-message">{errors?.tradePriceZero}</div>
-                            {/* todo  - decimal type or number type? */}
+                    {/* todo  - decimal type or number type? */}
 
-                            <div className="input-separator-div"></div>
+                    <div className="input-separator-div"></div>
 
                 </div>
                 <div className="create-trade-form-body-separator-bottom"></div>
 
                 <div className="create-trade-button-container">
-                    <button
-                        className="create-trade-form-submit"
-                        type="submit"
-                        disabled={Object.values(errors).length}
-                    >
-                        Submit
-                    </button>
+                    {Object.values(errors).length ?
+                        <>
+                            <button
+                                className="create-trade-form-errors"
+                                type="submit"
+                                disabled={true}
+                            >
+                                Submit
+                            </button>
+                        </>
+                        :
+                        <button
+                            className="create-trade-form-submit"
+                            type="submit"
+                            disabled={Object.values(errors).length}
+                        >
+                            Submit
+                        </button>
+                    }
+
                     <button
                         className="create-trade-form-cancel-here"
                         onClick={() => setShowModal(false)}

@@ -5,20 +5,12 @@ import { useSelector } from 'react-redux';
 import './CreateTradeModal/CreateTradeModal.css'
 
 
-const SearchBar = ({ setTokenSelect, tokenSelect }) => {
-    const allTokens = useSelector((state) => (state?.tokens))
+const SearchBar = ({ setTokenSelect, search, setSearch }) => {
 
-    function editorNah() {
-        if (tokenSelect && allTokens[tokenSelect]) {
-            return allTokens[tokenSelect].name
-        }
-        return ''
-    }
 
     const tokens = useSelector(state => state?.tokens)
     const [filterTokens, setFilterTokens] = useState([])
     const [showResults, setShowResults] = useState(true)
-    const [search, setSearch] = useState(editorNah())
 
     const tokenSearch = (keyword) => {
         setShowResults(true)
@@ -35,26 +27,18 @@ const SearchBar = ({ setTokenSelect, tokenSelect }) => {
         }
     }
 
-
-
     function selectResult(token) {
         setShowResults(false)
         setTokenSelect(token.id)
         setSearch(token.name)
-        console.log(tokenSelect)
     }
 
     function newSearch() {
         setSearch('')
     }
 
-
-
-
     return (
         <>
-
-
                     <label className="create-trade-form-label">Choose a Token</label>
                     <input
                         id='searchInputField'

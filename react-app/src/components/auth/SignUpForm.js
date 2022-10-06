@@ -24,7 +24,7 @@ const SignUpForm = ({setShowSignup}) => {
   useEffect(() => {
     const newErrors = {};
 
-    // if (username.length < 6) newErrors.username = "Username must be atleast 6 characters"
+    if (username.length < 6) newErrors.username = "Username must be atleast 6 characters"
     if (username.length > 255) newErrors.username = "Username must be less than 255 characters"
     if (!username) newErrors.username = "Please enter a user name"
     if (!email.includes('@') || !email.includes('.')) newErrors.email = "Invalid Email"
@@ -38,8 +38,6 @@ const SignUpForm = ({setShowSignup}) => {
     setErrors(newErrors);
 }, [username, email, password, repeatPassword]);
 
-console.log('PASS', password)
-console.log('REAPEAT', repeatPassword)
 
 
   const onSignUp = async (e) => {
@@ -48,7 +46,6 @@ console.log('REAPEAT', repeatPassword)
     dispatch(updateAllTokensThunk())
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
-      console.log(data, 'DATA CONDITIONAL SIGNUP')
       if (data) {
         setBerrors(data)
       }

@@ -53,7 +53,10 @@
   caret-color: black;
   text-overflow: ellipsis;
   color: white;
+  caret-color: white;
 }
+
+
 
 .create-trade-form-input::placeholder {
   color: #A9A9A9;
@@ -87,6 +90,20 @@
   height: 20px;
 }
 
+.create-trade-form-errors {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightgray;
+  color: rgb(151, 151, 151);
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+  cursor: default;
+}
+
 .create-trade-form-submit:hover {
   background-color: #ad98ff;
 }
@@ -117,7 +134,7 @@
 
 .tokenResultsDiv {
   position: absolute;
-  top: 171px;
+  top: 100px;
   /* right: 125px; */
   width: 206px;
   z-index: 101;
@@ -126,7 +143,7 @@
 .search-entries-container {
   padding: 8px;
   border: 1px solid #404040;
-  background-color: #1a1a1a;
+  background-color: #131313;
   z-index: 101;
 }
 
