@@ -53,7 +53,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         className="create-portfolio-form-input"
                         type="string"
                         placeholder="Name"
-                        
+
                         value={name}
                         onChange={updateName}
                     />
@@ -62,13 +62,25 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
 
                 <div className="create-portfolio-button-container">
-                    <button
-                        className="create-portfolio-form-submit"
-                        type="submit"
-                        disabled={Object.values(errors).length}
-                    >
-                        Submit
-                    </button>
+                {Object.values(errors).length ?
+                        <>
+                            <button
+                                className="create-portfolio-form-errors"
+                                type="submit"
+                                disabled={true}
+                            >
+                                Submit
+                            </button>
+                        </>
+                        :
+                        <button
+                            className="create-portfolio-form-submit"
+                            type="submit"
+                            disabled={Object.values(errors).length}
+                        >
+                            Submit
+                        </button>
+                    }
                     <button
                         className="create-book-form-cancel-here"
                         onClick={() => setShowModal(false)}

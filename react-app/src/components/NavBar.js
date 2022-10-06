@@ -59,6 +59,8 @@ const NavBar = ({setShowSignup}) => {
               LOG IN
             </div>
 
+            
+
           </div>
 
         }

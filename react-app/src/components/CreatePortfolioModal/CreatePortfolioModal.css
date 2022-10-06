@@ -87,6 +87,20 @@
   height: 20px;
 }
 
+.create-portfolio-form-errors {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightgray;
+  color: rgb(151, 151, 151);
+  font-family: roboto, sans-serif;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100px;
+  height: 20px;
+  cursor: default;
+}
+
 .create-portfolio-form-submit:hover {
   background-color: #ad98ff;
 }

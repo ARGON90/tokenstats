@@ -24,7 +24,7 @@ const SignUpForm = ({setShowSignup}) => {
   useEffect(() => {
     const newErrors = {};
 
-    // if (username.length < 6) newErrors.username = "Username must be atleast 6 characters"
+    if (username.length < 6) newErrors.username = "Username must be atleast 6 characters"
     if (username.length > 255) newErrors.username = "Username must be less than 255 characters"
     if (!username) newErrors.username = "Please enter a user name"
     if (!email.includes('@') || !email.includes('.')) newErrors.email = "Invalid Email"
@@ -38,19 +38,21 @@ const SignUpForm = ({setShowSignup}) => {
     setErrors(newErrors);
 }, [username, email, password, repeatPassword]);
 
-console.log('PASS', password)
-console.log('REAPEAT', repeatPassword)
 
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    setErrors([])
+    setBerrors([])
     dispatch(updateAllTokensThunk())
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setBerrors(data)
       }
+
+    if (!data) {
+      setShowSignup('all')
+    }
     }
   };
 
@@ -63,7 +65,7 @@ console.log('REAPEAT', repeatPassword)
   return (
     <>
       <form className='signup-form' onSubmit={onSignUp}>
-        
+
         <div>
           {Berrors.map((error, ind) => (
             <div className='signup-form-error-message' key={ind}>{error}</div>

@@ -320,6 +320,25 @@
     width: 100%;
 }
 
+.notfound-page {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: roboto, sans-serif;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 30px;
+    height: 1000px;
+    width: 100%;
+}
+
+.notfound-header {
+    font-size: 30px;
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+
 .splash-header {
     font-size: 12px;
     padding-top: 25px;
@@ -345,6 +364,10 @@
     column-gap: 30px;
 }
 
+.instructions-div {
+    display: flex;
+    justify-content: flex-end;
+}
 
 
 .splash-body {

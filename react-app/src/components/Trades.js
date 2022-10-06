@@ -58,7 +58,9 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
         userTrades.forEach((trade) => {
             totalProfit += (allTokens[trade.token_id].price * trade.amount_traded - trade.total_cost)
         })
-        return `$${totalProfit.toFixed(2)}`
+        const prices = [totalProfit];
+        let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
+        return localeString
     }
     function getPLTrade(trade) {
         let tradePL = (allTokens[trade.token_id].price * trade.amount_traded) - (trade.total_cost)
@@ -98,7 +100,7 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
                         <div className='trade-col-2'>{trade.amount_traded}</div>
                         <div className='trade-cols'>{getTokenName(trade.token_id)}</div>
                         <div className='trade-cols'>{getTotalCostTrade(trade.total_cost)}</div>
-                        <div className='trade-cols-5'>${(allTokens[trade.token_id].price * trade.amount_traded).toFixed(2)}</div>
+                        <div className='trade-cols-5'>{getTotalCostTrade(allTokens[trade.token_id].price * trade.amount_traded)}</div>
                         { getPLTrade(trade) && getPLTrade(trade)[0] === '$' ? <div className='trade-cols-green'>{getPLTrade(trade)}</div> : <div className='trade-cols-red'>{getPLTrade(trade)}</div>}
                         <div className='image-cols'>
                             <EditTradeModal trade={trade} />
@@ -108,8 +110,8 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
                     </div>
                 )}
 
-                <div>My Trades</div>
-                {getTradesTotalProfit() && getTradesTotalProfit()[0] === '$' ? <div className='green-font'>Total Profit: {getTradesTotalProfit()}</div> : <div className='red-font'>Total Profit: {getTradesTotalProfit()}</div>}
+                <div>Trades Total Profit</div>
+                {getTradesTotalProfit() && getTradesTotalProfit()[0] === '$' ? <div className='green-font'>{getTradesTotalProfit()}</div> : <div className='red-font'>{getTradesTotalProfit()}</div>}
             </div>
         </>
     )

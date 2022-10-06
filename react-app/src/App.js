@@ -16,6 +16,7 @@ import SplashPage from './components/SplashPage';
 import Tokens from './components/Tokens'
 import Portfolios from './components/Portfolios';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +59,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/tokens' exact={true}>
           <Tokens />
+        </ProtectedRoute>
+        <ProtectedRoute>
+          <NotFound />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
