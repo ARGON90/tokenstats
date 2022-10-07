@@ -133,9 +133,18 @@ input::-webkit-inner-spin-button {
 /* DELETE PORTFOLIO STYLING */
 
 .delete-portfolio-image {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    font-size: 25px;
     cursor: pointer;
+    color: #505050
+}
+
+.delete-portfolio-image:hover {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    color: #9C84FF
 }
 
 .delete-book-form {

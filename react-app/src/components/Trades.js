@@ -71,12 +71,12 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
         }
         const prices = [tradePL];
         let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
-       return localeString
+        return localeString
     }
     function getTotalCostTrade(rawNum) {
         const prices = [rawNum];
         let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
-       return localeString
+        return localeString
     }
 
     if (!userTrades) return <div>No Trades</div>
@@ -93,7 +93,7 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
                     <div className='trade-cols'>PROFIT/LOSS</div>
                     <div className='trade-cols'>EDIT/DELETE</div>
                 </div>
-                {userTrades.map((trade) =>
+                {userTrades.length ? userTrades.map((trade) =>
                     <div key={trade.id} className='trades-individual-container'>
 
                         <div className='trade-col-1'>{boughtSold(trade.buy)}</div>
@@ -101,17 +101,28 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
                         <div className='trade-cols'>{getTokenName(trade.token_id)}</div>
                         <div className='trade-cols'>{getTotalCostTrade(trade.total_cost)}</div>
                         <div className='trade-cols-5'>{getTotalCostTrade(allTokens[trade.token_id].price * trade.amount_traded)}</div>
-                        { getPLTrade(trade) && getPLTrade(trade)[0] === '$' ? <div className='trade-cols-green'>{getPLTrade(trade)}</div> : <div className='trade-cols-red'>{getPLTrade(trade)}</div>}
+                        {getPLTrade(trade) && getPLTrade(trade)[0] === '$' ? <div className='trade-cols-green'>{getPLTrade(trade)}</div> : <div className='trade-cols-red'>{getPLTrade(trade)}</div>}
                         <div className='image-cols'>
                             <EditTradeModal trade={trade} />
                             <DeleteTradeModal trade={trade} />
                         </div>
 
                     </div>
-                )}
+                )
 
-                <div style={{'font-weight': 'bold'}}>Trades Total Profit</div>
-                {getTradesTotalProfit() && getTradesTotalProfit()[0] === '$' ? <div className='green-font'>{getTradesTotalProfit()}</div> : <div className='red-font'>{getTradesTotalProfit()}</div>}
+                    :
+                    <div> You have no trades. Please click "Add a Transaction". </div>
+                }
+
+
+                {userTrades.length ?
+                    <>
+                        <div style={{ 'font-weight': 'bold' }}>Trades Total Profit</div>
+                        {getTradesTotalProfit() && getTradesTotalProfit()[0] === '$' ? <div className='green-font'>{getTradesTotalProfit()}</div> : <div className='red-font'>{getTradesTotalProfit()}</div>}
+                    </>
+                    : null}
+
+
             </div>
         </>
     )

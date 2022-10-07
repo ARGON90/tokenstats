@@ -49,7 +49,7 @@ const NavBar = ({setShowSignup}) => {
               <div className='stats'>Stats</div>
             </NavLink>
 
-
+          
             <div className={'signup-login-buttons'} onClick={() => setShowSignup('sign-up')}>
               SIGN UP
             </div>

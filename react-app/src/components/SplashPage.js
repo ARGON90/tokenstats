@@ -77,11 +77,7 @@ function SplashPage({ showSignup, setShowSignup }) {
                 {showSignup === 'sign-up' &&
                     <div className="signup-splash-top">
                         <div className="signup-splash-portfolio-div">
-
-
-                            <div className="signup-splash-portfolio-clicked">Sign Up Here →</div>
-
-                            <div>
+                            <div className="purple-border">
                                 <SignUpForm setShowSignup={setShowSignup} />
                             </div>
                         </div>
@@ -92,10 +88,7 @@ function SplashPage({ showSignup, setShowSignup }) {
                 {showSignup === 'login' &&
                     <div className="signup-splash-top">
                         <div className="signup-splash-portfolio-div">
-
-                            <div className="signup-splash-portfolio-clicked">Log In Here →</div>
-
-                            <div >
+                            <div className="purple-border">
                                 <LoginForm setShowSignup={setShowSignup} />
                             </div>
 
