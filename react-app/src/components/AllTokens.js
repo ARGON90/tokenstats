@@ -8,6 +8,8 @@ import Portfolios from './Portfolios';
 import "./CSS/index.css"
 
 //  FUNCTIONALITY
+// add number constraint to forms?
+// cap the amount to two decimal places
 
 // STYLING
 // search: clear dropdown on clickoff

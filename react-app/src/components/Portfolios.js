@@ -29,11 +29,11 @@ function Portfolios() {
 
 
     console.log('PORTFOLIO.JS - CURRENT PORTFOLIO USESTATE - LINE 24 : ', currentPortfolio)
-
+    let sortedHoldingsArray;
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
         console.log('USE EFFECT PORTFOLIOS.JS')
-    }, [dispatch, displayTab, currentPortfolio, rerender])
+    }, [dispatch, displayTab, currentPortfolio, rerender, sortedHoldingsArray])
 
     if (!allTokens[1]) return null
     if (!currentUser) return null
@@ -61,19 +61,17 @@ function Portfolios() {
                 amount_traded -= tradesByToken[i].amount_traded
                 totalCost -= tradesByToken[i].total_cost
             }
-            if (amount_traded) {
-                holdings[tradesByToken[i].token_id] = {}
-                holdings[tradesByToken[i].token_id].amount_traded = amount_traded
-                holdings[tradesByToken[i].token_id].totalCost = totalCost
-                holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
-                holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
-                holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
-            }
+            holdings[tradesByToken[i].token_id] = {}
+            holdings[tradesByToken[i].token_id].amount_traded = amount_traded
+            holdings[tradesByToken[i].token_id].totalCost = totalCost
+            holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
+            holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
+            holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
         }
     }
 
     let holdingsArray = Object.values(holdings)
-    let sortedHoldingsArray = []
+    sortedHoldingsArray = []
     for (let j = holdingsArray.length - 1; j >= 0; j--) {
         let maxIndex;
         let max = 0;
@@ -199,7 +197,7 @@ function Portfolios() {
                     <div className='portfolio-assets-container'>
                         <div className={allAssetsClicked()} >
                             <div className='briefcase'>
-                            <ion-icon name="briefcase"></ion-icon>
+                                <ion-icon name="briefcase"></ion-icon>
                             </div>
                             <button className='portfolio-all-assets' value='all' onClick={() => setCurrentPortfolio('all')}>All Assets</button>
                         </div>
@@ -248,7 +246,7 @@ function Portfolios() {
 
                     {displayTab === 'holdings' &&
                         <div>
-                            <Holdings portId={currentPortfolio} />
+                            <Holdings portId={currentPortfolio} sortedHoldingsArray={sortedHoldingsArray} />
                         </div>}
                     {displayTab === 'trades' &&
                         <div>
