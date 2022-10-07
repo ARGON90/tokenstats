@@ -55,6 +55,8 @@
 }
 
 
+
+
 .portfolios-header-clicked {
     border-bottom: 2px solid #9c84ff;
     cursor: pointer;
@@ -65,11 +67,7 @@
     padding-bottom: 5px;
 }
 
-.portfolios-buttons-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+
 
 button {
     color: #e5e5e5;
@@ -77,6 +75,20 @@ button {
     background-color: black;
     padding: 15px;
     cursor: pointer;
+}
+
+.portfolios-buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.portfolio-selection {
+    display: flex;
+    width: 66%;
+    height: 60px;
+    justify-content: space-between;
 }
 
 .portfolios-buttons {
@@ -111,10 +123,7 @@ button {
     justify-content: space-around;
 }
 
-.portfolio-selection {
-    width: 66%;
-    height: 60px;
-}
+
 
 .portfolio-create-div {
     padding-bottom: 15px;
@@ -159,11 +168,11 @@ button {
 }
 
 .refresh-outline {
+
     padding-top: 3px;
     color: white;
     cursor: pointer;
-    font-size: 24px;
-    font-weight: bolder;
+    font-size: 26px;
 }
 
 .refresh-outline:hover {

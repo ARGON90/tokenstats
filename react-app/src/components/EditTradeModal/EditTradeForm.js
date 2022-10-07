@@ -44,10 +44,12 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
         const name = allTokens[tokenSelect]?.name
         const newErrors = {};
 
+        if (tradeAmount >= 1000000000) newErrors.tradeAmount = "Trade Size must be less than 1 Billion"
+        if (tradeAmount <= 0) newErrors.tradeAmount = "Trade size must be greater than 0"
         if (!tradeAmount) newErrors.tradeAmount = "Please enter a trade amount"
-        if (tradeAmount <= 0) newErrors.tradeAmountZero = "Trade size must be greater than 0"
+        if (tradePrice >= 1000000) newErrors.tradePrice = "Trade Price must be less than 1 Million"
+        if (tradePrice <= 0) newErrors.tradePrice = "Trade price must be greater than 0"
         if (!tradePrice) newErrors.tradePrice = "Please enter a trade price"
-        if (!tradePrice) newErrors.tradePriceZero = "Trade price must be greater than 0"
         if (!userPortfolio) newErrors.portfolio = "Please select a portfolio"
         if (!alltokenNames.includes(search)) newErrors.tokenSelect = "Token must be chosen from search results"
         if (!search) newErrors.tokenSelect = "Please enter a token"
@@ -70,31 +72,36 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let mounted = true
 
-        let tradeAmountNumber = Number(tradeAmount)
-        let total_cost = tradeAmountNumber * tradePrice
+        if (mounted) {
 
-        const data = {
-            id: trade.id,
-            amount_traded: tradeAmountNumber,
-            buy: buySell,
-            token_id: tokenSelect,
-            portfolio_id: userPortfolio,
-            token_name: 'defaultName',
-            trade_price: tradePrice,
-            total_cost: total_cost,
-            user_id: userId
-        };
+            let tradeAmountNumber = Number(tradeAmount)
+            let total_cost = tradeAmountNumber * tradePrice
+
+            const data = {
+                id: trade.id,
+                amount_traded: tradeAmountNumber,
+                buy: buySell,
+                token_id: tokenSelect,
+                portfolio_id: userPortfolio,
+                token_name: 'defaultName',
+                trade_price: tradePrice,
+                total_cost: total_cost,
+                user_id: userId
+            };
 
 
-        const updatedTrade = await dispatch(updateTradeThunk(data));
+            const updatedTrade = await dispatch(updateTradeThunk(data));
 
 
-        if (updatedTrade) {
-            setErrors([]);
-            setShowModal(false);
-            history.push("/home");
+            if (updatedTrade) {
+                setErrors([]);
+                setShowModal(false);
+                history.push("/home");
+            }
         }
+        return () => mounted = false
     };
 
     if (!currentUser) {
@@ -112,7 +119,6 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
         }
     }
 
-    console.log(alltokenNames, 'ATNAMES')
     const userId = Number(currentUser.id)
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
     const portfolioTrades = allTrades.filter(trade => trade?.portfolio_id === Number(userPortfolio))
@@ -148,7 +154,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                 <div className="edit-trade-form-body-separator-top"></div>
                 <div className="edit-trade-modal-body">
 
-                <SearchBar search={search} setSearch={setSearch} setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
+                    <SearchBar search={search} setSearch={setSearch} setTokenSelect={setTokenSelect} tokenSelect={tokenSelect} />
                     <div className="edit-trade-form-error-message">{errors?.tokenSelect}</div>
 
                     <div className="input-separator-div"></div>
@@ -183,7 +189,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
                     </select>
                     <div className="edit-trade-form-error-message">{errors?.buySell}</div>
 
-                        <div className="input-separator-div"></div>
+                    <div className="input-separator-div"></div>
 
                     <div className="edit-trade-form-error-message">{errors?.buySell}</div>
                     <label className="create-trade-form-label">Amount of Token Bought/Sold</label>
@@ -220,7 +226,7 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
 
 
                 <div className="edit-trade-button-container">
-                {Object.values(errors).length ?
+                    {Object.values(errors).length ?
                         <>
                             <button
                                 className="create-trade-form-errors"

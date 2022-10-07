@@ -8,7 +8,7 @@ import SearchBar from "../SearchBar";
 import "./CreateTradeModal.css"
 
 
-const CreatePortfolioForm = ({ setShowModal }) => {
+const CreatePortfolioForm = ({ setShowModal, userPortfolios }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const currentUser = useSelector((state) => (state?.session?.user))
@@ -44,10 +44,12 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         const name = allTokens[tokenSelect]?.name
         const newErrors = {};
 
+        if (tradeAmount >= 1000000000) newErrors.tradeAmount = "Trade Size must be less than 1 Billion"
+        if (tradeAmount <= 0) newErrors.tradeAmount = "Trade size must be greater than 0"
         if (!tradeAmount) newErrors.tradeAmount = "Please enter a trade amount"
-        if (tradeAmount <= 0) newErrors.tradeAmountZero = "Trade size must be greater than 0"
+        if (tradePrice >= 1000000) newErrors.tradePrice = "Trade Price must be less than 1 Million"
+        if (tradePrice <= 0) newErrors.tradePrice = "Trade price must be greater than 0"
         if (!tradePrice) newErrors.tradePrice = "Please enter a trade price"
-        if (!tradePrice) newErrors.tradePriceZero = "Trade price must be greater than 0"
         if (!userPortfolio) newErrors.portfolio = "Please select a portfolio"
         if (!alltokenNames.includes(search)) newErrors.tokenSelect = "Token must be chosen from search results"
         if (!search) newErrors.tokenSelect = "Please enter a token"
@@ -66,38 +68,42 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let mounted = true
+        if (mounted) {
 
-        let tradeAmountNumber = Number(tradeAmount)
-        let total_cost = tradeAmountNumber * tradePrice
+            let tradeAmountNumber = Number(tradeAmount)
+            let total_cost = tradeAmountNumber * tradePrice
 
 
-        const data = {
-            amount_traded: tradeAmountNumber,
-            buy: buySell,
-            token_id: tokenSelect,
-            portfolio_id: userPortfolio,
-            token_name: 'defaultName',
-            trade_price: tradePrice,
-            total_cost: total_cost,
-            user_id: userId
-        };
+            const data = {
+                amount_traded: tradeAmountNumber,
+                buy: buySell,
+                token_id: tokenSelect,
+                portfolio_id: userPortfolio,
+                token_name: 'defaultName',
+                trade_price: tradePrice,
+                total_cost: total_cost,
+                user_id: userId
+            };
 
-        const createdTrade = await dispatch(createTradeThunk(data));
-        dispatch(getUserTradesThunk())
-        dispatch(getUserPortfoliosThunk())
+            const createdTrade = await dispatch(createTradeThunk(data));
+            dispatch(getUserTradesThunk())
+            dispatch(getUserPortfoliosThunk())
 
-        if (createdTrade) {
-            setErrors([]);
-            setShowModal(false);
-            history.push("/home");
+            if (createdTrade) {
+                setErrors([]);
+                setShowModal(false);
+                history.push("/home");
+            }
         }
+        return () => mounted = false
     };
 
     if (!currentUser) return <div>Loading Create Trade Modal</div>
     if (!allTokens) return <div>Loading All Tokens</div>
 
     const userId = Number(currentUser.id)
-    const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
+    // const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
     const portfolioTrades = allTrades.filter(trade => trade?.portfolio_id === Number(userPortfolio))
     const tradesByToken = portfolioTrades.filter((trade) => trade?.token_id === tokenSelect)
     if (!userPortfolios) return null

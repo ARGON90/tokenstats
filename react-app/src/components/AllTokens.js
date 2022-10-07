@@ -8,6 +8,7 @@ import Portfolios from './Portfolios';
 import "./CSS/index.css"
 
 //  FUNCTIONALITY
+// add number constraint to forms?
 
 // STYLING
 // search: clear dropdown on clickoff
@@ -34,9 +35,9 @@ import "./CSS/index.css"
 // ??? - ReadMe Not Present.
 
 // Feature 2:
-// When I try to sell all my Token, it does not delete it off the portfolio.
-// When I try to sell all the same Token again, it runs into an error saying I have "0 Leo Token".
-// But, I can still see that I have it on my portfolio.
+// DONE - When I try to sell all my Token, it does not delete it off the portfolio.
+// DONE - When I try to sell all the same Token again, it runs into an error saying I have "0 Leo Token".
+// DONE - But, I can still see that I have it on my portfolio.
 // Should have max constraints for large integer fields.
 
 function AllTokens() {

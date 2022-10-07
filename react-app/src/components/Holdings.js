@@ -6,7 +6,7 @@ import { getUserTradesThunk } from '../store/trades-store';
 
 import './CSS/holdings.css'
 
-function Holdings({ portId }) {
+function Holdings({ portId, sortedHoldingsArray }) {
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => (state?.session?.user))
     const allTrades = useSelector((state) => Object.values(state?.trades))
@@ -52,24 +52,21 @@ function Holdings({ portId }) {
             }
             if (tradesByToken[i].buy === 'sell') {
                 amount_traded -= tradesByToken[i].amount_traded
-                console.log('INSIDE TRADE SELL CONDITIONAL')
                 totalCost -= tradesByToken[i].total_cost
             }
-            if (amount_traded) {
-                holdings[tradesByToken[i].token_id] = {}
-                holdings[tradesByToken[i].token_id].amount_traded = amount_traded
-                holdings[tradesByToken[i].token_id].totalCost = totalCost
-                holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
-                holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
-                holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
-            }
+            holdings[tradesByToken[i].token_id] = {}
+            holdings[tradesByToken[i].token_id].amount_traded = amount_traded
+            holdings[tradesByToken[i].token_id].totalCost = totalCost
+            holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
+            holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
+            holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
         }
     }
     // console.log(holdings, 'HOLDINGS - 67')
     // result is a nested object, need to convert this into a price-sorted array
     let holdingsArray = Object.values(holdings)
     // console.log(holdingsArray.length, 'holdingsArray length - 70')
-    let sortedHoldingsArray = []
+    sortedHoldingsArray = []
     for (let j = holdingsArray.length - 1; j >= 0; j--) {
         let maxIndex;
         let max = 0;
@@ -123,7 +120,7 @@ function Holdings({ portId }) {
                 {sortedHoldingsArray ? sortedHoldingsArray.map((holding, idx) =>
                     <div key={idx} className='holdings-individual-container'>
                         <div className='items-col-1'>{allTokens[holding[0].tokenId].name}</div>
-                        <div className='items-col-2'>{holding[0].amount_traded} </div>
+                        <div className='items-col-2'>{holding[0].amount_traded.toFixed(2)} </div>
                         <div className='reg-cols'>{getTokenPrice(allTokens[holding[0].tokenId].price)}</div>
                         {allTokens[holding[0].tokenId].dailyChange >= 0 ? <div className='reg-cols green-font'>+{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div> : <div className='reg-cols red-font'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>}
                         <div className='reg-cols'>{getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>

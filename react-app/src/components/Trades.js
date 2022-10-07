@@ -110,7 +110,7 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
                     </div>
                 )}
 
-                <div>Trades Total Profit</div>
+                <div style={{'font-weight': 'bold'}}>Trades Total Profit</div>
                 {getTradesTotalProfit() && getTradesTotalProfit()[0] === '$' ? <div className='green-font'>{getTradesTotalProfit()}</div> : <div className='red-font'>{getTradesTotalProfit()}</div>}
             </div>
         </>

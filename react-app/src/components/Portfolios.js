@@ -9,7 +9,6 @@ import EditPortfolioModal from './EditPortfolioModal';
 import Trades from './Trades';
 import Holdings from './Holdings';
 
-
 import './CSS/portfolios.css'
 
 function Portfolios() {
@@ -29,11 +28,11 @@ function Portfolios() {
 
 
     console.log('PORTFOLIO.JS - CURRENT PORTFOLIO USESTATE - LINE 24 : ', currentPortfolio)
-
+    let sortedHoldingsArray;
     useEffect(() => {
         dispatch(getUserPortfoliosThunk())
         console.log('USE EFFECT PORTFOLIOS.JS')
-    }, [dispatch, displayTab, currentPortfolio, rerender])
+    }, [dispatch, displayTab, currentPortfolio, rerender, sortedHoldingsArray])
 
     if (!allTokens[1]) return null
     if (!currentUser) return null
@@ -61,19 +60,17 @@ function Portfolios() {
                 amount_traded -= tradesByToken[i].amount_traded
                 totalCost -= tradesByToken[i].total_cost
             }
-            if (amount_traded) {
-                holdings[tradesByToken[i].token_id] = {}
-                holdings[tradesByToken[i].token_id].amount_traded = amount_traded
-                holdings[tradesByToken[i].token_id].totalCost = totalCost
-                holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
-                holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
-                holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
-            }
+            holdings[tradesByToken[i].token_id] = {}
+            holdings[tradesByToken[i].token_id].amount_traded = amount_traded
+            holdings[tradesByToken[i].token_id].totalCost = totalCost
+            holdings[tradesByToken[i].token_id].tokenId = tradesByToken[i].token_id
+            holdings[tradesByToken[i].token_id].totalValue = amount_traded * allTokens[tradesByToken[i].token_id].price
+            holdings[tradesByToken[i].token_id].totalValue24hAgo = (amount_traded * allTokens[tradesByToken[i].token_id].price) - amount_traded * allTokens[tradesByToken[i].token_id].price * (allTokens[tradesByToken[i].token_id].dailyChange / 100)
         }
     }
 
     let holdingsArray = Object.values(holdings)
-    let sortedHoldingsArray = []
+    sortedHoldingsArray = []
     for (let j = holdingsArray.length - 1; j >= 0; j--) {
         let maxIndex;
         let max = 0;
@@ -199,7 +196,7 @@ function Portfolios() {
                     <div className='portfolio-assets-container'>
                         <div className={allAssetsClicked()} >
                             <div className='briefcase'>
-                            <ion-icon name="briefcase"></ion-icon>
+                                <ion-icon name="briefcase"></ion-icon>
                             </div>
                             <button className='portfolio-all-assets' value='all' onClick={() => setCurrentPortfolio('all')}>All Assets</button>
                         </div>
@@ -208,7 +205,9 @@ function Portfolios() {
                         {userPortfolios.map((portfolio) =>
                             <div key={portfolio.id} className='portfolios-buttons-container'>
                                 <div className='portfolio-selection'>
-                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={() => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
+
+                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} style={{'font-size' : '16px'}} value={portfolio.id} onClick={() => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
+
                                 </div>
                                 <div className='portfolios-edit-delete-buttons'>
                                     <EditPortfolioModal portfolio={portfolio} />
@@ -241,14 +240,14 @@ function Portfolios() {
                             <div className={tradesClicked()} onClick={() => setDisplayTab('trades')}>TRADES</div>
                         </div>
                         <div className='holdings-trades-header-add-txn'>
-                            <CreateTradeModal />
+                            <CreateTradeModal userPortfolios={userPortfolios} />
                             {/* <div className=''>hi</div> */}
                         </div>
                     </div>
 
                     {displayTab === 'holdings' &&
                         <div>
-                            <Holdings portId={currentPortfolio} />
+                            <Holdings portId={currentPortfolio} sortedHoldingsArray={sortedHoldingsArray} />
                         </div>}
                     {displayTab === 'trades' &&
                         <div>
