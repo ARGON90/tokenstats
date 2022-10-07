@@ -1,9 +1,8 @@
 import { useState } from "react"
-import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 import './CreateTradeModal/CreateTradeModal.css'
-
+import { tokenImages } from "./Tokens";
 
 const SearchBar = ({ setTokenSelect, search, setSearch }) => {
 
@@ -57,7 +56,10 @@ const SearchBar = ({ setTokenSelect, search, setSearch }) => {
                                     key={idx}
                                     value={token.id}
                                     onClick={() => selectResult(token)}>
-                                    <div className="search-entries">{token.name}<br></br></div>
+                                    <div className="search-entries">
+                                        <img className="token-image" src={`${tokenImages[token.name]}`} alt='token image'></img>
+                                        <div>{token.name}</div>
+                                    </div>
                                 </div>
                             ))
                         )}

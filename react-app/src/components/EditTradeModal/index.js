@@ -10,19 +10,24 @@ function EditTradeModal({ trade }) {
 
   return (
     <>
+      <div
+        className='delete-portfolio-image'
+        onClick={() => setShowModal(true)}>
+        <ion-icon name="create"></ion-icon>
+      </div>
 
-    <img
-    src='https://www.pngmart.com/files/8/Contract-Transparent-PNG.png'
-    alt='edit'
-    onClick={() => setShowModal(true)}
-    className="delete-portfolio-image"
-    >
-    </img>
-        {showModal && (
-          <Modal onClose={() => setShowModal(false)}>
-            <EditTradeForm setShowModal={setShowModal} trade={trade} />
-          </Modal>
-        )}
+      {/* <img
+        src='https://www.pngmart.com/files/8/Contract-Transparent-PNG.png'
+        alt='edit'
+        onClick={() => setShowModal(true)}
+        className="delete-portfolio-image"
+      >
+      </img> */}
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <EditTradeForm setShowModal={setShowModal} trade={trade} />
+        </Modal>
+      )}
     </>
   );
 }

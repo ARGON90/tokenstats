@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateTradeThunk } from "../../store/trades-store";
-import AllTokens from "../AllTokens";
 import SearchBar from "../SearchBar";
-
 import "./EditTradeModal.css"
 
 
@@ -49,17 +47,17 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
         if (!tradeAmount) newErrors.tradeAmount = "Please enter a trade amount"
         if (tradePrice >= 1000000) newErrors.tradePrice = "Trade Price must be less than 1 Million"
         if (tradePrice <= 0) newErrors.tradePrice = "Trade price must be greater than 0"
-        if (!tradePrice) newErrors.tradePrice = "Please enter a trade price"
+        if (!tradePrice) newErrors.tradePrice = "Trade Price must be a number"
         if (!userPortfolio) newErrors.portfolio = "Please select a portfolio"
         if (!alltokenNames.includes(search)) newErrors.tokenSelect = "Token must be chosen from search results"
         if (!search) newErrors.tokenSelect = "Please enter a token"
         if (!buySell) newErrors.buySell = "Please select a 'buy' or 'sell'"
-        if (buySell == 'sell' && userPortfolio && (tokenTotal - (tradeAmount * 2) < 0)) {
+        if (buySell === 'sell' && userPortfolio && (tokenTotal - (tradeAmount * 2) < 0)) {
             console.log('TOKEN TOTAL', tokenTotal)
             console.log('TRADE AMT', tradeAmount - tokenTotal)
             newErrors.noBalance = `This transaction edit results in a balance of ${tokenTotal - (tradeAmount * 2)} ${name}. Negative balances are not allowed.`
         }
-        if (buySell == 'sell' && userPortfolio && tradeAmount > tokenTotal) {
+        if (buySell === 'sell' && userPortfolio && tradeAmount > tokenTotal) {
 
             newErrors.noBalance = `Trade amount is too large. You have ${tokenTotal} ${name}!`
         }

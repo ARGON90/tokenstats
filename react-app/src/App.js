@@ -11,10 +11,8 @@ import { authenticate } from './store/session';
 // import { useSelector } from 'react-redux';
 
 import AllTokens from './components/AllTokens'
-import UpdateTokens from './components/UpdateTokens';
 import SplashPage from './components/SplashPage';
 import Tokens from './components/Tokens'
-import Portfolios from './components/Portfolios';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 

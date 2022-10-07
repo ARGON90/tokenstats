@@ -106,6 +106,7 @@
 
 .create-trade-form-submit:hover {
   background-color: #ad98ff;
+  transition-duration: 0.4s;
 }
 
 .create-trade-form-cancel-here {
@@ -124,6 +125,7 @@
 
 .create-trade-form-cancel-here:hover {
   background-color: black;
+  transition-duration: 0.4s;
 }
 
 .input-separator-div {
@@ -131,6 +133,12 @@
 }
 
 /* SEARCHBAR */
+
+.token-image {
+  height: 17px;
+  width: 17px;
+  padding-right: 7px;
+}
 
 .tokenResultsDiv {
   position: absolute;
@@ -149,6 +157,7 @@
 
 .search-entries-container:hover {
 background-color: black;
+transition-duration: 0.4s;
 }
 
 /* .searchClear {
@@ -159,6 +168,8 @@ background-color: black;
 
 .search-entries {
   font-family: roboto, sans-serif;
+  display: flex;
+  flex-direction: row;
   color: white;
   font-size: 14px;
   letter-spacing: 1px;

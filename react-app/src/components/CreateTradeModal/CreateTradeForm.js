@@ -12,7 +12,7 @@ const CreatePortfolioForm = ({ setShowModal, userPortfolios }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const currentUser = useSelector((state) => (state?.session?.user))
-    const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
+    // const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
     const allTokens = useSelector((state) => (state?.tokens))
     const allTrades = useSelector((state) => Object.values(state?.trades))
 
@@ -49,18 +49,22 @@ const CreatePortfolioForm = ({ setShowModal, userPortfolios }) => {
         if (!tradeAmount) newErrors.tradeAmount = "Please enter a trade amount"
         if (tradePrice >= 1000000) newErrors.tradePrice = "Trade Price must be less than 1 Million"
         if (tradePrice <= 0) newErrors.tradePrice = "Trade price must be greater than 0"
-        if (!tradePrice) newErrors.tradePrice = "Please enter a trade price"
+        // if (typeof Number(tradePrice) !== typeof(1)) newErrors.tradePrice = "Trade Price must be a number"
+        if (!tradePrice) newErrors.tradePrice = "Trade Price must be a number"
         if (!userPortfolio) newErrors.portfolio = "Please select a portfolio"
         if (!alltokenNames.includes(search)) newErrors.tokenSelect = "Token must be chosen from search results"
         if (!search) newErrors.tokenSelect = "Please enter a token"
         if (!buySell) newErrors.buySell = "Please select a 'buy' or 'sell'"
 
-        if (buySell == 'sell' && userPortfolio && tradeAmount > tokenTotal) {
+        console.log(typeof tradePrice)
+        console.log(typeof Number(tradePrice))
+
+        if (buySell === 'sell' && userPortfolio && tradeAmount > tokenTotal) {
             newErrors.noBalance = `Trade amount is too large. You have ${tokenTotal} ${name}!`
         }
 
         setErrors(newErrors);
-    }, [tradeAmount, tradePrice, userPortfolio, tokenSelect, buySell, search]);
+    }, [tradeAmount, tradePrice, userPortfolio, tokenSelect, buySell, search, allTokens]);
 
 
 
@@ -210,7 +214,7 @@ const CreatePortfolioForm = ({ setShowModal, userPortfolios }) => {
                     <label className="create-trade-form-label">Trade Price of Token</label>
                     <input
                         className="create-trade-form-input"
-                        type="decimal"
+                        type="number"
                         placeholder={tradePricePlaceholder()}
 
                         value={tradePrice}

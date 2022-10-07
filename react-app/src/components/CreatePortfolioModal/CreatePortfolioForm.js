@@ -86,7 +86,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
                         </button>
                     }
                     <button
-                        className="create-book-form-cancel-here"
+                        className="create-portfolio-form-cancel-here"
                         onClick={() => setShowModal(false)}
                     >
                         Cancel

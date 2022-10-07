@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserPortfoliosThunk, deletePortfolioThunk } from "../../store/portfolio-store";
-import { getUserTradesThunk } from "../../store/trades-store";
 import { deleteTradeThunk } from "../../store/trades-store";
 import { useSelector } from "react-redux";
 

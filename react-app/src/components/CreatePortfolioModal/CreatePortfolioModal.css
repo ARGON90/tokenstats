@@ -103,9 +103,10 @@
 
 .create-portfolio-form-submit:hover {
   background-color: #ad98ff;
+  transition-duration: 0.4s;
 }
 
-.create-book-form-cancel-here {
+.create-portfolio-form-cancel-here {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,8 +120,9 @@
   height: 20px;
 }
 
-.create-book-form-cancel-here:hover {
+.create-portfolio-form-cancel-here:hover {
   background-color: black;
+  transition-duration: 0.4s;
 }
 
 /* main page */
@@ -150,6 +152,7 @@
 
 .create-portfolio-button:hover {
   background-color: #ad98ff;
+  transition-duration: 0.4s;
 }
 
 @media screen and (max-width: 900px) {

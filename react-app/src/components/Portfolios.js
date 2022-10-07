@@ -8,6 +8,7 @@ import DeletePortfolioModal from './DeletePortfolioModal';
 import EditPortfolioModal from './EditPortfolioModal';
 import Trades from './Trades';
 import Holdings from './Holdings';
+import RefreshButton from './TestButton';
 
 import './CSS/portfolios.css'
 
@@ -206,7 +207,7 @@ function Portfolios() {
                             <div key={portfolio.id} className='portfolios-buttons-container'>
                                 <div className='portfolio-selection'>
 
-                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} style={{'font-size' : '16px'}} value={portfolio.id} onClick={() => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
+                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} style={{ 'font-size': '16px' }} value={portfolio.id} onClick={() => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
 
                                 </div>
                                 <div className='portfolios-edit-delete-buttons'>
@@ -223,8 +224,9 @@ function Portfolios() {
                     <div className='holdings-totals-container'>
                         <div className='total-holdings'>
                             <div >{getTotalHoldingsValue()}</div>
-                            <div className="refresh-outline">
-                                <ion-icon name="refresh-outline" onClick={() => refreshPrice()}></ion-icon>
+                            <div className="" onClick={() => refreshPrice()}>
+                                <RefreshButton />
+                                {/* <ion-icon name="refresh-outline" ></ion-icon> */}
                             </div>
                         </div>
                         <div className='holdings-PL-container'>

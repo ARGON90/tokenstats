@@ -1,3 +1,11 @@
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Your React App will live here.  You will need to run `npm install` to install all your dependencies before starting up the application. While in development, run this application from this location using `npm start`.
+
+No environment variables are needed to run this application in development, but be sure to set the REACT_APP_BASE_URL environment variable in your dockerfile!
+
+This app will be automatically built when you push to your main branch on Github.
+
 # Flask React Project
 
 This is the starter for the Flask React project.
@@ -43,7 +51,7 @@ This is the starter for the Flask React project.
 <br>
 
 ## Deploy to Heroku
-This repo comes configured with Github Actions. When you push to your main branch, Github will automatically pull your code, package and push it to Heroku, and then release the new image and run db migrations. 
+This repo comes configured with Github Actions. When you push to your main branch, Github will automatically pull your code, package and push it to Heroku, and then release the new image and run db migrations.
 
 1. Write your Dockerfile. In order for the Github action to work effectively, it must have a configured Dockerfile. Follow the comments found in this [Dockerfile](./Dockerfile) to write your own!
 

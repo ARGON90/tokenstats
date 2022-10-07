@@ -10,11 +10,17 @@ function EditPortfolioModal({ portfolio }) {
 
   return (
     <>
-      <div className="edit-book-container">
-      <img src='https://www.pngmart.com/files/8/Contract-Transparent-PNG.png'
-      className="edit-portfolio-image"
-      onClick={() => setShowModal(true)}
-      alt='edit'></img>
+      <div>
+        <div
+
+          className='delete-portfolio-image'
+          onClick={() => setShowModal(true)}>
+          <ion-icon name="create"></ion-icon>
+        </div>
+        {/* <img src='https://www.pngmart.com/files/8/Contract-Transparent-PNG.png'
+          className="edit-portfolio-image"
+          onClick={() => setShowModal(true)}
+          alt='edit'></img> */}
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <EditPortfolioForm setShowModal={setShowModal} portfolio={portfolio} />

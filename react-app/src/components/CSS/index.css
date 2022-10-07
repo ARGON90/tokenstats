@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+
 /* coloring */
 
 .font-white {
@@ -15,12 +18,12 @@
     font-family: roboto, sans-serif;
 }
 
-.green {
-    color: green
+.font-16 {
+    font-size: 16px;
 }
 
-.red {
-    color: red
+.bold {
+    font-weight: bolder;
 }
 
 /* displays */
@@ -47,6 +50,10 @@
 
 .col-gap-30 {
     column-gap: 30px;
+}
+
+.pad-right-5 {
+    padding-right: 5px;
 }
 
 /* NAVBAR */
@@ -79,6 +86,7 @@
     flex-direction: row;
     width: 90%;
     justify-content: space-between;
+    align-items: center;
 }
 
 .nav-left-panel {
@@ -100,6 +108,7 @@
 .portfolio-tracker:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 .tracker-div {
@@ -144,6 +153,7 @@
 
 .logout-button-div:hover {
     color: #AD98FF;
+    transition-duration: 0.4s;
 }
 
 .logout-button {
@@ -157,6 +167,7 @@
 .nav-logged-out {
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 90%;
     column-gap: 40px;
 }
@@ -228,6 +239,7 @@
 .git-linked-container:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 .footer-spacer {
@@ -276,6 +288,7 @@
 
 .logout-button-div:hover {
     color: #AD98FF;
+    transition-duration: 0.4s;
 }
 
 .logout-button {
@@ -376,6 +389,7 @@
     justify-content: center;
     align-items: center;
     width: 60%;
+    padding-bottom: 75px;
 }
 
 .splash-header-container {
@@ -437,6 +451,7 @@
 .splash-instructions:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 .splash-portfolio-clicked {
@@ -497,6 +512,11 @@
     justify-content: center;
 }
 
+.purple-border {
+    border: 2px solid #9C84FF;
+    border-radius: 12px;
+    padding: 20px;
+}
 
 /* SPLASH TOKENS */
 .splash-col-1 {
@@ -534,6 +554,7 @@
 .splash-portfolio:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 /* SIGN UP */
@@ -606,6 +627,7 @@
 
 .signup-form-submit:hover {
     background-color: #ad98ff;
+    transition-duration: 0.4s;
 }
 
 .splash-form-cancel-here {
@@ -624,6 +646,7 @@
 
 .splash-form-cancel-here:hover {
     background-color: black;
+    transition-duration: 0.4s;
 }
 
 
@@ -643,8 +666,9 @@
     width: 100px;
     height: 20px;
     cursor: default;
-  }
+}
 
-  .create-trade-form-submit:hover {
+.create-trade-form-submit:hover {
     background-color: #ad98ff;
-  }
+    transition-duration: 0.4s;
+}
