@@ -41,11 +41,21 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
 
     function boughtSold(buy) {
         if (buy === 'buy') {
-            return 'BUY'
+            return (
+                <>
+                    <div className='pad-right-5 bold'>BUY</div>
+                    <div className='green-font'>+</div>
+                </>
+            )
         }
 
         if (buy === 'sell') {
-            return 'SELL'
+            return (
+                <>
+                    <div className='pad-right-5 bold'>SELL</div>
+                    <div className='red-font font-16'>-</div>
+                </>
+            )
         }
     }
 
@@ -96,7 +106,9 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
                 {userTrades.length ? userTrades.map((trade) =>
                     <div key={trade.id} className='trades-individual-container'>
 
-                        <div className='trade-col-1'>{boughtSold(trade.buy)}</div>
+                        <div className='trade-col-1'>
+                            {boughtSold(trade.buy)}
+                        </div>
                         <div className='trade-col-2'>{trade.amount_traded}</div>
                         <div className='trade-cols'>{getTokenName(trade.token_id)}</div>
                         <div className='trade-cols'>{getTotalCostTrade(trade.total_cost)}</div>

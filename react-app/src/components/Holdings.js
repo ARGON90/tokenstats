@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getUserHoldingsThunk } from '../store/holdings-store';
 import { getUserTradesThunk } from '../store/trades-store';
+
+import { tokenImages } from './Tokens';
 
 import './CSS/holdings.css'
 
@@ -79,7 +80,7 @@ function Holdings({ portId, sortedHoldingsArray }) {
         sortedHoldingsArray.push(holdingsArray.splice(maxIndex, 1))
     }
     console.log(sortedHoldingsArray, 'holdingsArray length - 70')
-    for (let i =  sortedHoldingsArray.length - 1; i >= 0; i --) {
+    for (let i = sortedHoldingsArray.length - 1; i >= 0; i--) {
         console.log(sortedHoldingsArray[i], 'INDEX I')
         if (sortedHoldingsArray[i][0].amount_traded === 0) {
             sortedHoldingsArray.splice([i], 1)
@@ -125,7 +126,10 @@ function Holdings({ portId, sortedHoldingsArray }) {
 
                 {sortedHoldingsArray.length ? sortedHoldingsArray.map((holding, idx) =>
                     <div key={idx} className='holdings-individual-container'>
-                        <div className='items-col-1'>{allTokens[holding[0].tokenId].name}</div>
+                        <div className='items-col-1'>
+                            <img className='token-image' src={`${tokenImages[allTokens[holding[0].tokenId].name]}`}></img>
+                            <div >{allTokens[holding[0].tokenId].name}</div>
+                        </div>
                         <div className='items-col-2'>{holding[0].amount_traded.toFixed(2)} </div>
                         <div className='reg-cols'>{getTokenPrice(allTokens[holding[0].tokenId].price)}</div>
                         {allTokens[holding[0].tokenId].dailyChange >= 0 ? <div className='reg-cols green-font'>+{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div> : <div className='reg-cols red-font'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>}

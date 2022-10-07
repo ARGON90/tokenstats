@@ -132,6 +132,12 @@
 
 /* SEARCHBAR */
 
+.token-image {
+  height: 17px;
+  width: 17px;
+  padding-right: 7px;
+}
+
 .tokenResultsDiv {
   position: absolute;
   top: 100px;
@@ -159,6 +165,8 @@ background-color: black;
 
 .search-entries {
   font-family: roboto, sans-serif;
+  display: flex;
+  flex-direction: row;
   color: white;
   font-size: 14px;
   letter-spacing: 1px;

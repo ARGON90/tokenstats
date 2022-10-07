@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+
 /* coloring */
 
 .font-white {
@@ -15,12 +18,12 @@
     font-family: roboto, sans-serif;
 }
 
-.green {
-    color: green
+.font-16 {
+    font-size: 16px;
 }
 
-.red {
-    color: red
+.bold {
+    font-weight: bolder;
 }
 
 /* displays */
@@ -47,6 +50,10 @@
 
 .col-gap-30 {
     column-gap: 30px;
+}
+
+.pad-right-5{
+    padding-right: 5px;
 }
 
 /* NAVBAR */
@@ -378,6 +385,7 @@
     justify-content: center;
     align-items: center;
     width: 60%;
+    padding-bottom: 75px;
 }
 
 .splash-header-container {
