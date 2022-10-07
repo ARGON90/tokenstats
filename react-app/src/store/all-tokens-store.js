@@ -26,7 +26,6 @@ export const updateAllTokensThunk = () => async (dispatch) => {
 
     const response = await fetch('/api/tokens/refresh');
     if (response.ok) {
-    
         const data = await response.json();
         dispatch(updateAllTokens(data));
         return JSON.stringify(data);
