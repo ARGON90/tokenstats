@@ -12,10 +12,10 @@ Check out the app by clicking [here](https://argon90-token-stats.herokuapp.com/)
 ## Technologies Used
 
 * Backend
-Python, Flask, WTForms, SQLAlchemy, Alembic
+   * Python, Flask, WTForms, SQLAlchemy, Alembic
 
 *  Frontend 
-Javascript, React, Redux
+   * Javascript, React, Redux
 
 ## Useful Links:
 
