@@ -10,6 +10,7 @@ function EditTradeModal({ trade }) {
 
   return (
     <>
+
     <img
     src='https://www.pngmart.com/files/8/Contract-Transparent-PNG.png'
     alt='edit'

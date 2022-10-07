@@ -44,10 +44,12 @@ const CreatePortfolioForm = ({ setShowModal, trade }) => {
         const name = allTokens[tokenSelect]?.name
         const newErrors = {};
 
+        if (tradeAmount >= 1000000000) newErrors.tradeAmount = "Trade Size must be less than 1 Billion"
+        if (tradeAmount <= 0) newErrors.tradeAmount = "Trade size must be greater than 0"
         if (!tradeAmount) newErrors.tradeAmount = "Please enter a trade amount"
-        if (tradeAmount <= 0) newErrors.tradeAmountZero = "Trade size must be greater than 0"
+        if (tradePrice >= 1000000) newErrors.tradePrice = "Trade Price must be less than 1 Million"
+        if (tradePrice <= 0) newErrors.tradePrice = "Trade price must be greater than 0"
         if (!tradePrice) newErrors.tradePrice = "Please enter a trade price"
-        if (!tradePrice) newErrors.tradePriceZero = "Trade price must be greater than 0"
         if (!userPortfolio) newErrors.portfolio = "Please select a portfolio"
         if (!alltokenNames.includes(search)) newErrors.tokenSelect = "Token must be chosen from search results"
         if (!search) newErrors.tokenSelect = "Please enter a token"

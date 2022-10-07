@@ -67,6 +67,10 @@ function SplashPage({ showSignup, setShowSignup }) {
                                 <div className="splash-portfolio">Already a User? Log In!</div>
                             </div>
                         </div>
+                        <div className="instructions-container">
+                            <a className="splash-instructions" href='https://github.com/ARGON90/tokenstats/wiki/How-To-Use-TokenStats' target='_blank'>Not sure where to Start? Click here!
+                            </a>
+                        </div>
                     </div>
 
                 }

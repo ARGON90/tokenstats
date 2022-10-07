@@ -347,7 +347,7 @@
 
 .splash-top {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     height: 120px;
     width: 100%
@@ -398,6 +398,13 @@
     height: 100%;
 }
 
+.instructions-container {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 35%;
+}
+
 .splash-portfolio {
     display: flex;
     justify-content: center;
@@ -410,6 +417,26 @@
     width: 100%;
     padding: 0 10px;
     cursor: pointer;
+}
+
+.splash-instructions {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: roboto, sans-serif;
+    border-radius: 12px;
+    background-color: #262626;
+    color: #CCCCCC;
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.splash-instructions:hover {
+    background-color: #9C84FF;
+    color: black;
 }
 
 .splash-portfolio-clicked {
@@ -546,7 +573,7 @@
 .signup-form-error-message {
     font-family: roboto, sans-serif;
     color: #ff4d4d
-  }
+}
 
 .signup-submit-container {
     display: flex;
@@ -561,7 +588,7 @@
     justify-content: center;
     align-items: center;
     column-gap: 20px;
-  }
+}
 
 .signup-form-submit {
     display: flex;
@@ -579,7 +606,7 @@
 
 .signup-form-submit:hover {
     background-color: #ad98ff;
-  }
+}
 
 .splash-form-cancel-here {
     display: flex;
@@ -593,13 +620,31 @@
     border-radius: 18px;
     width: 100px;
     height: 20px;
-  }
+}
 
-  .splash-form-cancel-here:hover {
+.splash-form-cancel-here:hover {
     background-color: black;
-  }
+}
 
 
 .signup-form-separator {
     padding-bottom: 10px;
 }
+
+.create-trade-form-errors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    color: rgb(151, 151, 151);
+    font-family: roboto, sans-serif;
+    font-weight: bold;
+    border-radius: 18px;
+    width: 100px;
+    height: 20px;
+    cursor: default;
+  }
+
+  .create-trade-form-submit:hover {
+    background-color: #ad98ff;
+  }

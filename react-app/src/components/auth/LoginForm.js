@@ -79,10 +79,25 @@ const LoginForm = ({setShowSignup}) => {
 
       <div className='splash-button-container'>
           <div className='signup-submit-container'>
-            <button
-            className='signup-form-submit'
-            disabled={Object.values(errors).length}
-            type='submit'>Log In</button>
+          {Object.values(errors).length ?
+                        <>
+                            <button
+                                className="create-trade-form-errors"
+                                type="submit"
+                                disabled={true}
+                            >
+                                Submit
+                            </button>
+                        </>
+                        :
+                        <button
+                            className="create-trade-form-submit"
+                            type="submit"
+                            disabled={Object.values(errors).length}
+                        >
+                            Submit
+                        </button>
+                    }
           </div>
           <div className='splash-page-form-'>
             <button className='splash-form-cancel-here' onClick={() => setShowSignup('all')}>Cancel</button>

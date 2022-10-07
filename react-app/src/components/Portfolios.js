@@ -9,7 +9,6 @@ import EditPortfolioModal from './EditPortfolioModal';
 import Trades from './Trades';
 import Holdings from './Holdings';
 
-
 import './CSS/portfolios.css'
 
 function Portfolios() {
@@ -206,7 +205,9 @@ function Portfolios() {
                         {userPortfolios.map((portfolio) =>
                             <div key={portfolio.id} className='portfolios-buttons-container'>
                                 <div className='portfolio-selection'>
-                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} value={portfolio.id} onClick={() => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
+
+                                    <button id={portfolio.id} className={portfolioButtonClicked(portfolio.id)} style={{'font-size' : '16px'}} value={portfolio.id} onClick={() => setCurrentPortfolio(portfolio.id)}>{portfolio.name}</button>
+
                                 </div>
                                 <div className='portfolios-edit-delete-buttons'>
                                     <EditPortfolioModal portfolio={portfolio} />
@@ -239,7 +240,7 @@ function Portfolios() {
                             <div className={tradesClicked()} onClick={() => setDisplayTab('trades')}>TRADES</div>
                         </div>
                         <div className='holdings-trades-header-add-txn'>
-                            <CreateTradeModal userPortfolios={userPortfolios}/>
+                            <CreateTradeModal userPortfolios={userPortfolios} />
                             {/* <div className=''>hi</div> */}
                         </div>
                     </div>
