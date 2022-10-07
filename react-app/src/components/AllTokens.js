@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
+import { getAllTokensThunk } from '../store/all-tokens-store';
 import Portfolios from './Portfolios';
 
 

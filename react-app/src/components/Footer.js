@@ -1,14 +1,12 @@
 
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
-import { useSelector } from 'react-redux';
+import React from 'react';
+// import { useSelector } from 'react-redux';
 
 import './CSS/index.css'
 
-const Footer = ({ setShowSignup }) => {
+const Footer = () => {
 
-    const currentUser = useSelector((state) => (state?.session?.user))
+    // const currentUser = useSelector((state) => (state?.session?.user))
 
 
     return (
@@ -23,13 +21,13 @@ const Footer = ({ setShowSignup }) => {
                             <div className='token'>Connect with the Dev →</div>
 
                             <div className='footer-spacer'></div>
-                            <a className='git-linked-container' href='https://www.linkedin.com/in/alex-gonglach/' target='_blank'>
+                            <a className='git-linked-container' href='https://www.linkedin.com/in/alex-gonglach/' target='_blank' rel='noreferrer'>
                                 <div className='tracker-div'>LinkedIn</div>
                                 <ion-icon name="logo-linkedin"></ion-icon>
                             </a>
 
                             <div className='footer-spacer'></div>
-                            <a className='git-linked-container' href='https://github.com/ARGON90' target='_blank'>
+                            <a className='git-linked-container' href='https://github.com/ARGON90' target='_blank' rel='noreferrer'>
                                 <div className='tracker-div'>GitHub</div>
                                 <ion-icon name="logo-github"></ion-icon>
                             </a>

@@ -1,10 +1,9 @@
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect } from "react-router-dom"
 import { getAllTokensThunk, updateAllTokensThunk } from '../store/all-tokens-store';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import SignUpForm from "./auth/SignUpForm";
 import LoginForm from "./auth/LoginForm";
-import { signUp } from "../store/session";
 import { login } from "../store/session";
 
 function SplashPage({ showSignup, setShowSignup }) {
@@ -68,7 +67,7 @@ function SplashPage({ showSignup, setShowSignup }) {
                             </div>
                         </div>
                         <div className="instructions-container">
-                            <a className="splash-instructions" href='https://github.com/ARGON90/tokenstats/wiki/How-To-Use-TokenStats' target='_blank'>Not sure where to Start? Click here!
+                            <a className="splash-instructions" href='https://github.com/ARGON90/tokenstats/wiki/How-To-Use-TokenStats' target='_blank' rel='noreferrer'>Not sure where to Start? Click here!
                             </a>
                         </div>
                     </div>

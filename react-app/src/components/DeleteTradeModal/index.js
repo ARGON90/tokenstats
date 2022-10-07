@@ -12,7 +12,7 @@ function DeleteTradeModal({ trade }) {
     <>
     <img
     src='https://images.vexels.com/media/users/3/223479/isolated/preview/8ecc75c9d0cf6d942cce96e196d4953f-trash-bin-icon-flat-by-vexels.png'
-    alt='delete trade'
+    alt='delete'
     onClick={() => setShowModal(true)}
     className='delete-portfolio-image'>
     </img>
