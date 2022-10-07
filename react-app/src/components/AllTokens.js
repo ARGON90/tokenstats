@@ -25,7 +25,19 @@ import "./CSS/index.css"
 // dropdown menu is buggy, takes time to load
 // double clicking on modals can create two trades?
 
+// Scorecard
+// DONE- Feature 4
+// DONE- Auth: Deadlink when I click sign up button on the navbar, then try to click the login button on the navbar, nothing happens. This should redirect back to login form.
+// ??? - Deadlink on the "New User? Sign up!" button.
+// ??? - Deadlink on the "Already a User? Login!".
+// ??? - Change the of "sign up" to be "login" on the login form.
+// ??? - ReadMe Not Present.
 
+// Feature 2:
+// When I try to sell all my Token, it does not delete it off the portfolio.
+// When I try to sell all the same Token again, it runs into an error saying I have "0 Leo Token".
+// But, I can still see that I have it on my portfolio.
+// Should have max constraints for large integer fields.
 
 function AllTokens() {
   const dispatch = useDispatch()

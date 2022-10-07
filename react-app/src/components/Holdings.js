@@ -52,6 +52,7 @@ function Holdings({ portId }) {
             }
             if (tradesByToken[i].buy === 'sell') {
                 amount_traded -= tradesByToken[i].amount_traded
+                console.log('INSIDE TRADE SELL CONDITIONAL')
                 totalCost -= tradesByToken[i].total_cost
             }
             if (amount_traded) {
@@ -128,6 +129,8 @@ function Holdings({ portId }) {
                         <div className='reg-cols'>{getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>
                         {(holding[0].amount_traded * allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100) >= 0 ? <div className='reg-cols flex-end green-font'>{getToken24HPL(holding[0].amount_traded * allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div> : <div className='reg-cols flex-end red-font'>{getToken24HPL(holding[0].amount_traded * allTokens[holding[0].tokenId].price * allTokens[holding[0].tokenId].dailyChange / 100)}</div>}
                     </div>
+                    // {style={{ color: negativeNum ? red : green }}}
+                    // className={ negativeNum ? 'red' : 'green' }
                 ) : <div>No holdings</div>}
             </div>
         </>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createTradeThunk } from "../../store/trades-store";
+import { getUserPortfoliosThunk } from "../../store/portfolio-store";
+import { createTradeThunk, getUserTradesThunk } from "../../store/trades-store";
 import SearchBar from "../SearchBar";
 
 import "./CreateTradeModal.css"
@@ -14,9 +15,6 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     const allPortfolios = useSelector((state) => Object.values(state?.portfolios))
     const allTokens = useSelector((state) => (state?.tokens))
     const allTrades = useSelector((state) => Object.values(state?.trades))
-
-
-
 
     const [errors, setErrors] = useState('');
     const [tokenSelect, setTokenSelect] = useState('');
@@ -85,6 +83,8 @@ const CreatePortfolioForm = ({ setShowModal }) => {
         };
 
         const createdTrade = await dispatch(createTradeThunk(data));
+        dispatch(getUserTradesThunk())
+        dispatch(getUserPortfoliosThunk())
 
         if (createdTrade) {
             setErrors([]);
@@ -116,7 +116,7 @@ const CreatePortfolioForm = ({ setShowModal }) => {
     let tokenTotal = 0
     if (tradesByToken) {
         for (let i = 0; i < tradesByToken.length; i++) {
-            console.log(tradesByToken[i].amount_traded)
+            // console.log(tradesByToken[i].amount_traded)
             if (tradesByToken[i].buy === 'buy') {
                 tokenTotal += tradesByToken[i].amount_traded
             }

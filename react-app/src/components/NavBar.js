@@ -55,11 +55,11 @@ const NavBar = ({setShowSignup}) => {
               SIGN UP
             </div>
 
-            <div className={'signup-login-buttons'} onClick={() => setShowSignup('sign-up')}>
+            <div className={'signup-login-buttons'} onClick={() => setShowSignup('login')}>
               LOG IN
             </div>
 
-            
+
 
           </div>
 

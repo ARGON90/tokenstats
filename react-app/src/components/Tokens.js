@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Holdings from './Holdings';
-import Trades from './Trades';
-import Portfolios from './Portfolios';
-
+import { getAllTokensThunk } from '../store/all-tokens-store';
 
 function Tokens() {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getAllTokensThunk())
+    }, [dispatch])
+
+    const allTokens = useSelector((state) => Object.values(state?.tokens))
 
 
     const getDecimals = (num) => {
@@ -24,7 +28,6 @@ function Tokens() {
         return localeString
     }
 
-    const allTokens = useSelector((state) => Object.values(state?.tokens))
 
 
     return (
