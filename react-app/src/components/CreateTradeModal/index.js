@@ -4,7 +4,7 @@ import CreateTradeForm from "./CreateTradeForm";
 
 import './CreateTradeModal.css'
 
-function CreateTradeModal() {
+function CreateTradeModal({userPortfolios}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ function CreateTradeModal() {
         </div>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <CreateTradeForm setShowModal={setShowModal} />
+            <CreateTradeForm setShowModal={setShowModal} userPortfolios={userPortfolios} />
           </Modal>
         )}
     </>

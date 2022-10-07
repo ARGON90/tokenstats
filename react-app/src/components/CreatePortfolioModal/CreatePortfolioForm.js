@@ -29,6 +29,8 @@ const CreatePortfolioForm = ({ setShowModal }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let mounted = true
+        if (mounted) {
 
         const data = {
             name,
@@ -41,6 +43,8 @@ const CreatePortfolioForm = ({ setShowModal }) => {
             setShowModal(false);
             history.push("/home");
         }
+    }
+    return () => mounted = false
     };
 
     return (

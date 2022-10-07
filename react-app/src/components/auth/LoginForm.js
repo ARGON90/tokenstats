@@ -82,7 +82,7 @@ const LoginForm = ({setShowSignup}) => {
             <button
             className='signup-form-submit'
             disabled={Object.values(errors).length}
-            type='submit'>Sign Up</button>
+            type='submit'>Log In</button>
           </div>
           <div className='splash-page-form-'>
             <button className='splash-form-cancel-here' onClick={() => setShowSignup('all')}>Cancel</button>

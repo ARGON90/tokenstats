@@ -239,7 +239,7 @@ function Portfolios() {
                             <div className={tradesClicked()} onClick={() => setDisplayTab('trades')}>TRADES</div>
                         </div>
                         <div className='holdings-trades-header-add-txn'>
-                            <CreateTradeModal />
+                            <CreateTradeModal userPortfolios={userPortfolios}/>
                             {/* <div className=''>hi</div> */}
                         </div>
                     </div>

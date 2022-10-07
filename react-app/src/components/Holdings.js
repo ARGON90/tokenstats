@@ -120,7 +120,7 @@ function Holdings({ portId, sortedHoldingsArray }) {
                 {sortedHoldingsArray ? sortedHoldingsArray.map((holding, idx) =>
                     <div key={idx} className='holdings-individual-container'>
                         <div className='items-col-1'>{allTokens[holding[0].tokenId].name}</div>
-                        <div className='items-col-2'>{holding[0].amount_traded} </div>
+                        <div className='items-col-2'>{holding[0].amount_traded.toFixed(2)} </div>
                         <div className='reg-cols'>{getTokenPrice(allTokens[holding[0].tokenId].price)}</div>
                         {allTokens[holding[0].tokenId].dailyChange >= 0 ? <div className='reg-cols green-font'>+{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div> : <div className='reg-cols red-font'>{allTokens[holding[0].tokenId].dailyChange.toFixed(2)}%</div>}
                         <div className='reg-cols'>{getTokenHoldingValue(holding[0].amount_traded, allTokens[holding[0].tokenId].price)}</div>

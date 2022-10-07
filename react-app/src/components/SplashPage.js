@@ -43,7 +43,7 @@ function SplashPage({ showSignup, setShowSignup }) {
         dispatch(updateAllTokensThunk())
         await dispatch(login('demo@aa.io', 'password'));
 
-      };
+    };
 
     return (
         <>
@@ -64,7 +64,7 @@ function SplashPage({ showSignup, setShowSignup }) {
                             </div>
 
                             <div className="splash-item-portfolio-container" onClick={() => setShowSignup('login')}>
-                                <div className="splash-portfolio">Already a User? Login!</div>
+                                <div className="splash-portfolio">Already a User? Log In!</div>
                             </div>
                         </div>
                     </div>
@@ -75,9 +75,8 @@ function SplashPage({ showSignup, setShowSignup }) {
                     <div className="signup-splash-top">
                         <div className="signup-splash-portfolio-div">
 
-                            {/* <div className="signup-splash-item-portfolio-container"> */}
-                                <div className="signup-splash-portfolio-clicked">New User? Sign up!</div>
-                            {/* </div> */}
+
+                            <div className="signup-splash-portfolio-clicked">Sign Up Here →</div>
 
                             <div>
                                 <SignUpForm setShowSignup={setShowSignup} />
@@ -91,8 +90,7 @@ function SplashPage({ showSignup, setShowSignup }) {
                     <div className="signup-splash-top">
                         <div className="signup-splash-portfolio-div">
 
-                                <div className="signup-splash-portfolio-clicked">Already a User? Login!</div>
-
+                            <div className="signup-splash-portfolio-clicked">Log In Here →</div>
 
                             <div >
                                 <LoginForm setShowSignup={setShowSignup} />

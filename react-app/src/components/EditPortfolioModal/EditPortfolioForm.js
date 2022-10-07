@@ -29,7 +29,8 @@ const EditPortfolioForm = ({ setShowModal, portfolio }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        let mounted = true
+        if (mounted) {
         const data = {
             id: portfolio.id,
             name,
@@ -42,6 +43,8 @@ const EditPortfolioForm = ({ setShowModal, portfolio }) => {
             setShowModal(false);
             history.push("/home");
         }
+    }
+    return () => mounted = false
     };
 
     return (
@@ -55,7 +58,7 @@ const EditPortfolioForm = ({ setShowModal, portfolio }) => {
                         className="edit-portfolio-form-input"
                         type="string"
                         placeholder="Name"
-                        
+
                         value={name}
                         onChange={updateName}
                     />
