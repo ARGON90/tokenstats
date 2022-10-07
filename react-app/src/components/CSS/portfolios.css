@@ -178,9 +178,6 @@ button {
     font-size: 26px;
     background-color: transparent;
 }
-.refresh-outline:hover {
-    color: #ad98ff;
-}
 
 #button.rotate {
     display: flex;
@@ -191,7 +188,7 @@ button {
     cursor: pointer;
     font-size: 26px;
     background-color: transparent;
-    animation: rotate 1.5s linear;
+    animation: rotate 2s linear;
 }
 
 .aqua {

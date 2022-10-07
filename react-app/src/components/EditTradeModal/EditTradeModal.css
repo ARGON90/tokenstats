@@ -89,6 +89,7 @@
 
 .edit-trade-form-submit:hover {
   background-color: #ad98ff;
+  transition-duration: 0.4s;
 }
 
 .edit-trade-form-cancel-here {
@@ -107,6 +108,7 @@
 
 .edit-trade-form-cancel-here:hover {
   background-color: black;
+  transition-duration: 0.4s;
 }
 
 .input-separator-div {

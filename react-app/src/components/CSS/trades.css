@@ -95,7 +95,6 @@
 }
 
 .add-txn-button:hover {
-
     color: #AD98FF;
-
+    transition-duration: 0.4s;
 }

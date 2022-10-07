@@ -90,6 +90,7 @@
 
 .delete-portfolio-form-submit:hover {
   background-color: #ad98ff;
+  transition-duration: 0.4s;
 }
 
 .delete-portfolio-form-cancel-here {
@@ -108,4 +109,5 @@
 
 .delete-portfolio-form-cancel-here:hover {
   background-color: black;
+  transition-duration: 0.4s;
 }

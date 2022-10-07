@@ -108,6 +108,7 @@
 .portfolio-tracker:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 .tracker-div {
@@ -152,6 +153,7 @@
 
 .logout-button-div:hover {
     color: #AD98FF;
+    transition-duration: 0.4s;
 }
 
 .logout-button {
@@ -237,6 +239,7 @@
 .git-linked-container:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 .footer-spacer {
@@ -285,6 +288,7 @@
 
 .logout-button-div:hover {
     color: #AD98FF;
+    transition-duration: 0.4s;
 }
 
 .logout-button {
@@ -447,6 +451,7 @@
 .splash-instructions:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 .splash-portfolio-clicked {
@@ -549,6 +554,7 @@
 .splash-portfolio:hover {
     background-color: #9C84FF;
     color: black;
+    transition-duration: 0.4s;
 }
 
 /* SIGN UP */
@@ -621,6 +627,7 @@
 
 .signup-form-submit:hover {
     background-color: #ad98ff;
+    transition-duration: 0.4s;
 }
 
 .splash-form-cancel-here {
@@ -639,6 +646,7 @@
 
 .splash-form-cancel-here:hover {
     background-color: black;
+    transition-duration: 0.4s;
 }
 
 
@@ -662,5 +670,5 @@
 
 .create-trade-form-submit:hover {
     background-color: #ad98ff;
+    transition-duration: 0.4s;
 }
-
