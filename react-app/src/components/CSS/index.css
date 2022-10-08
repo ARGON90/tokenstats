@@ -183,6 +183,12 @@
     letter-spacing: 1px;
 }
 
+.token-image {
+    height: 17px;
+    width: 17px;
+    padding-right: 7px;
+  }
+
 
 /* FOOTER */
 
