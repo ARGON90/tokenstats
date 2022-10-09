@@ -6,6 +6,8 @@ import SignUpForm from "./auth/SignUpForm";
 import LoginForm from "./auth/LoginForm";
 import { login } from "../store/session";
 
+import { tokenImages } from "./Tokens";
+
 function SplashPage({ showSignup, setShowSignup }) {
     const currentUser = useSelector(state => state?.session?.user)
     const allTokens = useSelector((state) => Object.values(state?.tokens))
@@ -94,9 +96,7 @@ function SplashPage({ showSignup, setShowSignup }) {
 
                         </div>
                     </div>
-
                 }
-
 
                 <div className="splash-body">
                     <div className='splash-header-container'>
@@ -107,10 +107,12 @@ function SplashPage({ showSignup, setShowSignup }) {
                         <div className='splash-cols flex-end'>MARKET CAP</div>
                     </div>
 
-
                     {allTokens.map((token) =>
                         <div key={token.id} className='splash-individual-container'>
-                            <div className="splash-col-1">{token.name}</div>
+                            <div className="splash-col-1">
+                                <img className='token-image' src={`${tokenImages[token.name]}`} alt='token image'></img>
+                                <div>{token.name}</div>
+                            </div>
                             <div className="splash-col-2">{getTokenPrice(token.price)}</div>
                             {token.dailyChange >= 0 ? <div className="splash-cols green-font">{getDecimals(token.dailyChange)}%</div> : <div className="splash-cols red-font">{getDecimals(token.dailyChange)}%</div>}
                             <div className="splash-cols">{getTokenPrice(token.dailyVolume)}</div>
