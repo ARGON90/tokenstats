@@ -85,6 +85,13 @@ button {
     justify-content: space-around;
 }
 
+.no-portfolios-container {
+    padding-top: 20px;
+}
+
+.no-portfolios-text {
+}
+
 .portfolio-selection {
     display: flex;
     width: 66%;

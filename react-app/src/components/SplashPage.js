@@ -96,9 +96,7 @@ function SplashPage({ showSignup, setShowSignup }) {
 
                         </div>
                     </div>
-
                 }
-
 
                 <div className="splash-body">
                     <div className='splash-header-container'>
@@ -108,7 +106,6 @@ function SplashPage({ showSignup, setShowSignup }) {
                         <div className='splash-cols'>24H VOLUME</div>
                         <div className='splash-cols flex-end'>MARKET CAP</div>
                     </div>
-
 
                     {allTokens.map((token) =>
                         <div key={token.id} className='splash-individual-container'>

@@ -186,7 +186,6 @@ function Portfolios() {
 
     const userPortfolios = allPortfolios.filter(portfolio => portfolio.user_id === userId)
 
-    if (!userPortfolios) return <div>No portfolfios</div>
     return (
         <>
             <div className='portfolios-page'>
@@ -203,7 +202,7 @@ function Portfolios() {
                         </div>
                     </div>
                     <div>
-                        {userPortfolios.map((portfolio) =>
+                        {userPortfolios.length ? userPortfolios.map((portfolio) =>
                             <div key={portfolio.id} className='portfolios-buttons-container'>
                                 <div className='portfolio-selection'>
 
@@ -215,7 +214,11 @@ function Portfolios() {
                                     <DeletePortfolioModal setPortfolios={setPortfolios} portfolios={portfolios} portfolio={portfolio} rerender={rerender} setRerender={setRerender} holdVal={getTotalHoldingsValue} setCurrentPortfolio={setCurrentPortfolio} />
                                 </div>
                             </div>
-                        )}
+                        )
+                            :
+                            <div className='no-portfolios-container'>
+                                <div className='no-portfolios-text'>Click "Create a Portfolio" to get started!</div>
+                            </div>}
                     </div>
                 </div>
 
