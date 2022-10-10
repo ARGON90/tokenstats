@@ -200,6 +200,7 @@ const CreatePortfolioForm = ({ setShowModal, userPortfolios }) => {
                     <input
                         className="create-trade-form-input"
                         type="number"
+                        step='any'
                         placeholder={amountPlaceholder()}
 
                         value={tradeAmount}
@@ -215,6 +216,7 @@ const CreatePortfolioForm = ({ setShowModal, userPortfolios }) => {
                     <input
                         className="create-trade-form-input"
                         type="number"
+                        step='any'
                         placeholder={tradePricePlaceholder()}
 
                         value={tradePrice}

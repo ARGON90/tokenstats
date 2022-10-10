@@ -66,14 +66,27 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
     function getTradesTotalProfit() {
         let totalProfit = 0;
         userTrades.forEach((trade) => {
-            totalProfit += (allTokens[trade.token_id].price * trade.amount_traded - trade.total_cost)
+            if (trade.buy === 'buy') {
+                totalProfit += (allTokens[trade.token_id].price * trade.amount_traded - trade.total_cost)
+            }
+            if (trade.buy === 'sell') {
+                totalProfit += (trade.total_cost) - (allTokens[trade.token_id].price * trade.amount_traded)
+            }
         })
         const prices = [totalProfit];
         let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
         return localeString
     }
     function getPLTrade(trade) {
-        let tradePL = (allTokens[trade.token_id].price * trade.amount_traded) - (trade.total_cost)
+        let tradePL;
+        if (trade.buy === 'buy') {
+            tradePL = (allTokens[trade.token_id].price * trade.amount_traded) - (trade.total_cost)
+        }
+
+        if (trade.buy === 'sell') {
+            tradePL = (trade.total_cost) - (allTokens[trade.token_id].price * trade.amount_traded)
+        }
+
         if (tradePL > 0) {
             const prices = [tradePL];
             let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
@@ -82,6 +95,8 @@ function Trades({ portId, totalHoldingsVar, rerender, portfolios, setPortfolios 
         const prices = [tradePL];
         let localeString = prices.toLocaleString('usa-US', { style: 'currency', currency: 'USD' });
         return localeString
+
+
     }
     function getTotalCostTrade(rawNum) {
         const prices = [rawNum];
