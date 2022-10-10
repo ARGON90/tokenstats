@@ -8,7 +8,7 @@ import Portfolios from './Portfolios';
 import "./CSS/index.css"
 
 //  FUNCTIONALITY
-// add number constraint to forms?
+// need to add token images to trades tab!!!
 
 // STYLING
 // search: clear dropdown on clickoff
